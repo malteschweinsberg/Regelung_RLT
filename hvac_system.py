@@ -3,8 +3,8 @@ import logging
 import numpy as np
 from control_loops import (RoomAirTemperatureLoop, RoomAirHumidityLoop, 
                         SupplyAirTemperatureLoop, SupplyAirHumidityLoop)
-from .error_processors import TemperatureErrorProcessor, HumidityErrorProcessor
-from .fan_controllers import SupplyFanController, ExhaustFanController
+from error_processors import TemperatureErrorProcessor, HumidityErrorProcessor
+from fan_controllers import SupplyFanController, ExhaustFanController
 
 logger = logging.getLogger("HVAC_Control")
 
