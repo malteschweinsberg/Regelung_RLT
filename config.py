@@ -1,3 +1,10 @@
+"""
+config.py
+
+Diese Datei enthält die Konfigurationslogik für das HVAC-System.
+Grenzwerte, Zielwerte und Gewichtungsfaktoren können hier zentral angepasst und gespeichert werden.
+"""
+
 import json
 import os
 import logging
@@ -10,6 +17,7 @@ class HVACConfig:
         self.config = self.load_config()
     
     def load_config(self):
+        # Konfiguration aus Datei laden oder Standardwerte verwenden
         if os.path.exists(self.config_file):
             try:
                 with open(self.config_file, 'r') as f:
@@ -24,6 +32,7 @@ class HVACConfig:
             return self._get_default_config()
     
     def _get_default_config(self):
+        # Standardkonfiguration
         return {
             "temperature": {
                 "min": 15,
@@ -46,6 +55,7 @@ class HVACConfig:
         }
     
     def save_config(self):
+        # Konfiguration in Datei speichern
         try:
             with open(self.config_file, 'w') as f:
                 json.dump(self.config, f, indent=4)
@@ -54,24 +64,17 @@ class HVACConfig:
             logger.error(f"Error saving configuration: {e}")
     
     def apply_config(self, airflow_control):
-        # Apply temperature settings
+        # Überträgt die Konfigurationswerte auf das Steuerungssystem
         airflow_control.room_temp_loop.set_parameter("temp_min", self.config["temperature"]["min"])
         airflow_control.room_temp_loop.set_parameter("temp_max", self.config["temperature"]["max"])
         airflow_control.room_temp_loop.set_parameter("temp_target", self.config["temperature"]["target"])
-        
         airflow_control.supply_temp_loop.set_parameter("temp_min", self.config["temperature"]["min"])
         airflow_control.supply_temp_loop.set_parameter("temp_max", self.config["temperature"]["max"])
-        
-        # Apply humidity settings
         airflow_control.room_humidity_loop.set_parameter("humidity_min", self.config["humidity"]["min"])
         airflow_control.room_humidity_loop.set_parameter("humidity_max", self.config["humidity"]["max"])
         airflow_control.room_humidity_loop.set_parameter("humidity_target", self.config["humidity"]["target"])
-        
         airflow_control.supply_humidity_loop.set_parameter("humidity_min", self.config["humidity"]["min"])
         airflow_control.supply_humidity_loop.set_parameter("humidity_max", self.config["humidity"]["max"])
-        
-        # Apply weight factors
         airflow_control.temp_error_processor.set_weight(self.config["weights"]["temperature"])
         airflow_control.humidity_error_processor.set_weight(self.config["weights"]["humidity"])
-        
         logger.info("Applied configuration to airflow control system")
