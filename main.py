@@ -1,30 +1,41 @@
 """
-main.py
-
-Dies ist der Einstiegspunkt für das HVAC-Projekt.
-Hier wird die Simulation gestartet und die Programmausführung gesteuert.
+Datei: main.py
+Datum: 2025-05-03
+Beschreibung:
+    Startet und steuert die Simulation der RLT-Anlage.
+    Initialisiert alle Module, liest die Konfiguration und verwaltet den Simulationsablauf.
 """
 
-import logging
-import argparse
-from simulation import run_simulation
-from hvac_system import AirflowControlLoop
-from config import HVACConfig
 
 def main():
-    # Argumentparser für Kommandozeilenoptionen
-    parser = argparse.ArgumentParser(description='HVAC Control System Simulation')
-    parser.add_argument('--duration', type=int, default=60, help='Simulation duration in minutes')
-    parser.add_argument('--interval', type=int, default=60, help='Simulation interval in seconds')
-    parser.add_argument('--no-plot', action='store_true', help='Disable plotting of results')
-    args = parser.parse_args()
-    # Simulation starten
-    results = run_simulation(
-        duration_minutes=args.duration,
-        interval_seconds=args.interval,
-        plot_results=not args.no_plot
-    )
-    print("Simulation completed successfully")
+    # Lädt alle Konfigurationsparameter
+    from config import SIMULATION, REGELUNG, ANLAGE
 
-if __name__ == "__main__":
-    main()
+    # Initialisiert Regler
+    pid_temp = PIController(
+        Kp=REGELUNG['temp']['Kp'],
+        Tn=REGELUNG['temp']['Tn'],
+        limit=ANLAGE['max_massenstrom']
+    )
+
+    # Simulationsschleife
+    startzeit = time.time()
+    for step in range(int(SIMULATION['dauer'] / SIMULATION['zeitschritt'])):
+        # Regelungsberechnung
+        massenstrom = pid_temp.compute(
+            setpoint=22.0,
+            measured=state['temp'],
+            dt=SIMULATION['zeitschritt']
+        )
+
+        # Physikalische Simulation
+        state = simulation_step(state, SIMULATION['zeitschritt'])
+
+        # Echtzeitvisualisierung
+        if step % 10 == 0:  # Reduzierte Plot-Updates für Performance
+            update_plots(state)
+
+        # Beschleunigungssteuerung
+        sleep_time = (SIMULATION['zeitschritt'] /
+                      SIMULATION['beschleunigungsfaktor'])
+        time.sleep(max(0, sleep_time - (time.time() - startzeit)))

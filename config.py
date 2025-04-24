@@ -1,80 +1,43 @@
 """
-config.py
-
-Diese Datei enthält die Konfigurationslogik für das HVAC-System.
-Grenzwerte, Zielwerte und Gewichtungsfaktoren können hier zentral angepasst und gespeichert werden.
+Datei: config.py
+Datum: 2025-05-03
+Beschreibung:
+    Enthält alle einstellbaren Parameter und Startwerte für die Simulation.
+    Hier werden Simulationsdauer, Zeitschritt, Regelparameter und technische Grenzwerte definiert.
 """
+# SIMULATION: Steuerparameter für den Simulationslauf
+SIMULATION = {
+    "beschleunigungsfaktor": 10.0,  # 10-fache Echtzeitgeschwindigkeit
+    "zeitschritt": 60,              # Physikalischer Berechnungsschritt [s]
+    "dauer": 24*3600,               # Gesamtsimulationsdauer [s]
+    "initial": {                    # Startbedingungen
+        "temp_raum": 22.0,          # Anfangstemperatur Raum [°C]
+        "feuchte_raum": 45.0        # Anfangsfeuchte Raum [%rF]
+    }
+}
 
-import json
-import os
-import logging
+# REGELUNG: Parameter für die PID-Regler
+REGELUNG = {
+    "temp": {
+        "Kp": 3.0,                  # Verstärkung Temperaturregler
+        "Tn": 900                   # Nachstellzeit [s] (15min)
+    },
+    "feuchte": {
+        "Kp": 5.0,                  # Verstärkung Feuchteregler
+        "Tn": 1200                  # Nachstellzeit [s] (20min)
+    },
+    "tote_zone": {                  # Hysterese-Bereiche
+        "temp": 0.5,                # ±0.5°C Totzone
+        "feuchte": 2.0              # ±2% rF Totzone
+    }
+}
 
-logger = logging.getLogger("HVAC_Control")
+# ANLAGE: Technische Parameter der RLT-Anlage
+ANLAGE = {
+    "rotor_effizienz": 0.75,        # Wirkungsgrad Wärmetauscher [0-1]
+    "max_massenstrom": 2.5,         # Max. Luftdurchsatz [kg/s]
+    "kuehler_temp": 7.0,            # Kühlregistertemperatur [°C]
+    "heizung_temp": 45.0,           # Heizregistertemperatur [°C]
+    "waermelast": 1500.0            # Interne Wärmelasten [W]
+}
 
-class HVACConfig:
-    def __init__(self, config_file="hvac_config.json"):
-        self.config_file = config_file
-        self.config = self.load_config()
-    
-    def load_config(self):
-        # Konfiguration aus Datei laden oder Standardwerte verwenden
-        if os.path.exists(self.config_file):
-            try:
-                with open(self.config_file, 'r') as f:
-                    config = json.load(f)
-                logger.info(f"Loaded configuration from {self.config_file}")
-                return config
-            except Exception as e:
-                logger.error(f"Error loading configuration: {e}")
-                return self._get_default_config()
-        else:
-            logger.info(f"Configuration file {self.config_file} not found, using defaults")
-            return self._get_default_config()
-    
-    def _get_default_config(self):
-        # Standardkonfiguration
-        return {
-            "temperature": {
-                "min": 15,
-                "max": 24,
-                "target": 21
-            },
-            "humidity": {
-                "min": 6,
-                "max": 12,
-                "target": 9
-            },
-            "weights": {
-                "temperature": 1.0,
-                "humidity": 0.7
-            },
-            "fan_control": {
-                "base_speed": 60,
-                "error_scaling": 3
-            }
-        }
-    
-    def save_config(self):
-        # Konfiguration in Datei speichern
-        try:
-            with open(self.config_file, 'w') as f:
-                json.dump(self.config, f, indent=4)
-            logger.info(f"Saved configuration to {self.config_file}")
-        except Exception as e:
-            logger.error(f"Error saving configuration: {e}")
-    
-    def apply_config(self, airflow_control):
-        # Überträgt die Konfigurationswerte auf das Steuerungssystem
-        airflow_control.room_temp_loop.set_parameter("temp_min", self.config["temperature"]["min"])
-        airflow_control.room_temp_loop.set_parameter("temp_max", self.config["temperature"]["max"])
-        airflow_control.room_temp_loop.set_parameter("temp_target", self.config["temperature"]["target"])
-        airflow_control.supply_temp_loop.set_parameter("temp_min", self.config["temperature"]["min"])
-        airflow_control.supply_temp_loop.set_parameter("temp_max", self.config["temperature"]["max"])
-        airflow_control.room_humidity_loop.set_parameter("humidity_min", self.config["humidity"]["min"])
-        airflow_control.room_humidity_loop.set_parameter("humidity_max", self.config["humidity"]["max"])
-        airflow_control.room_humidity_loop.set_parameter("humidity_target", self.config["humidity"]["target"])
-        airflow_control.supply_humidity_loop.set_parameter("humidity_min", self.config["humidity"]["min"])
-        airflow_control.supply_humidity_loop.set_parameter("humidity_max", self.config["humidity"]["max"])
-        airflow_control.temp_error_processor.set_weight(self.config["weights"]["temperature"])
-        airflow_control.humidity_error_processor.set_weight(self.config["weights"]["humidity"])
-        logger.info("Applied configuration to airflow control system")

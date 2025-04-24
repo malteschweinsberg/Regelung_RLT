@@ -1,5 +1,0 @@
-# requirements.txt
-# Diese Datei listet alle Python-Abhängigkeiten für das Projekt auf.
-
-numpy>=1.20.0
-matplotlib>=3.4.0
