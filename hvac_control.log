@@ -1,0 +1,1217 @@
+2025-04-24 09:29:02,393 - HVAC_Control - INFO - Initialized control loop: Control Loop 1.1
+2025-04-24 09:29:02,393 - HVAC_Control - INFO - Initialized control loop: Control Loop 1.2
+2025-04-24 09:29:02,393 - HVAC_Control - INFO - Initialized control loop: Control Loop 1.1.1
+2025-04-24 09:29:02,394 - HVAC_Control - INFO - Initialized control loop: Control Loop 1.2.1
+2025-04-24 09:29:02,394 - HVAC_Control - INFO - Initialized error processor: Temperature Error Processor
+2025-04-24 09:29:02,394 - HVAC_Control - INFO - Initialized error processor: Humidity Error Processor
+2025-04-24 09:29:02,394 - HVAC_Control - INFO - Initialized fan controller: Supply Fan Controller
+2025-04-24 09:29:02,395 - HVAC_Control - INFO - Initialized fan controller: Exhaust Fan Controller
+2025-04-24 09:29:02,395 - HVAC_Control - INFO - Initialized Airflow Control Loop (1.4)
+2025-04-24 09:29:02,395 - HVAC_Control - INFO - Configuration file hvac_config.json not found, using defaults
+2025-04-24 09:29:02,395 - HVAC_Control - INFO - Updated weight for Temperature Error Processor: 1.0
+2025-04-24 09:29:02,396 - HVAC_Control - INFO - Updated weight for Humidity Error Processor: 0.7
+2025-04-24 09:29:02,396 - HVAC_Control - INFO - Applied configuration to airflow control system
+2025-04-24 09:29:02,396 - HVAC_Control - INFO - Starting simulation: duration=200min, interval=30s
+2025-04-24 09:29:02,396 - HVAC_Control - INFO - Initial conditions: T=23°C, RH=10g/kg
+2025-04-24 09:29:02,396 - HVAC_Control - INFO - Set Supply Fan Controller speed to 57.9%
+2025-04-24 09:29:02,396 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 57.9%
+2025-04-24 09:29:02,397 - HVAC_Control - INFO - Processed: Temp=23.0°C, Humidity=10.0g/kg, Fan=57.9%
+2025-04-24 09:29:02,767 - HVAC_Control - INFO - Set Supply Fan Controller speed to 57.92920528357933%
+2025-04-24 09:29:02,767 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 57.92920528357933%
+2025-04-24 09:29:02,767 - HVAC_Control - INFO - Processed: Temp=22.8°C, Humidity=10.0g/kg, Fan=57.92920528357933%
+2025-04-24 09:29:02,767 - HVAC_Control - INFO - Set Supply Fan Controller speed to 57.83184693929569%
+2025-04-24 09:29:02,767 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 57.83184693929569%
+2025-04-24 09:29:02,767 - HVAC_Control - INFO - Processed: Temp=22.9°C, Humidity=10.0g/kg, Fan=57.83184693929569%
+2025-04-24 09:29:02,768 - HVAC_Control - INFO - Set Supply Fan Controller speed to 57.73821654446713%
+2025-04-24 09:29:02,768 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 57.73821654446713%
+2025-04-24 09:29:02,768 - HVAC_Control - INFO - Processed: Temp=23.1°C, Humidity=10.1g/kg, Fan=57.73821654446713%
+2025-04-24 09:29:02,768 - HVAC_Control - INFO - Set Supply Fan Controller speed to 57.6516162707537%
+2025-04-24 09:29:02,768 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 57.6516162707537%
+2025-04-24 09:29:02,768 - HVAC_Control - INFO - Processed: Temp=22.9°C, Humidity=10.1g/kg, Fan=57.6516162707537%
+2025-04-24 09:29:02,768 - HVAC_Control - INFO - Set Supply Fan Controller speed to 57.774020580162826%
+2025-04-24 09:29:02,769 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 57.774020580162826%
+2025-04-24 09:29:02,769 - HVAC_Control - INFO - Processed: Temp=23.1°C, Humidity=10.1g/kg, Fan=57.774020580162826%
+2025-04-24 09:29:02,769 - HVAC_Control - INFO - Set Supply Fan Controller speed to 57.78281114896069%
+2025-04-24 09:29:02,769 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 57.78281114896069%
+2025-04-24 09:29:02,769 - HVAC_Control - INFO - Processed: Temp=23.0°C, Humidity=10.1g/kg, Fan=57.78281114896069%
+2025-04-24 09:29:02,769 - HVAC_Control - INFO - Set Supply Fan Controller speed to 58.099566555832894%
+2025-04-24 09:29:02,769 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 58.099566555832894%
+2025-04-24 09:29:02,770 - HVAC_Control - INFO - Processed: Temp=23.0°C, Humidity=9.9g/kg, Fan=58.099566555832894%
+2025-04-24 09:29:02,770 - HVAC_Control - INFO - Set Supply Fan Controller speed to 58.147440768865394%
+2025-04-24 09:29:02,770 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 58.147440768865394%
+2025-04-24 09:29:02,770 - HVAC_Control - INFO - Processed: Temp=22.9°C, Humidity=9.9g/kg, Fan=58.147440768865394%
+2025-04-24 09:29:02,770 - HVAC_Control - INFO - Set Supply Fan Controller speed to 58.24748477967813%
+2025-04-24 09:29:02,770 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 58.24748477967813%
+2025-04-24 09:29:02,771 - HVAC_Control - INFO - Processed: Temp=22.9°C, Humidity=9.8g/kg, Fan=58.24748477967813%
+2025-04-24 09:29:02,771 - HVAC_Control - INFO - Set Supply Fan Controller speed to 58.47440075910123%
+2025-04-24 09:29:02,771 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 58.47440075910123%
+2025-04-24 09:29:02,771 - HVAC_Control - INFO - Processed: Temp=22.8°C, Humidity=9.7g/kg, Fan=58.47440075910123%
+2025-04-24 09:29:02,771 - HVAC_Control - INFO - Set Supply Fan Controller speed to 58.56239791354685%
+2025-04-24 09:29:02,771 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 58.56239791354685%
+2025-04-24 09:29:02,771 - HVAC_Control - INFO - Processed: Temp=22.8°C, Humidity=9.7g/kg, Fan=58.56239791354685%
+2025-04-24 09:29:02,771 - HVAC_Control - INFO - Set Supply Fan Controller speed to 58.576259966489914%
+2025-04-24 09:29:02,772 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 58.576259966489914%
+2025-04-24 09:29:02,772 - HVAC_Control - INFO - Processed: Temp=22.6°C, Humidity=9.7g/kg, Fan=58.576259966489914%
+2025-04-24 09:29:02,772 - HVAC_Control - INFO - Set Supply Fan Controller speed to 58.597261025542586%
+2025-04-24 09:29:02,772 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 58.597261025542586%
+2025-04-24 09:29:02,772 - HVAC_Control - INFO - Processed: Temp=22.4°C, Humidity=9.7g/kg, Fan=58.597261025542586%
+2025-04-24 09:29:02,772 - HVAC_Control - INFO - Set Supply Fan Controller speed to 58.48528130808261%
+2025-04-24 09:29:02,773 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 58.48528130808261%
+2025-04-24 09:29:02,773 - HVAC_Control - INFO - Processed: Temp=22.4°C, Humidity=9.7g/kg, Fan=58.48528130808261%
+2025-04-24 09:29:02,773 - HVAC_Control - INFO - Set Supply Fan Controller speed to 58.556075522715396%
+2025-04-24 09:29:02,773 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 58.556075522715396%
+2025-04-24 09:29:02,773 - HVAC_Control - INFO - Processed: Temp=22.5°C, Humidity=9.7g/kg, Fan=58.556075522715396%
+2025-04-24 09:29:02,774 - HVAC_Control - INFO - Set Supply Fan Controller speed to 58.52414151414728%
+2025-04-24 09:29:02,774 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 58.52414151414728%
+2025-04-24 09:29:02,774 - HVAC_Control - INFO - Processed: Temp=22.6°C, Humidity=9.7g/kg, Fan=58.52414151414728%
+2025-04-24 09:29:02,774 - HVAC_Control - INFO - Set Supply Fan Controller speed to 58.630739859260224%
+2025-04-24 09:29:02,774 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 58.630739859260224%
+2025-04-24 09:29:02,775 - HVAC_Control - INFO - Processed: Temp=22.6°C, Humidity=9.7g/kg, Fan=58.630739859260224%
+2025-04-24 09:29:02,775 - HVAC_Control - INFO - Set Supply Fan Controller speed to 58.66952121617858%
+2025-04-24 09:29:02,775 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 58.66952121617858%
+2025-04-24 09:29:02,775 - HVAC_Control - INFO - Processed: Temp=22.6°C, Humidity=9.6g/kg, Fan=58.66952121617858%
+2025-04-24 09:29:02,775 - HVAC_Control - INFO - Set Supply Fan Controller speed to 58.68737093059836%
+2025-04-24 09:29:02,775 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 58.68737093059836%
+2025-04-24 09:29:02,775 - HVAC_Control - INFO - Processed: Temp=22.6°C, Humidity=9.6g/kg, Fan=58.68737093059836%
+2025-04-24 09:29:02,775 - HVAC_Control - INFO - Set Supply Fan Controller speed to 58.62848686414923%
+2025-04-24 09:29:02,776 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 58.62848686414923%
+2025-04-24 09:29:02,776 - HVAC_Control - INFO - Processed: Temp=22.6°C, Humidity=9.7g/kg, Fan=58.62848686414923%
+2025-04-24 09:29:02,776 - HVAC_Control - INFO - Set Supply Fan Controller speed to 58.71765307856157%
+2025-04-24 09:29:02,776 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 58.71765307856157%
+2025-04-24 09:29:02,776 - HVAC_Control - INFO - Processed: Temp=22.5°C, Humidity=9.6g/kg, Fan=58.71765307856157%
+2025-04-24 09:29:02,776 - HVAC_Control - INFO - Set Supply Fan Controller speed to 58.797598177938674%
+2025-04-24 09:29:02,777 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 58.797598177938674%
+2025-04-24 09:29:02,777 - HVAC_Control - INFO - Processed: Temp=22.3°C, Humidity=9.6g/kg, Fan=58.797598177938674%
+2025-04-24 09:29:02,777 - HVAC_Control - INFO - Set Supply Fan Controller speed to 58.7055550719425%
+2025-04-24 09:29:02,777 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 58.7055550719425%
+2025-04-24 09:29:02,777 - HVAC_Control - INFO - Processed: Temp=22.2°C, Humidity=9.6g/kg, Fan=58.7055550719425%
+2025-04-24 09:29:02,777 - HVAC_Control - INFO - Set Supply Fan Controller speed to 58.76692978854978%
+2025-04-24 09:29:02,777 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 58.76692978854978%
+2025-04-24 09:29:02,779 - HVAC_Control - INFO - Processed: Temp=22.2°C, Humidity=9.6g/kg, Fan=58.76692978854978%
+2025-04-24 09:29:02,779 - HVAC_Control - INFO - Set Supply Fan Controller speed to 58.7751319644383%
+2025-04-24 09:29:02,779 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 58.7751319644383%
+2025-04-24 09:29:02,779 - HVAC_Control - INFO - Processed: Temp=22.1°C, Humidity=9.6g/kg, Fan=58.7751319644383%
+2025-04-24 09:29:02,779 - HVAC_Control - INFO - Set Supply Fan Controller speed to 58.59806866649866%
+2025-04-24 09:29:02,779 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 58.59806866649866%
+2025-04-24 09:29:02,780 - HVAC_Control - INFO - Processed: Temp=22.2°C, Humidity=9.7g/kg, Fan=58.59806866649866%
+2025-04-24 09:29:02,780 - HVAC_Control - INFO - Set Supply Fan Controller speed to 58.62515571137776%
+2025-04-24 09:29:02,780 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 58.62515571137776%
+2025-04-24 09:29:02,781 - HVAC_Control - INFO - Processed: Temp=22.1°C, Humidity=9.7g/kg, Fan=58.62515571137776%
+2025-04-24 09:29:02,781 - HVAC_Control - INFO - Set Supply Fan Controller speed to 58.6539068096682%
+2025-04-24 09:29:02,781 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 58.6539068096682%
+2025-04-24 09:29:02,781 - HVAC_Control - INFO - Processed: Temp=22.0°C, Humidity=9.6g/kg, Fan=58.6539068096682%
+2025-04-24 09:29:02,782 - HVAC_Control - INFO - Set Supply Fan Controller speed to 58.776950679961516%
+2025-04-24 09:29:02,782 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 58.776950679961516%
+2025-04-24 09:29:02,782 - HVAC_Control - INFO - Processed: Temp=22.1°C, Humidity=9.6g/kg, Fan=58.776950679961516%
+2025-04-24 09:29:02,782 - HVAC_Control - INFO - Set Supply Fan Controller speed to 58.99344698442968%
+2025-04-24 09:29:02,782 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 58.99344698442968%
+2025-04-24 09:29:02,783 - HVAC_Control - INFO - Processed: Temp=22.1°C, Humidity=9.5g/kg, Fan=58.99344698442968%
+2025-04-24 09:29:02,783 - HVAC_Control - INFO - Set Supply Fan Controller speed to 59.034888962525855%
+2025-04-24 09:29:02,783 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 59.034888962525855%
+2025-04-24 09:29:02,783 - HVAC_Control - INFO - Processed: Temp=22.1°C, Humidity=9.5g/kg, Fan=59.034888962525855%
+2025-04-24 09:29:02,784 - HVAC_Control - INFO - Set Supply Fan Controller speed to 59.016528897633286%
+2025-04-24 09:29:02,784 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 59.016528897633286%
+2025-04-24 09:29:02,784 - HVAC_Control - INFO - Processed: Temp=22.2°C, Humidity=9.5g/kg, Fan=59.016528897633286%
+2025-04-24 09:29:02,784 - HVAC_Control - INFO - Set Supply Fan Controller speed to 59.106159098839136%
+2025-04-24 09:29:02,784 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 59.106159098839136%
+2025-04-24 09:29:02,785 - HVAC_Control - INFO - Processed: Temp=22.1°C, Humidity=9.4g/kg, Fan=59.106159098839136%
+2025-04-24 09:29:02,785 - HVAC_Control - INFO - Set Supply Fan Controller speed to 59.18109638492635%
+2025-04-24 09:29:02,785 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 59.18109638492635%
+2025-04-24 09:29:02,785 - HVAC_Control - INFO - Processed: Temp=22.1°C, Humidity=9.4g/kg, Fan=59.18109638492635%
+2025-04-24 09:29:02,786 - HVAC_Control - INFO - Set Supply Fan Controller speed to 59.311184885020786%
+2025-04-24 09:29:02,786 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 59.311184885020786%
+2025-04-24 09:29:02,786 - HVAC_Control - INFO - Processed: Temp=21.9°C, Humidity=9.3g/kg, Fan=59.311184885020786%
+2025-04-24 09:29:02,786 - HVAC_Control - INFO - Set Supply Fan Controller speed to 59.259802044518835%
+2025-04-24 09:29:02,786 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 59.259802044518835%
+2025-04-24 09:29:02,787 - HVAC_Control - INFO - Processed: Temp=22.0°C, Humidity=9.4g/kg, Fan=59.259802044518835%
+2025-04-24 09:29:02,787 - HVAC_Control - INFO - Set Supply Fan Controller speed to 59.308786031933565%
+2025-04-24 09:29:02,787 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 59.308786031933565%
+2025-04-24 09:29:02,787 - HVAC_Control - INFO - Processed: Temp=21.9°C, Humidity=9.3g/kg, Fan=59.308786031933565%
+2025-04-24 09:29:02,787 - HVAC_Control - INFO - Set Supply Fan Controller speed to 59.377943551624604%
+2025-04-24 09:29:02,787 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 59.377943551624604%
+2025-04-24 09:29:02,787 - HVAC_Control - INFO - Processed: Temp=21.8°C, Humidity=9.3g/kg, Fan=59.377943551624604%
+2025-04-24 09:29:02,788 - HVAC_Control - INFO - Set Supply Fan Controller speed to 59.45836966498829%
+2025-04-24 09:29:02,788 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 59.45836966498829%
+2025-04-24 09:29:02,788 - HVAC_Control - INFO - Processed: Temp=21.9°C, Humidity=9.3g/kg, Fan=59.45836966498829%
+2025-04-24 09:29:02,788 - HVAC_Control - INFO - Set Supply Fan Controller speed to 59.573874248016324%
+2025-04-24 09:29:02,788 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 59.573874248016324%
+2025-04-24 09:29:02,789 - HVAC_Control - INFO - Processed: Temp=21.8°C, Humidity=9.2g/kg, Fan=59.573874248016324%
+2025-04-24 09:29:02,789 - HVAC_Control - INFO - Set Supply Fan Controller speed to 59.74137510954013%
+2025-04-24 09:29:02,789 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 59.74137510954013%
+2025-04-24 09:29:02,789 - HVAC_Control - INFO - Processed: Temp=21.7°C, Humidity=9.1g/kg, Fan=59.74137510954013%
+2025-04-24 09:29:02,790 - HVAC_Control - INFO - Set Supply Fan Controller speed to 59.681115122104195%
+2025-04-24 09:29:02,790 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 59.681115122104195%
+2025-04-24 09:29:02,790 - HVAC_Control - INFO - Processed: Temp=21.6°C, Humidity=9.2g/kg, Fan=59.681115122104195%
+2025-04-24 09:29:02,790 - HVAC_Control - INFO - Set Supply Fan Controller speed to 59.68308567194697%
+2025-04-24 09:29:02,790 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 59.68308567194697%
+2025-04-24 09:29:02,791 - HVAC_Control - INFO - Processed: Temp=21.6°C, Humidity=9.2g/kg, Fan=59.68308567194697%
+2025-04-24 09:29:02,791 - HVAC_Control - INFO - Set Supply Fan Controller speed to 59.522830193600605%
+2025-04-24 09:29:02,791 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 59.522830193600605%
+2025-04-24 09:29:02,791 - HVAC_Control - INFO - Processed: Temp=21.7°C, Humidity=9.2g/kg, Fan=59.522830193600605%
+2025-04-24 09:29:02,791 - HVAC_Control - INFO - Set Supply Fan Controller speed to 59.50490653171621%
+2025-04-24 09:29:02,792 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 59.50490653171621%
+2025-04-24 09:29:02,792 - HVAC_Control - INFO - Processed: Temp=21.5°C, Humidity=9.2g/kg, Fan=59.50490653171621%
+2025-04-24 09:29:02,792 - HVAC_Control - INFO - Set Supply Fan Controller speed to 59.54045971151179%
+2025-04-24 09:29:02,792 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 59.54045971151179%
+2025-04-24 09:29:02,792 - HVAC_Control - INFO - Processed: Temp=21.5°C, Humidity=9.2g/kg, Fan=59.54045971151179%
+2025-04-24 09:29:02,793 - HVAC_Control - INFO - Set Supply Fan Controller speed to 59.615734287851666%
+2025-04-24 09:29:02,793 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 59.615734287851666%
+2025-04-24 09:29:02,793 - HVAC_Control - INFO - Processed: Temp=21.3°C, Humidity=9.2g/kg, Fan=59.615734287851666%
+2025-04-24 09:29:02,793 - HVAC_Control - INFO - Set Supply Fan Controller speed to 59.40297937680085%
+2025-04-24 09:29:02,793 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 59.40297937680085%
+2025-04-24 09:29:02,794 - HVAC_Control - INFO - Processed: Temp=21.4°C, Humidity=9.3g/kg, Fan=59.40297937680085%
+2025-04-24 09:29:02,794 - HVAC_Control - INFO - Set Supply Fan Controller speed to 59.25779820539297%
+2025-04-24 09:29:02,794 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 59.25779820539297%
+2025-04-24 09:29:02,794 - HVAC_Control - INFO - Processed: Temp=21.4°C, Humidity=9.4g/kg, Fan=59.25779820539297%
+2025-04-24 09:29:02,795 - HVAC_Control - INFO - Set Supply Fan Controller speed to 59.292536118908004%
+2025-04-24 09:29:02,795 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 59.292536118908004%
+2025-04-24 09:29:02,796 - HVAC_Control - INFO - Processed: Temp=21.3°C, Humidity=9.3g/kg, Fan=59.292536118908004%
+2025-04-24 09:29:02,796 - HVAC_Control - INFO - Set Supply Fan Controller speed to 59.24693675911509%
+2025-04-24 09:29:02,796 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 59.24693675911509%
+2025-04-24 09:29:02,796 - HVAC_Control - INFO - Processed: Temp=21.3°C, Humidity=9.4g/kg, Fan=59.24693675911509%
+2025-04-24 09:29:02,797 - HVAC_Control - INFO - Set Supply Fan Controller speed to 59.40057391154453%
+2025-04-24 09:29:02,797 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 59.40057391154453%
+2025-04-24 09:29:02,797 - HVAC_Control - INFO - Processed: Temp=21.3°C, Humidity=9.3g/kg, Fan=59.40057391154453%
+2025-04-24 09:29:02,798 - HVAC_Control - INFO - Set Supply Fan Controller speed to 59.695536834677796%
+2025-04-24 09:29:02,798 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 59.695536834677796%
+2025-04-24 09:29:02,798 - HVAC_Control - INFO - Processed: Temp=21.2°C, Humidity=9.1g/kg, Fan=59.695536834677796%
+2025-04-24 09:29:02,798 - HVAC_Control - INFO - Set Supply Fan Controller speed to 59.621692238310146%
+2025-04-24 09:29:02,798 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 59.621692238310146%
+2025-04-24 09:29:02,799 - HVAC_Control - INFO - Processed: Temp=21.2°C, Humidity=9.2g/kg, Fan=59.621692238310146%
+2025-04-24 09:29:02,799 - HVAC_Control - INFO - Set Supply Fan Controller speed to 59.61681873756893%
+2025-04-24 09:29:02,799 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 59.61681873756893%
+2025-04-24 09:29:02,799 - HVAC_Control - INFO - Processed: Temp=21.2°C, Humidity=9.2g/kg, Fan=59.61681873756893%
+2025-04-24 09:29:02,800 - HVAC_Control - INFO - Set Supply Fan Controller speed to 59.55455777719301%
+2025-04-24 09:29:02,800 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 59.55455777719301%
+2025-04-24 09:29:02,800 - HVAC_Control - INFO - Processed: Temp=21.3°C, Humidity=9.2g/kg, Fan=59.55455777719301%
+2025-04-24 09:29:02,800 - HVAC_Control - INFO - Set Supply Fan Controller speed to 59.55207089310215%
+2025-04-24 09:29:02,800 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 59.55207089310215%
+2025-04-24 09:29:02,801 - HVAC_Control - INFO - Processed: Temp=21.3°C, Humidity=9.2g/kg, Fan=59.55207089310215%
+2025-04-24 09:29:02,801 - HVAC_Control - INFO - Set Supply Fan Controller speed to 59.5941325758121%
+2025-04-24 09:29:02,801 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 59.5941325758121%
+2025-04-24 09:29:02,801 - HVAC_Control - INFO - Processed: Temp=21.4°C, Humidity=9.2g/kg, Fan=59.5941325758121%
+2025-04-24 09:29:02,802 - HVAC_Control - INFO - Set Supply Fan Controller speed to 59.6283674062307%
+2025-04-24 09:29:02,802 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 59.6283674062307%
+2025-04-24 09:29:02,802 - HVAC_Control - INFO - Processed: Temp=21.3°C, Humidity=9.2g/kg, Fan=59.6283674062307%
+2025-04-24 09:29:02,802 - HVAC_Control - INFO - Set Supply Fan Controller speed to 59.67829916250477%
+2025-04-24 09:29:02,802 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 59.67829916250477%
+2025-04-24 09:29:02,802 - HVAC_Control - INFO - Processed: Temp=21.2°C, Humidity=9.2g/kg, Fan=59.67829916250477%
+2025-04-24 09:29:02,803 - HVAC_Control - INFO - Set Supply Fan Controller speed to 59.82137465026154%
+2025-04-24 09:29:02,803 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 59.82137465026154%
+2025-04-24 09:29:02,803 - HVAC_Control - INFO - Processed: Temp=21.1°C, Humidity=9.1g/kg, Fan=59.82137465026154%
+2025-04-24 09:29:02,803 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.21946637531869%
+2025-04-24 09:29:02,803 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.21946637531869%
+2025-04-24 09:29:02,804 - HVAC_Control - INFO - Processed: Temp=20.9°C, Humidity=9.1g/kg, Fan=60.21946637531869%
+2025-04-24 09:29:02,804 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.2027363736515%
+2025-04-24 09:29:02,804 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.2027363736515%
+2025-04-24 09:29:02,804 - HVAC_Control - INFO - Processed: Temp=20.9°C, Humidity=9.2g/kg, Fan=60.2027363736515%
+2025-04-24 09:29:02,804 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.25557319906713%
+2025-04-24 09:29:02,804 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.25557319906713%
+2025-04-24 09:29:02,804 - HVAC_Control - INFO - Processed: Temp=20.9°C, Humidity=9.1g/kg, Fan=60.25557319906713%
+2025-04-24 09:29:02,804 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.31331744053989%
+2025-04-24 09:29:02,806 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.31331744053989%
+2025-04-24 09:29:02,806 - HVAC_Control - INFO - Processed: Temp=20.9°C, Humidity=9.2g/kg, Fan=60.31331744053989%
+2025-04-24 09:29:02,806 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.83056385091453%
+2025-04-24 09:29:02,806 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.83056385091453%
+2025-04-24 09:29:02,806 - HVAC_Control - INFO - Processed: Temp=20.7°C, Humidity=9.1g/kg, Fan=60.83056385091453%
+2025-04-24 09:29:02,807 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.02833460079593%
+2025-04-24 09:29:02,807 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.02833460079593%
+2025-04-24 09:29:02,807 - HVAC_Control - INFO - Processed: Temp=20.7°C, Humidity=9.1g/kg, Fan=61.02833460079593%
+2025-04-24 09:29:02,807 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.95753812893689%
+2025-04-24 09:29:02,807 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.95753812893689%
+2025-04-24 09:29:02,808 - HVAC_Control - INFO - Processed: Temp=20.7°C, Humidity=9.1g/kg, Fan=60.95753812893689%
+2025-04-24 09:29:02,808 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.40736355552296%
+2025-04-24 09:29:02,808 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.40736355552296%
+2025-04-24 09:29:02,808 - HVAC_Control - INFO - Processed: Temp=20.9°C, Humidity=8.9g/kg, Fan=60.40736355552296%
+2025-04-24 09:29:02,809 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.750465512558094%
+2025-04-24 09:29:02,809 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.750465512558094%
+2025-04-24 09:29:02,809 - HVAC_Control - INFO - Processed: Temp=20.7°C, Humidity=8.9g/kg, Fan=60.750465512558094%
+2025-04-24 09:29:02,809 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.998370348000535%
+2025-04-24 09:29:02,809 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.998370348000535%
+2025-04-24 09:29:02,810 - HVAC_Control - INFO - Processed: Temp=20.7°C, Humidity=8.9g/kg, Fan=60.998370348000535%
+2025-04-24 09:29:02,810 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.41885024908952%
+2025-04-24 09:29:02,810 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.41885024908952%
+2025-04-24 09:29:02,810 - HVAC_Control - INFO - Processed: Temp=20.9°C, Humidity=8.9g/kg, Fan=60.41885024908952%
+2025-04-24 09:29:02,811 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.33817581410035%
+2025-04-24 09:29:02,811 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.33817581410035%
+2025-04-24 09:29:02,811 - HVAC_Control - INFO - Processed: Temp=20.9°C, Humidity=8.8g/kg, Fan=60.33817581410035%
+2025-04-24 09:29:02,811 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.570396071593194%
+2025-04-24 09:29:02,811 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.570396071593194%
+2025-04-24 09:29:02,813 - HVAC_Control - INFO - Processed: Temp=20.8°C, Humidity=8.8g/kg, Fan=60.570396071593194%
+2025-04-24 09:29:02,813 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.45113591899073%
+2025-04-24 09:29:02,813 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.45113591899073%
+2025-04-24 09:29:02,813 - HVAC_Control - INFO - Processed: Temp=20.8°C, Humidity=8.8g/kg, Fan=60.45113591899073%
+2025-04-24 09:29:02,813 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.36089850652046%
+2025-04-24 09:29:02,813 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.36089850652046%
+2025-04-24 09:29:02,814 - HVAC_Control - INFO - Processed: Temp=21.0°C, Humidity=8.8g/kg, Fan=60.36089850652046%
+2025-04-24 09:29:02,814 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.37570904442561%
+2025-04-24 09:29:02,814 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.37570904442561%
+2025-04-24 09:29:02,814 - HVAC_Control - INFO - Processed: Temp=21.1°C, Humidity=8.8g/kg, Fan=60.37570904442561%
+2025-04-24 09:29:02,815 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.38978839152084%
+2025-04-24 09:29:02,815 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.38978839152084%
+2025-04-24 09:29:02,815 - HVAC_Control - INFO - Processed: Temp=21.1°C, Humidity=8.8g/kg, Fan=60.38978839152084%
+2025-04-24 09:29:02,815 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.351398785043365%
+2025-04-24 09:29:02,815 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.351398785043365%
+2025-04-24 09:29:02,815 - HVAC_Control - INFO - Processed: Temp=21.1°C, Humidity=8.8g/kg, Fan=60.351398785043365%
+2025-04-24 09:29:02,817 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.47105529239923%
+2025-04-24 09:29:02,817 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.47105529239923%
+2025-04-24 09:29:02,817 - HVAC_Control - INFO - Processed: Temp=21.3°C, Humidity=8.8g/kg, Fan=60.47105529239923%
+2025-04-24 09:29:02,817 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.41663188909914%
+2025-04-24 09:29:02,817 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.41663188909914%
+2025-04-24 09:29:02,818 - HVAC_Control - INFO - Processed: Temp=21.4°C, Humidity=8.8g/kg, Fan=60.41663188909914%
+2025-04-24 09:29:02,818 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.40447297115486%
+2025-04-24 09:29:02,818 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.40447297115486%
+2025-04-24 09:29:02,818 - HVAC_Control - INFO - Processed: Temp=21.3°C, Humidity=8.8g/kg, Fan=60.40447297115486%
+2025-04-24 09:29:02,818 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.32318580611547%
+2025-04-24 09:29:02,818 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.32318580611547%
+2025-04-24 09:29:02,819 - HVAC_Control - INFO - Processed: Temp=21.3°C, Humidity=8.8g/kg, Fan=60.32318580611547%
+2025-04-24 09:29:02,819 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.375697388591306%
+2025-04-24 09:29:02,819 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.375697388591306%
+2025-04-24 09:29:02,819 - HVAC_Control - INFO - Processed: Temp=21.3°C, Humidity=8.8g/kg, Fan=60.375697388591306%
+2025-04-24 09:29:02,819 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.44119987302575%
+2025-04-24 09:29:02,820 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.44119987302575%
+2025-04-24 09:29:02,820 - HVAC_Control - INFO - Processed: Temp=21.3°C, Humidity=8.8g/kg, Fan=60.44119987302575%
+2025-04-24 09:29:02,820 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.43493773606583%
+2025-04-24 09:29:02,820 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.43493773606583%
+2025-04-24 09:29:02,820 - HVAC_Control - INFO - Processed: Temp=21.3°C, Humidity=8.8g/kg, Fan=60.43493773606583%
+2025-04-24 09:29:02,821 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.62093229803302%
+2025-04-24 09:29:02,821 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.62093229803302%
+2025-04-24 09:29:02,821 - HVAC_Control - INFO - Processed: Temp=21.5°C, Humidity=8.7g/kg, Fan=60.62093229803302%
+2025-04-24 09:29:02,822 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.5771875724134%
+2025-04-24 09:29:02,822 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.5771875724134%
+2025-04-24 09:29:02,822 - HVAC_Control - INFO - Processed: Temp=21.4°C, Humidity=8.7g/kg, Fan=60.5771875724134%
+2025-04-24 09:29:02,822 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.605367447457006%
+2025-04-24 09:29:02,822 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.605367447457006%
+2025-04-24 09:29:02,822 - HVAC_Control - INFO - Processed: Temp=21.3°C, Humidity=8.7g/kg, Fan=60.605367447457006%
+2025-04-24 09:29:02,823 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.48710433333392%
+2025-04-24 09:29:02,823 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.48710433333392%
+2025-04-24 09:29:02,823 - HVAC_Control - INFO - Processed: Temp=21.3°C, Humidity=8.8g/kg, Fan=60.48710433333392%
+2025-04-24 09:29:02,823 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.508663097138914%
+2025-04-24 09:29:02,823 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.508663097138914%
+2025-04-24 09:29:02,825 - HVAC_Control - INFO - Processed: Temp=21.1°C, Humidity=8.8g/kg, Fan=60.508663097138914%
+2025-04-24 09:29:02,825 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.429902000014266%
+2025-04-24 09:29:02,825 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.429902000014266%
+2025-04-24 09:29:02,825 - HVAC_Control - INFO - Processed: Temp=21.2°C, Humidity=8.8g/kg, Fan=60.429902000014266%
+2025-04-24 09:29:02,825 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.49140696113062%
+2025-04-24 09:29:02,826 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.49140696113062%
+2025-04-24 09:29:02,826 - HVAC_Control - INFO - Processed: Temp=21.2°C, Humidity=8.8g/kg, Fan=60.49140696113062%
+2025-04-24 09:29:02,826 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.55826559373614%
+2025-04-24 09:29:02,826 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.55826559373614%
+2025-04-24 09:29:02,826 - HVAC_Control - INFO - Processed: Temp=21.3°C, Humidity=8.7g/kg, Fan=60.55826559373614%
+2025-04-24 09:29:02,827 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.61236075210182%
+2025-04-24 09:29:02,827 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.61236075210182%
+2025-04-24 09:29:02,827 - HVAC_Control - INFO - Processed: Temp=21.3°C, Humidity=8.7g/kg, Fan=60.61236075210182%
+2025-04-24 09:29:02,827 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.59491484194936%
+2025-04-24 09:29:02,827 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.59491484194936%
+2025-04-24 09:29:02,828 - HVAC_Control - INFO - Processed: Temp=21.4°C, Humidity=8.7g/kg, Fan=60.59491484194936%
+2025-04-24 09:29:02,829 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.77471966587888%
+2025-04-24 09:29:02,829 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.77471966587888%
+2025-04-24 09:29:02,829 - HVAC_Control - INFO - Processed: Temp=21.4°C, Humidity=8.6g/kg, Fan=60.77471966587888%
+2025-04-24 09:29:02,830 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.02260460410379%
+2025-04-24 09:29:02,830 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.02260460410379%
+2025-04-24 09:29:02,830 - HVAC_Control - INFO - Processed: Temp=21.4°C, Humidity=8.5g/kg, Fan=61.02260460410379%
+2025-04-24 09:29:02,830 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.056786256825895%
+2025-04-24 09:29:02,831 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.056786256825895%
+2025-04-24 09:29:02,831 - HVAC_Control - INFO - Processed: Temp=21.5°C, Humidity=8.5g/kg, Fan=61.056786256825895%
+2025-04-24 09:29:02,831 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.9800482024024%
+2025-04-24 09:29:02,831 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.9800482024024%
+2025-04-24 09:29:02,831 - HVAC_Control - INFO - Processed: Temp=21.5°C, Humidity=8.5g/kg, Fan=60.9800482024024%
+2025-04-24 09:29:02,832 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.81742220397308%
+2025-04-24 09:29:02,832 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.81742220397308%
+2025-04-24 09:29:02,832 - HVAC_Control - INFO - Processed: Temp=21.5°C, Humidity=8.6g/kg, Fan=60.81742220397308%
+2025-04-24 09:29:02,832 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.88196579515021%
+2025-04-24 09:29:02,832 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.88196579515021%
+2025-04-24 09:29:02,833 - HVAC_Control - INFO - Processed: Temp=21.7°C, Humidity=8.6g/kg, Fan=60.88196579515021%
+2025-04-24 09:29:02,833 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.764567293759725%
+2025-04-24 09:29:02,833 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.764567293759725%
+2025-04-24 09:29:02,833 - HVAC_Control - INFO - Processed: Temp=21.7°C, Humidity=8.6g/kg, Fan=60.764567293759725%
+2025-04-24 09:29:02,833 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.724610002236005%
+2025-04-24 09:29:02,833 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.724610002236005%
+2025-04-24 09:29:02,833 - HVAC_Control - INFO - Processed: Temp=21.8°C, Humidity=8.7g/kg, Fan=60.724610002236005%
+2025-04-24 09:29:02,833 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.96519780992787%
+2025-04-24 09:29:02,834 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.96519780992787%
+2025-04-24 09:29:02,834 - HVAC_Control - INFO - Processed: Temp=22.0°C, Humidity=8.5g/kg, Fan=60.96519780992787%
+2025-04-24 09:29:02,834 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.99154018592426%
+2025-04-24 09:29:02,834 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.99154018592426%
+2025-04-24 09:29:02,834 - HVAC_Control - INFO - Processed: Temp=22.0°C, Humidity=8.5g/kg, Fan=60.99154018592426%
+2025-04-24 09:29:02,835 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.02104944691851%
+2025-04-24 09:29:02,835 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.02104944691851%
+2025-04-24 09:29:02,835 - HVAC_Control - INFO - Processed: Temp=22.1°C, Humidity=8.5g/kg, Fan=61.02104944691851%
+2025-04-24 09:29:02,835 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.17875775044466%
+2025-04-24 09:29:02,835 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.17875775044466%
+2025-04-24 09:29:02,835 - HVAC_Control - INFO - Processed: Temp=22.1°C, Humidity=8.4g/kg, Fan=61.17875775044466%
+2025-04-24 09:29:02,835 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.0483646063148%
+2025-04-24 09:29:02,837 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.0483646063148%
+2025-04-24 09:29:02,837 - HVAC_Control - INFO - Processed: Temp=22.0°C, Humidity=8.5g/kg, Fan=61.0483646063148%
+2025-04-24 09:29:02,837 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.07036812843568%
+2025-04-24 09:29:02,837 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.07036812843568%
+2025-04-24 09:29:02,837 - HVAC_Control - INFO - Processed: Temp=21.9°C, Humidity=8.5g/kg, Fan=61.07036812843568%
+2025-04-24 09:29:02,837 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.951442866365696%
+2025-04-24 09:29:02,837 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.951442866365696%
+2025-04-24 09:29:02,838 - HVAC_Control - INFO - Processed: Temp=21.9°C, Humidity=8.5g/kg, Fan=60.951442866365696%
+2025-04-24 09:29:02,838 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.904493631228846%
+2025-04-24 09:29:02,838 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.904493631228846%
+2025-04-24 09:29:02,838 - HVAC_Control - INFO - Processed: Temp=21.8°C, Humidity=8.6g/kg, Fan=60.904493631228846%
+2025-04-24 09:29:02,838 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.8409167504284%
+2025-04-24 09:29:02,838 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.8409167504284%
+2025-04-24 09:29:02,838 - HVAC_Control - INFO - Processed: Temp=21.7°C, Humidity=8.6g/kg, Fan=60.8409167504284%
+2025-04-24 09:29:02,839 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.837333720702695%
+2025-04-24 09:29:02,839 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.837333720702695%
+2025-04-24 09:29:02,839 - HVAC_Control - INFO - Processed: Temp=21.7°C, Humidity=8.6g/kg, Fan=60.837333720702695%
+2025-04-24 09:29:02,839 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.81870051485498%
+2025-04-24 09:29:02,839 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.81870051485498%
+2025-04-24 09:29:02,839 - HVAC_Control - INFO - Processed: Temp=21.8°C, Humidity=8.6g/kg, Fan=60.81870051485498%
+2025-04-24 09:29:02,839 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.939401085573%
+2025-04-24 09:29:02,840 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.939401085573%
+2025-04-24 09:29:02,840 - HVAC_Control - INFO - Processed: Temp=21.8°C, Humidity=8.6g/kg, Fan=60.939401085573%
+2025-04-24 09:29:02,840 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.99996101687988%
+2025-04-24 09:29:02,840 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.99996101687988%
+2025-04-24 09:29:02,840 - HVAC_Control - INFO - Processed: Temp=21.9°C, Humidity=8.5g/kg, Fan=60.99996101687988%
+2025-04-24 09:29:02,840 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.13144512713507%
+2025-04-24 09:29:02,840 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.13144512713507%
+2025-04-24 09:29:02,841 - HVAC_Control - INFO - Processed: Temp=21.7°C, Humidity=8.5g/kg, Fan=61.13144512713507%
+2025-04-24 09:29:02,841 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.177880780681534%
+2025-04-24 09:29:02,841 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.177880780681534%
+2025-04-24 09:29:02,841 - HVAC_Control - INFO - Processed: Temp=21.7°C, Humidity=8.4g/kg, Fan=61.177880780681534%
+2025-04-24 09:29:02,841 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.04102535419428%
+2025-04-24 09:29:02,841 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.04102535419428%
+2025-04-24 09:29:02,841 - HVAC_Control - INFO - Processed: Temp=21.6°C, Humidity=8.5g/kg, Fan=61.04102535419428%
+2025-04-24 09:29:02,841 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.137945677476786%
+2025-04-24 09:29:02,842 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.137945677476786%
+2025-04-24 09:29:02,842 - HVAC_Control - INFO - Processed: Temp=21.5°C, Humidity=8.5g/kg, Fan=61.137945677476786%
+2025-04-24 09:29:02,842 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.17331205195107%
+2025-04-24 09:29:02,842 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.17331205195107%
+2025-04-24 09:29:02,842 - HVAC_Control - INFO - Processed: Temp=21.3°C, Humidity=8.4g/kg, Fan=61.17331205195107%
+2025-04-24 09:29:02,842 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.235809126977905%
+2025-04-24 09:29:02,842 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.235809126977905%
+2025-04-24 09:29:02,842 - HVAC_Control - INFO - Processed: Temp=21.4°C, Humidity=8.4g/kg, Fan=61.235809126977905%
+2025-04-24 09:29:02,843 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.3677083658923%
+2025-04-24 09:29:02,843 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.3677083658923%
+2025-04-24 09:29:02,843 - HVAC_Control - INFO - Processed: Temp=21.4°C, Humidity=8.3g/kg, Fan=61.3677083658923%
+2025-04-24 09:29:02,843 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.54323249013451%
+2025-04-24 09:29:02,843 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.54323249013451%
+2025-04-24 09:29:02,843 - HVAC_Control - INFO - Processed: Temp=21.4°C, Humidity=8.3g/kg, Fan=61.54323249013451%
+2025-04-24 09:29:02,844 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.50096925756575%
+2025-04-24 09:29:02,844 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.50096925756575%
+2025-04-24 09:29:02,844 - HVAC_Control - INFO - Processed: Temp=21.3°C, Humidity=8.3g/kg, Fan=61.50096925756575%
+2025-04-24 09:29:02,844 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.41102583870999%
+2025-04-24 09:29:02,844 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.41102583870999%
+2025-04-24 09:29:02,845 - HVAC_Control - INFO - Processed: Temp=21.3°C, Humidity=8.3g/kg, Fan=61.41102583870999%
+2025-04-24 09:29:02,845 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.37096874412964%
+2025-04-24 09:29:02,845 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.37096874412964%
+2025-04-24 09:29:02,845 - HVAC_Control - INFO - Processed: Temp=21.4°C, Humidity=8.3g/kg, Fan=61.37096874412964%
+2025-04-24 09:29:02,845 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.258857513986364%
+2025-04-24 09:29:02,846 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.258857513986364%
+2025-04-24 09:29:02,846 - HVAC_Control - INFO - Processed: Temp=21.5°C, Humidity=8.4g/kg, Fan=61.258857513986364%
+2025-04-24 09:29:02,846 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.27457434611081%
+2025-04-24 09:29:02,846 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.27457434611081%
+2025-04-24 09:29:02,846 - HVAC_Control - INFO - Processed: Temp=21.4°C, Humidity=8.4g/kg, Fan=61.27457434611081%
+2025-04-24 09:29:02,846 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.25143404829297%
+2025-04-24 09:29:02,846 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.25143404829297%
+2025-04-24 09:29:02,847 - HVAC_Control - INFO - Processed: Temp=21.7°C, Humidity=8.4g/kg, Fan=61.25143404829297%
+2025-04-24 09:29:02,847 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.319508779288924%
+2025-04-24 09:29:02,847 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.319508779288924%
+2025-04-24 09:29:02,847 - HVAC_Control - INFO - Processed: Temp=21.6°C, Humidity=8.4g/kg, Fan=61.319508779288924%
+2025-04-24 09:29:02,847 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.20392270581191%
+2025-04-24 09:29:02,847 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.20392270581191%
+2025-04-24 09:29:02,848 - HVAC_Control - INFO - Processed: Temp=21.6°C, Humidity=8.4g/kg, Fan=61.20392270581191%
+2025-04-24 09:29:02,848 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.22041775545685%
+2025-04-24 09:29:02,848 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.22041775545685%
+2025-04-24 09:29:02,848 - HVAC_Control - INFO - Processed: Temp=21.6°C, Humidity=8.4g/kg, Fan=61.22041775545685%
+2025-04-24 09:29:02,849 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.35082907268197%
+2025-04-24 09:29:02,849 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.35082907268197%
+2025-04-24 09:29:02,849 - HVAC_Control - INFO - Processed: Temp=21.6°C, Humidity=8.4g/kg, Fan=61.35082907268197%
+2025-04-24 09:29:02,849 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.28996844762034%
+2025-04-24 09:29:02,849 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.28996844762034%
+2025-04-24 09:29:02,849 - HVAC_Control - INFO - Processed: Temp=21.5°C, Humidity=8.4g/kg, Fan=61.28996844762034%
+2025-04-24 09:29:02,850 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.38496693841016%
+2025-04-24 09:29:02,850 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.38496693841016%
+2025-04-24 09:29:02,850 - HVAC_Control - INFO - Processed: Temp=21.4°C, Humidity=8.3g/kg, Fan=61.38496693841016%
+2025-04-24 09:29:02,850 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.32702170196674%
+2025-04-24 09:29:02,850 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.32702170196674%
+2025-04-24 09:29:02,851 - HVAC_Control - INFO - Processed: Temp=21.5°C, Humidity=8.4g/kg, Fan=61.32702170196674%
+2025-04-24 09:29:02,851 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.29189517293375%
+2025-04-24 09:29:02,851 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.29189517293375%
+2025-04-24 09:29:02,851 - HVAC_Control - INFO - Processed: Temp=21.6°C, Humidity=8.4g/kg, Fan=61.29189517293375%
+2025-04-24 09:29:02,851 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.185325315833204%
+2025-04-24 09:29:02,851 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.185325315833204%
+2025-04-24 09:29:02,851 - HVAC_Control - INFO - Processed: Temp=21.6°C, Humidity=8.4g/kg, Fan=61.185325315833204%
+2025-04-24 09:29:02,852 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.203426141313905%
+2025-04-24 09:29:02,852 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.203426141313905%
+2025-04-24 09:29:02,852 - HVAC_Control - INFO - Processed: Temp=21.7°C, Humidity=8.4g/kg, Fan=61.203426141313905%
+2025-04-24 09:29:02,852 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.26485161631795%
+2025-04-24 09:29:02,852 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.26485161631795%
+2025-04-24 09:29:02,852 - HVAC_Control - INFO - Processed: Temp=21.7°C, Humidity=8.4g/kg, Fan=61.26485161631795%
+2025-04-24 09:29:02,853 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.15067241680903%
+2025-04-24 09:29:02,853 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.15067241680903%
+2025-04-24 09:29:02,853 - HVAC_Control - INFO - Processed: Temp=21.8°C, Humidity=8.5g/kg, Fan=61.15067241680903%
+2025-04-24 09:29:02,853 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.20479558809774%
+2025-04-24 09:29:02,853 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.20479558809774%
+2025-04-24 09:29:02,853 - HVAC_Control - INFO - Processed: Temp=21.7°C, Humidity=8.4g/kg, Fan=61.20479558809774%
+2025-04-24 09:29:02,854 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.251277599643885%
+2025-04-24 09:29:02,854 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.251277599643885%
+2025-04-24 09:29:02,854 - HVAC_Control - INFO - Processed: Temp=21.6°C, Humidity=8.4g/kg, Fan=61.251277599643885%
+2025-04-24 09:29:02,854 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.39473025709834%
+2025-04-24 09:29:02,854 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.39473025709834%
+2025-04-24 09:29:02,854 - HVAC_Control - INFO - Processed: Temp=21.4°C, Humidity=8.3g/kg, Fan=61.39473025709834%
+2025-04-24 09:29:02,854 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.4527872330432%
+2025-04-24 09:29:02,854 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.4527872330432%
+2025-04-24 09:29:02,855 - HVAC_Control - INFO - Processed: Temp=21.3°C, Humidity=8.3g/kg, Fan=61.4527872330432%
+2025-04-24 09:29:02,855 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.46187490148268%
+2025-04-24 09:29:02,855 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.46187490148268%
+2025-04-24 09:29:02,855 - HVAC_Control - INFO - Processed: Temp=21.3°C, Humidity=8.3g/kg, Fan=61.46187490148268%
+2025-04-24 09:29:02,855 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.437883797852436%
+2025-04-24 09:29:02,855 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.437883797852436%
+2025-04-24 09:29:02,855 - HVAC_Control - INFO - Processed: Temp=21.4°C, Humidity=8.3g/kg, Fan=61.437883797852436%
+2025-04-24 09:29:02,856 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.43573928983442%
+2025-04-24 09:29:02,856 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.43573928983442%
+2025-04-24 09:29:02,856 - HVAC_Control - INFO - Processed: Temp=21.3°C, Humidity=8.3g/kg, Fan=61.43573928983442%
+2025-04-24 09:29:02,856 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.51298514397503%
+2025-04-24 09:29:02,856 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.51298514397503%
+2025-04-24 09:29:02,856 - HVAC_Control - INFO - Processed: Temp=21.3°C, Humidity=8.3g/kg, Fan=61.51298514397503%
+2025-04-24 09:29:02,856 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.427264923765605%
+2025-04-24 09:29:02,856 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.427264923765605%
+2025-04-24 09:29:02,856 - HVAC_Control - INFO - Processed: Temp=21.3°C, Humidity=8.3g/kg, Fan=61.427264923765605%
+2025-04-24 09:29:02,858 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.37043807744465%
+2025-04-24 09:29:02,858 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.37043807744465%
+2025-04-24 09:29:02,858 - HVAC_Control - INFO - Processed: Temp=21.5°C, Humidity=8.3g/kg, Fan=61.37043807744465%
+2025-04-24 09:29:02,858 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.49747588172589%
+2025-04-24 09:29:02,858 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.49747588172589%
+2025-04-24 09:29:02,858 - HVAC_Control - INFO - Processed: Temp=21.4°C, Humidity=8.3g/kg, Fan=61.49747588172589%
+2025-04-24 09:29:02,859 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.37063258215244%
+2025-04-24 09:29:02,859 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.37063258215244%
+2025-04-24 09:29:02,859 - HVAC_Control - INFO - Processed: Temp=21.3°C, Humidity=8.3g/kg, Fan=61.37063258215244%
+2025-04-24 09:29:02,859 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.46855595490043%
+2025-04-24 09:29:02,859 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.46855595490043%
+2025-04-24 09:29:02,859 - HVAC_Control - INFO - Processed: Temp=21.3°C, Humidity=8.3g/kg, Fan=61.46855595490043%
+2025-04-24 09:29:02,859 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.50581254802791%
+2025-04-24 09:29:02,859 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.50581254802791%
+2025-04-24 09:29:02,859 - HVAC_Control - INFO - Processed: Temp=21.4°C, Humidity=8.3g/kg, Fan=61.50581254802791%
+2025-04-24 09:29:02,860 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.50031434179424%
+2025-04-24 09:29:02,860 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.50031434179424%
+2025-04-24 09:29:02,860 - HVAC_Control - INFO - Processed: Temp=21.4°C, Humidity=8.3g/kg, Fan=61.50031434179424%
+2025-04-24 09:29:02,860 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.31674510506241%
+2025-04-24 09:29:02,860 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.31674510506241%
+2025-04-24 09:29:02,860 - HVAC_Control - INFO - Processed: Temp=21.5°C, Humidity=8.4g/kg, Fan=61.31674510506241%
+2025-04-24 09:29:02,860 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.16727721777007%
+2025-04-24 09:29:02,861 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.16727721777007%
+2025-04-24 09:29:02,861 - HVAC_Control - INFO - Processed: Temp=21.5°C, Humidity=8.4g/kg, Fan=61.16727721777007%
+2025-04-24 09:29:02,861 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.155877505011475%
+2025-04-24 09:29:02,861 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.155877505011475%
+2025-04-24 09:29:02,861 - HVAC_Control - INFO - Processed: Temp=21.7°C, Humidity=8.4g/kg, Fan=61.155877505011475%
+2025-04-24 09:29:02,862 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.362835044649465%
+2025-04-24 09:29:02,862 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.362835044649465%
+2025-04-24 09:29:02,862 - HVAC_Control - INFO - Processed: Temp=21.7°C, Humidity=8.4g/kg, Fan=61.362835044649465%
+2025-04-24 09:29:02,862 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.25537997093912%
+2025-04-24 09:29:02,862 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.25537997093912%
+2025-04-24 09:29:02,862 - HVAC_Control - INFO - Processed: Temp=21.7°C, Humidity=8.4g/kg, Fan=61.25537997093912%
+2025-04-24 09:29:02,863 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.35516683160613%
+2025-04-24 09:29:02,863 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.35516683160613%
+2025-04-24 09:29:02,863 - HVAC_Control - INFO - Processed: Temp=21.6°C, Humidity=8.4g/kg, Fan=61.35516683160613%
+2025-04-24 09:29:02,863 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.1814764847511%
+2025-04-24 09:29:02,863 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.1814764847511%
+2025-04-24 09:29:02,864 - HVAC_Control - INFO - Processed: Temp=21.3°C, Humidity=8.4g/kg, Fan=61.1814764847511%
+2025-04-24 09:29:02,864 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.046241499669264%
+2025-04-24 09:29:02,864 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.046241499669264%
+2025-04-24 09:29:02,864 - HVAC_Control - INFO - Processed: Temp=21.3°C, Humidity=8.5g/kg, Fan=61.046241499669264%
+2025-04-24 09:29:02,864 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.88585825075083%
+2025-04-24 09:29:02,864 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.88585825075083%
+2025-04-24 09:29:02,866 - HVAC_Control - INFO - Processed: Temp=21.3°C, Humidity=8.6g/kg, Fan=60.88585825075083%
+2025-04-24 09:29:02,866 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.78751638742678%
+2025-04-24 09:29:02,866 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.78751638742678%
+2025-04-24 09:29:02,866 - HVAC_Control - INFO - Processed: Temp=21.3°C, Humidity=8.6g/kg, Fan=60.78751638742678%
+2025-04-24 09:29:02,866 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.81510361967096%
+2025-04-24 09:29:02,866 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.81510361967096%
+2025-04-24 09:29:02,866 - HVAC_Control - INFO - Processed: Temp=21.4°C, Humidity=8.6g/kg, Fan=60.81510361967096%
+2025-04-24 09:29:02,867 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.048089538475644%
+2025-04-24 09:29:02,867 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.048089538475644%
+2025-04-24 09:29:02,867 - HVAC_Control - INFO - Processed: Temp=21.3°C, Humidity=8.5g/kg, Fan=61.048089538475644%
+2025-04-24 09:29:02,867 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.2894726371653%
+2025-04-24 09:29:02,867 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.2894726371653%
+2025-04-24 09:29:02,867 - HVAC_Control - INFO - Processed: Temp=21.1°C, Humidity=8.4g/kg, Fan=61.2894726371653%
+2025-04-24 09:29:02,868 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.08476867315235%
+2025-04-24 09:29:02,868 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.08476867315235%
+2025-04-24 09:29:02,868 - HVAC_Control - INFO - Processed: Temp=21.1°C, Humidity=8.5g/kg, Fan=61.08476867315235%
+2025-04-24 09:29:02,868 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.062888131560335%
+2025-04-24 09:29:02,868 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.062888131560335%
+2025-04-24 09:29:02,868 - HVAC_Control - INFO - Processed: Temp=21.2°C, Humidity=8.5g/kg, Fan=61.062888131560335%
+2025-04-24 09:29:02,869 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.96218688035498%
+2025-04-24 09:29:02,869 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.96218688035498%
+2025-04-24 09:29:02,869 - HVAC_Control - INFO - Processed: Temp=21.2°C, Humidity=8.5g/kg, Fan=60.96218688035498%
+2025-04-24 09:29:02,869 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.929873959211974%
+2025-04-24 09:29:02,869 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.929873959211974%
+2025-04-24 09:29:02,869 - HVAC_Control - INFO - Processed: Temp=21.2°C, Humidity=8.6g/kg, Fan=60.929873959211974%
+2025-04-24 09:29:02,870 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.042773364154584%
+2025-04-24 09:29:02,870 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.042773364154584%
+2025-04-24 09:29:02,870 - HVAC_Control - INFO - Processed: Temp=21.1°C, Humidity=8.5g/kg, Fan=61.042773364154584%
+2025-04-24 09:29:02,870 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.95018555892109%
+2025-04-24 09:29:02,870 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.95018555892109%
+2025-04-24 09:29:02,871 - HVAC_Control - INFO - Processed: Temp=21.2°C, Humidity=8.5g/kg, Fan=60.95018555892109%
+2025-04-24 09:29:02,871 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.01130083863084%
+2025-04-24 09:29:02,871 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.01130083863084%
+2025-04-24 09:29:02,871 - HVAC_Control - INFO - Processed: Temp=21.2°C, Humidity=8.5g/kg, Fan=61.01130083863084%
+2025-04-24 09:29:02,871 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.040145915708905%
+2025-04-24 09:29:02,871 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.040145915708905%
+2025-04-24 09:29:02,872 - HVAC_Control - INFO - Processed: Temp=21.1°C, Humidity=8.5g/kg, Fan=61.040145915708905%
+2025-04-24 09:29:02,872 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.98561718686285%
+2025-04-24 09:29:02,872 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.98561718686285%
+2025-04-24 09:29:02,872 - HVAC_Control - INFO - Processed: Temp=21.1°C, Humidity=8.5g/kg, Fan=60.98561718686285%
+2025-04-24 09:29:02,872 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.96264915786242%
+2025-04-24 09:29:02,872 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.96264915786242%
+2025-04-24 09:29:02,873 - HVAC_Control - INFO - Processed: Temp=21.0°C, Humidity=8.5g/kg, Fan=60.96264915786242%
+2025-04-24 09:29:02,876 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.093216697839665%
+2025-04-24 09:29:02,877 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.093216697839665%
+2025-04-24 09:29:02,877 - HVAC_Control - INFO - Processed: Temp=20.9°C, Humidity=8.5g/kg, Fan=61.093216697839665%
+2025-04-24 09:29:02,877 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.12003538345967%
+2025-04-24 09:29:02,878 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.12003538345967%
+2025-04-24 09:29:02,879 - HVAC_Control - INFO - Processed: Temp=20.8°C, Humidity=8.5g/kg, Fan=61.12003538345967%
+2025-04-24 09:29:02,905 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.02477855084255%
+2025-04-24 09:29:02,909 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.02477855084255%
+2025-04-24 09:29:02,919 - HVAC_Control - INFO - Processed: Temp=20.9°C, Humidity=8.5g/kg, Fan=61.02477855084255%
+2025-04-24 09:29:02,921 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.931612531075054%
+2025-04-24 09:29:02,921 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.931612531075054%
+2025-04-24 09:29:02,921 - HVAC_Control - INFO - Processed: Temp=20.9°C, Humidity=8.6g/kg, Fan=60.931612531075054%
+2025-04-24 09:29:02,921 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.79711753070208%
+2025-04-24 09:29:02,922 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.79711753070208%
+2025-04-24 09:29:02,922 - HVAC_Control - INFO - Processed: Temp=20.8°C, Humidity=8.6g/kg, Fan=60.79711753070208%
+2025-04-24 09:29:02,922 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.86083692059504%
+2025-04-24 09:29:02,922 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.86083692059504%
+2025-04-24 09:29:02,922 - HVAC_Control - INFO - Processed: Temp=20.8°C, Humidity=8.6g/kg, Fan=60.86083692059504%
+2025-04-24 09:29:02,922 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.663375073548245%
+2025-04-24 09:29:02,922 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.663375073548245%
+2025-04-24 09:29:02,923 - HVAC_Control - INFO - Processed: Temp=20.9°C, Humidity=8.7g/kg, Fan=60.663375073548245%
+2025-04-24 09:29:02,923 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.640973807480286%
+2025-04-24 09:29:02,923 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.640973807480286%
+2025-04-24 09:29:02,923 - HVAC_Control - INFO - Processed: Temp=21.1°C, Humidity=8.7g/kg, Fan=60.640973807480286%
+2025-04-24 09:29:02,923 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.620384135241004%
+2025-04-24 09:29:02,923 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.620384135241004%
+2025-04-24 09:29:02,923 - HVAC_Control - INFO - Processed: Temp=21.2°C, Humidity=8.7g/kg, Fan=60.620384135241004%
+2025-04-24 09:29:02,924 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.5048947871422%
+2025-04-24 09:29:02,924 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.5048947871422%
+2025-04-24 09:29:02,924 - HVAC_Control - INFO - Processed: Temp=21.1°C, Humidity=8.8g/kg, Fan=60.5048947871422%
+2025-04-24 09:29:02,924 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.41923080275266%
+2025-04-24 09:29:02,924 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.41923080275266%
+2025-04-24 09:29:02,924 - HVAC_Control - INFO - Processed: Temp=21.2°C, Humidity=8.8g/kg, Fan=60.41923080275266%
+2025-04-24 09:29:02,924 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.59053336210706%
+2025-04-24 09:29:02,925 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.59053336210706%
+2025-04-24 09:29:02,925 - HVAC_Control - INFO - Processed: Temp=21.3°C, Humidity=8.7g/kg, Fan=60.59053336210706%
+2025-04-24 09:29:02,925 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.47511904531725%
+2025-04-24 09:29:02,925 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.47511904531725%
+2025-04-24 09:29:02,925 - HVAC_Control - INFO - Processed: Temp=21.4°C, Humidity=8.8g/kg, Fan=60.47511904531725%
+2025-04-24 09:29:02,925 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.508613626460026%
+2025-04-24 09:29:02,926 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.508613626460026%
+2025-04-24 09:29:02,926 - HVAC_Control - INFO - Processed: Temp=21.3°C, Humidity=8.8g/kg, Fan=60.508613626460026%
+2025-04-24 09:29:02,926 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.61502785421277%
+2025-04-24 09:29:02,926 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.61502785421277%
+2025-04-24 09:29:02,926 - HVAC_Control - INFO - Processed: Temp=21.4°C, Humidity=8.7g/kg, Fan=60.61502785421277%
+2025-04-24 09:29:02,926 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.49717404554338%
+2025-04-24 09:29:02,926 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.49717404554338%
+2025-04-24 09:29:02,927 - HVAC_Control - INFO - Processed: Temp=21.6°C, Humidity=8.8g/kg, Fan=60.49717404554338%
+2025-04-24 09:29:02,927 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.566160357520495%
+2025-04-24 09:29:02,927 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.566160357520495%
+2025-04-24 09:29:02,927 - HVAC_Control - INFO - Processed: Temp=21.3°C, Humidity=8.7g/kg, Fan=60.566160357520495%
+2025-04-24 09:29:02,927 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.53588807201826%
+2025-04-24 09:29:02,927 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.53588807201826%
+2025-04-24 09:29:02,927 - HVAC_Control - INFO - Processed: Temp=21.5°C, Humidity=8.7g/kg, Fan=60.53588807201826%
+2025-04-24 09:29:02,928 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.46160080627351%
+2025-04-24 09:29:02,928 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.46160080627351%
+2025-04-24 09:29:02,928 - HVAC_Control - INFO - Processed: Temp=21.5°C, Humidity=8.8g/kg, Fan=60.46160080627351%
+2025-04-24 09:29:02,928 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.62621166570967%
+2025-04-24 09:29:02,934 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.62621166570967%
+2025-04-24 09:29:02,934 - HVAC_Control - INFO - Processed: Temp=21.4°C, Humidity=8.7g/kg, Fan=60.62621166570967%
+2025-04-24 09:29:02,935 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.59825147275833%
+2025-04-24 09:29:02,935 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.59825147275833%
+2025-04-24 09:29:02,935 - HVAC_Control - INFO - Processed: Temp=21.5°C, Humidity=8.7g/kg, Fan=60.59825147275833%
+2025-04-24 09:29:02,935 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.421366083158105%
+2025-04-24 09:29:02,935 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.421366083158105%
+2025-04-24 09:29:02,935 - HVAC_Control - INFO - Processed: Temp=21.4°C, Humidity=8.8g/kg, Fan=60.421366083158105%
+2025-04-24 09:29:02,936 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.29508120952687%
+2025-04-24 09:29:02,936 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.29508120952687%
+2025-04-24 09:29:02,936 - HVAC_Control - INFO - Processed: Temp=21.4°C, Humidity=8.9g/kg, Fan=60.29508120952687%
+2025-04-24 09:29:02,936 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.20814603017119%
+2025-04-24 09:29:02,936 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.20814603017119%
+2025-04-24 09:29:02,936 - HVAC_Control - INFO - Processed: Temp=21.5°C, Humidity=8.9g/kg, Fan=60.20814603017119%
+2025-04-24 09:29:02,937 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.12179685300557%
+2025-04-24 09:29:02,937 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.12179685300557%
+2025-04-24 09:29:02,937 - HVAC_Control - INFO - Processed: Temp=21.4°C, Humidity=8.9g/kg, Fan=60.12179685300557%
+2025-04-24 09:29:02,937 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.24195642676241%
+2025-04-24 09:29:02,937 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.24195642676241%
+2025-04-24 09:29:02,937 - HVAC_Control - INFO - Processed: Temp=21.5°C, Humidity=8.9g/kg, Fan=60.24195642676241%
+2025-04-24 09:29:02,938 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.376868008263266%
+2025-04-24 09:29:02,938 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.376868008263266%
+2025-04-24 09:29:02,938 - HVAC_Control - INFO - Processed: Temp=21.5°C, Humidity=8.8g/kg, Fan=60.376868008263266%
+2025-04-24 09:29:02,938 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.47390150878855%
+2025-04-24 09:29:02,938 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.47390150878855%
+2025-04-24 09:29:02,938 - HVAC_Control - INFO - Processed: Temp=21.5°C, Humidity=8.8g/kg, Fan=60.47390150878855%
+2025-04-24 09:29:02,938 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.506295606120425%
+2025-04-24 09:29:02,939 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.506295606120425%
+2025-04-24 09:29:02,939 - HVAC_Control - INFO - Processed: Temp=21.6°C, Humidity=8.8g/kg, Fan=60.506295606120425%
+2025-04-24 09:29:02,939 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.522414814324634%
+2025-04-24 09:29:02,939 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.522414814324634%
+2025-04-24 09:29:02,939 - HVAC_Control - INFO - Processed: Temp=21.3°C, Humidity=8.8g/kg, Fan=60.522414814324634%
+2025-04-24 09:29:02,939 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.44448934246982%
+2025-04-24 09:29:02,939 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.44448934246982%
+2025-04-24 09:29:02,940 - HVAC_Control - INFO - Processed: Temp=21.5°C, Humidity=8.8g/kg, Fan=60.44448934246982%
+2025-04-24 09:29:02,940 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.45120983700269%
+2025-04-24 09:29:02,940 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.45120983700269%
+2025-04-24 09:29:02,940 - HVAC_Control - INFO - Processed: Temp=21.5°C, Humidity=8.8g/kg, Fan=60.45120983700269%
+2025-04-24 09:29:02,940 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.66062845958912%
+2025-04-24 09:29:02,940 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.66062845958912%
+2025-04-24 09:29:02,940 - HVAC_Control - INFO - Processed: Temp=21.7°C, Humidity=8.7g/kg, Fan=60.66062845958912%
+2025-04-24 09:29:02,941 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.621788545103236%
+2025-04-24 09:29:02,941 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.621788545103236%
+2025-04-24 09:29:02,941 - HVAC_Control - INFO - Processed: Temp=21.7°C, Humidity=8.7g/kg, Fan=60.621788545103236%
+2025-04-24 09:29:02,941 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.64936599360675%
+2025-04-24 09:29:02,941 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.64936599360675%
+2025-04-24 09:29:02,941 - HVAC_Control - INFO - Processed: Temp=21.8°C, Humidity=8.7g/kg, Fan=60.64936599360675%
+2025-04-24 09:29:02,941 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.57563826088156%
+2025-04-24 09:29:02,942 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.57563826088156%
+2025-04-24 09:29:02,942 - HVAC_Control - INFO - Processed: Temp=21.7°C, Humidity=8.7g/kg, Fan=60.57563826088156%
+2025-04-24 09:29:02,942 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.552364368546996%
+2025-04-24 09:29:02,942 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.552364368546996%
+2025-04-24 09:29:02,942 - HVAC_Control - INFO - Processed: Temp=21.6°C, Humidity=8.7g/kg, Fan=60.552364368546996%
+2025-04-24 09:29:02,942 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.5501458654368%
+2025-04-24 09:29:02,942 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.5501458654368%
+2025-04-24 09:29:02,942 - HVAC_Control - INFO - Processed: Temp=21.6°C, Humidity=8.7g/kg, Fan=60.5501458654368%
+2025-04-24 09:29:02,943 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.58964511495286%
+2025-04-24 09:29:02,943 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.58964511495286%
+2025-04-24 09:29:02,943 - HVAC_Control - INFO - Processed: Temp=21.7°C, Humidity=8.7g/kg, Fan=60.58964511495286%
+2025-04-24 09:29:02,943 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.53057958188476%
+2025-04-24 09:29:02,943 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.53057958188476%
+2025-04-24 09:29:02,943 - HVAC_Control - INFO - Processed: Temp=21.8°C, Humidity=8.7g/kg, Fan=60.53057958188476%
+2025-04-24 09:29:02,944 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.690286721033594%
+2025-04-24 09:29:02,944 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.690286721033594%
+2025-04-24 09:29:02,944 - HVAC_Control - INFO - Processed: Temp=21.9°C, Humidity=8.7g/kg, Fan=60.690286721033594%
+2025-04-24 09:29:02,944 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.72560053218916%
+2025-04-24 09:29:02,944 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.72560053218916%
+2025-04-24 09:29:02,944 - HVAC_Control - INFO - Processed: Temp=21.6°C, Humidity=8.7g/kg, Fan=60.72560053218916%
+2025-04-24 09:29:02,944 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.78077773899444%
+2025-04-24 09:29:02,946 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.78077773899444%
+2025-04-24 09:29:02,946 - HVAC_Control - INFO - Processed: Temp=21.6°C, Humidity=8.6g/kg, Fan=60.78077773899444%
+2025-04-24 09:29:02,946 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.894563816868946%
+2025-04-24 09:29:02,946 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.894563816868946%
+2025-04-24 09:29:02,946 - HVAC_Control - INFO - Processed: Temp=21.6°C, Humidity=8.6g/kg, Fan=60.894563816868946%
+2025-04-24 09:29:02,946 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.71989648481037%
+2025-04-24 09:29:02,946 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.71989648481037%
+2025-04-24 09:29:02,947 - HVAC_Control - INFO - Processed: Temp=21.5°C, Humidity=8.7g/kg, Fan=60.71989648481037%
+2025-04-24 09:29:02,947 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.93011594052054%
+2025-04-24 09:29:02,947 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.93011594052054%
+2025-04-24 09:29:02,947 - HVAC_Control - INFO - Processed: Temp=21.5°C, Humidity=8.6g/kg, Fan=60.93011594052054%
+2025-04-24 09:29:02,947 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.91860732199342%
+2025-04-24 09:29:02,947 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.91860732199342%
+2025-04-24 09:29:02,947 - HVAC_Control - INFO - Processed: Temp=21.6°C, Humidity=8.6g/kg, Fan=60.91860732199342%
+2025-04-24 09:29:02,948 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.00695357195015%
+2025-04-24 09:29:02,948 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.00695357195015%
+2025-04-24 09:29:02,948 - HVAC_Control - INFO - Processed: Temp=21.7°C, Humidity=8.5g/kg, Fan=61.00695357195015%
+2025-04-24 09:29:02,948 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.156036126003514%
+2025-04-24 09:29:02,948 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.156036126003514%
+2025-04-24 09:29:02,948 - HVAC_Control - INFO - Processed: Temp=21.7°C, Humidity=8.4g/kg, Fan=61.156036126003514%
+2025-04-24 09:29:02,948 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.30032621771289%
+2025-04-24 09:29:02,948 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.30032621771289%
+2025-04-24 09:29:02,949 - HVAC_Control - INFO - Processed: Temp=21.7°C, Humidity=8.4g/kg, Fan=61.30032621771289%
+2025-04-24 09:29:02,949 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.199384975834555%
+2025-04-24 09:29:02,949 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.199384975834555%
+2025-04-24 09:29:02,949 - HVAC_Control - INFO - Processed: Temp=21.9°C, Humidity=8.4g/kg, Fan=61.199384975834555%
+2025-04-24 09:29:02,949 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.21461592455968%
+2025-04-24 09:29:02,949 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.21461592455968%
+2025-04-24 09:29:02,949 - HVAC_Control - INFO - Processed: Temp=21.7°C, Humidity=8.4g/kg, Fan=61.21461592455968%
+2025-04-24 09:29:02,949 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.32568438737269%
+2025-04-24 09:29:02,950 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.32568438737269%
+2025-04-24 09:29:02,950 - HVAC_Control - INFO - Processed: Temp=21.7°C, Humidity=8.4g/kg, Fan=61.32568438737269%
+2025-04-24 09:29:02,950 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.26691246792727%
+2025-04-24 09:29:02,950 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.26691246792727%
+2025-04-24 09:29:02,950 - HVAC_Control - INFO - Processed: Temp=21.7°C, Humidity=8.4g/kg, Fan=61.26691246792727%
+2025-04-24 09:29:02,950 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.26026332777453%
+2025-04-24 09:29:02,950 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.26026332777453%
+2025-04-24 09:29:02,951 - HVAC_Control - INFO - Processed: Temp=21.6°C, Humidity=8.4g/kg, Fan=61.26026332777453%
+2025-04-24 09:29:02,951 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.42049276639763%
+2025-04-24 09:29:02,951 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.42049276639763%
+2025-04-24 09:29:02,951 - HVAC_Control - INFO - Processed: Temp=21.6°C, Humidity=8.3g/kg, Fan=61.42049276639763%
+2025-04-24 09:29:02,951 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.50369554051748%
+2025-04-24 09:29:02,951 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.50369554051748%
+2025-04-24 09:29:02,952 - HVAC_Control - INFO - Processed: Temp=21.5°C, Humidity=8.3g/kg, Fan=61.50369554051748%
+2025-04-24 09:29:02,952 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.58581006656736%
+2025-04-24 09:29:02,952 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.58581006656736%
+2025-04-24 09:29:02,952 - HVAC_Control - INFO - Processed: Temp=21.4°C, Humidity=8.2g/kg, Fan=61.58581006656736%
+2025-04-24 09:29:02,953 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.71364691363476%
+2025-04-24 09:29:02,953 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.71364691363476%
+2025-04-24 09:29:02,953 - HVAC_Control - INFO - Processed: Temp=21.5°C, Humidity=8.2g/kg, Fan=61.71364691363476%
+2025-04-24 09:29:02,953 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.73497888378049%
+2025-04-24 09:29:02,954 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.73497888378049%
+2025-04-24 09:29:02,954 - HVAC_Control - INFO - Processed: Temp=21.4°C, Humidity=8.2g/kg, Fan=61.73497888378049%
+2025-04-24 09:29:02,954 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.67113737326276%
+2025-04-24 09:29:02,954 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.67113737326276%
+2025-04-24 09:29:02,954 - HVAC_Control - INFO - Processed: Temp=21.2°C, Humidity=8.2g/kg, Fan=61.67113737326276%
+2025-04-24 09:29:02,955 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.6185471842456%
+2025-04-24 09:29:02,955 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.6185471842456%
+2025-04-24 09:29:02,955 - HVAC_Control - INFO - Processed: Temp=21.2°C, Humidity=8.2g/kg, Fan=61.6185471842456%
+2025-04-24 09:29:02,955 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.71378406225495%
+2025-04-24 09:29:02,955 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.71378406225495%
+2025-04-24 09:29:02,955 - HVAC_Control - INFO - Processed: Temp=21.1°C, Humidity=8.2g/kg, Fan=61.71378406225495%
+2025-04-24 09:29:02,956 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.83522247906865%
+2025-04-24 09:29:02,956 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.83522247906865%
+2025-04-24 09:29:02,956 - HVAC_Control - INFO - Processed: Temp=20.9°C, Humidity=8.1g/kg, Fan=61.83522247906865%
+2025-04-24 09:29:02,956 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.77324168015173%
+2025-04-24 09:29:02,956 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.77324168015173%
+2025-04-24 09:29:02,956 - HVAC_Control - INFO - Processed: Temp=21.0°C, Humidity=8.2g/kg, Fan=61.77324168015173%
+2025-04-24 09:29:02,956 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.695984623656585%
+2025-04-24 09:29:02,957 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.695984623656585%
+2025-04-24 09:29:02,957 - HVAC_Control - INFO - Processed: Temp=20.9°C, Humidity=8.2g/kg, Fan=61.695984623656585%
+2025-04-24 09:29:02,957 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.56151518888985%
+2025-04-24 09:29:02,957 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.56151518888985%
+2025-04-24 09:29:02,957 - HVAC_Control - INFO - Processed: Temp=21.0°C, Humidity=8.3g/kg, Fan=61.56151518888985%
+2025-04-24 09:29:02,957 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.58238855731819%
+2025-04-24 09:29:02,957 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.58238855731819%
+2025-04-24 09:29:02,957 - HVAC_Control - INFO - Processed: Temp=21.0°C, Humidity=8.2g/kg, Fan=61.58238855731819%
+2025-04-24 09:29:02,959 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.64070597420489%
+2025-04-24 09:29:02,959 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.64070597420489%
+2025-04-24 09:29:02,959 - HVAC_Control - INFO - Processed: Temp=20.9°C, Humidity=8.2g/kg, Fan=61.64070597420489%
+2025-04-24 09:29:02,959 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.72188332809984%
+2025-04-24 09:29:02,959 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.72188332809984%
+2025-04-24 09:29:02,960 - HVAC_Control - INFO - Processed: Temp=20.9°C, Humidity=8.2g/kg, Fan=61.72188332809984%
+2025-04-24 09:29:02,960 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.7981151015558%
+2025-04-24 09:29:02,960 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.7981151015558%
+2025-04-24 09:29:02,960 - HVAC_Control - INFO - Processed: Temp=20.8°C, Humidity=8.1g/kg, Fan=61.7981151015558%
+2025-04-24 09:29:02,960 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.89169096902402%
+2025-04-24 09:29:02,960 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.89169096902402%
+2025-04-24 09:29:02,960 - HVAC_Control - INFO - Processed: Temp=21.0°C, Humidity=8.1g/kg, Fan=61.89169096902402%
+2025-04-24 09:29:02,961 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.88495889256016%
+2025-04-24 09:29:02,961 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.88495889256016%
+2025-04-24 09:29:02,961 - HVAC_Control - INFO - Processed: Temp=20.9°C, Humidity=8.1g/kg, Fan=61.88495889256016%
+2025-04-24 09:29:02,961 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.93941729667417%
+2025-04-24 09:29:02,961 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.93941729667417%
+2025-04-24 09:29:02,961 - HVAC_Control - INFO - Processed: Temp=21.1°C, Humidity=8.1g/kg, Fan=61.93941729667417%
+2025-04-24 09:29:02,961 - HVAC_Control - INFO - Set Supply Fan Controller speed to 62.0401057572431%
+2025-04-24 09:29:02,962 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 62.0401057572431%
+2025-04-24 09:29:02,962 - HVAC_Control - INFO - Processed: Temp=21.2°C, Humidity=8.0g/kg, Fan=62.0401057572431%
+2025-04-24 09:29:02,962 - HVAC_Control - INFO - Set Supply Fan Controller speed to 62.065808590863554%
+2025-04-24 09:29:02,962 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 62.065808590863554%
+2025-04-24 09:29:02,962 - HVAC_Control - INFO - Processed: Temp=21.1°C, Humidity=8.0g/kg, Fan=62.065808590863554%
+2025-04-24 09:29:02,962 - HVAC_Control - INFO - Set Supply Fan Controller speed to 62.175162178053604%
+2025-04-24 09:29:02,963 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 62.175162178053604%
+2025-04-24 09:29:02,963 - HVAC_Control - INFO - Processed: Temp=21.0°C, Humidity=8.0g/kg, Fan=62.175162178053604%
+2025-04-24 09:29:02,963 - HVAC_Control - INFO - Set Supply Fan Controller speed to 62.114767165808075%
+2025-04-24 09:29:02,963 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 62.114767165808075%
+2025-04-24 09:29:02,963 - HVAC_Control - INFO - Processed: Temp=21.0°C, Humidity=8.0g/kg, Fan=62.114767165808075%
+2025-04-24 09:29:02,963 - HVAC_Control - INFO - Set Supply Fan Controller speed to 62.23615353649776%
+2025-04-24 09:29:02,963 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 62.23615353649776%
+2025-04-24 09:29:02,964 - HVAC_Control - INFO - Processed: Temp=21.1°C, Humidity=7.9g/kg, Fan=62.23615353649776%
+2025-04-24 09:29:02,964 - HVAC_Control - INFO - Set Supply Fan Controller speed to 62.12282677377855%
+2025-04-24 09:29:02,964 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 62.12282677377855%
+2025-04-24 09:29:02,964 - HVAC_Control - INFO - Processed: Temp=21.0°C, Humidity=8.0g/kg, Fan=62.12282677377855%
+2025-04-24 09:29:02,964 - HVAC_Control - INFO - Set Supply Fan Controller speed to 62.10178126630403%
+2025-04-24 09:29:02,964 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 62.10178126630403%
+2025-04-24 09:29:02,964 - HVAC_Control - INFO - Processed: Temp=21.1°C, Humidity=8.0g/kg, Fan=62.10178126630403%
+2025-04-24 09:29:02,965 - HVAC_Control - INFO - Set Supply Fan Controller speed to 62.135034197045606%
+2025-04-24 09:29:02,965 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 62.135034197045606%
+2025-04-24 09:29:02,965 - HVAC_Control - INFO - Processed: Temp=21.1°C, Humidity=8.0g/kg, Fan=62.135034197045606%
+2025-04-24 09:29:02,965 - HVAC_Control - INFO - Set Supply Fan Controller speed to 62.037346765678315%
+2025-04-24 09:29:02,965 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 62.037346765678315%
+2025-04-24 09:29:02,965 - HVAC_Control - INFO - Processed: Temp=21.0°C, Humidity=8.0g/kg, Fan=62.037346765678315%
+2025-04-24 09:29:02,965 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.91820278237269%
+2025-04-24 09:29:02,965 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.91820278237269%
+2025-04-24 09:29:02,966 - HVAC_Control - INFO - Processed: Temp=21.0°C, Humidity=8.1g/kg, Fan=61.91820278237269%
+2025-04-24 09:29:02,966 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.776021722245325%
+2025-04-24 09:29:02,966 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.776021722245325%
+2025-04-24 09:29:02,966 - HVAC_Control - INFO - Processed: Temp=20.9°C, Humidity=8.2g/kg, Fan=61.776021722245325%
+2025-04-24 09:29:02,966 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.74790392146427%
+2025-04-24 09:29:02,967 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.74790392146427%
+2025-04-24 09:29:02,967 - HVAC_Control - INFO - Processed: Temp=20.7°C, Humidity=8.2g/kg, Fan=61.74790392146427%
+2025-04-24 09:29:02,967 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.739732333883104%
+2025-04-24 09:29:02,967 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.739732333883104%
+2025-04-24 09:29:02,967 - HVAC_Control - INFO - Processed: Temp=20.6°C, Humidity=8.2g/kg, Fan=61.739732333883104%
+2025-04-24 09:29:02,967 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.83774145924165%
+2025-04-24 09:29:02,967 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.83774145924165%
+2025-04-24 09:29:02,967 - HVAC_Control - INFO - Processed: Temp=20.4°C, Humidity=8.2g/kg, Fan=61.83774145924165%
+2025-04-24 09:29:02,968 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.9938029189048%
+2025-04-24 09:29:02,968 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.9938029189048%
+2025-04-24 09:29:02,968 - HVAC_Control - INFO - Processed: Temp=20.3°C, Humidity=8.3g/kg, Fan=61.9938029189048%
+2025-04-24 09:29:02,968 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.62406118032551%
+2025-04-24 09:29:02,968 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.62406118032551%
+2025-04-24 09:29:02,968 - HVAC_Control - INFO - Processed: Temp=20.5°C, Humidity=8.4g/kg, Fan=61.62406118032551%
+2025-04-24 09:29:02,968 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.68997981256178%
+2025-04-24 09:29:02,968 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.68997981256178%
+2025-04-24 09:29:02,968 - HVAC_Control - INFO - Processed: Temp=20.4°C, Humidity=8.4g/kg, Fan=61.68997981256178%
+2025-04-24 09:29:02,968 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.676844757378184%
+2025-04-24 09:29:02,970 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.676844757378184%
+2025-04-24 09:29:02,970 - HVAC_Control - INFO - Processed: Temp=20.4°C, Humidity=8.4g/kg, Fan=61.676844757378184%
+2025-04-24 09:29:02,970 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.32618650692937%
+2025-04-24 09:29:02,970 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.32618650692937%
+2025-04-24 09:29:02,970 - HVAC_Control - INFO - Processed: Temp=20.6°C, Humidity=8.4g/kg, Fan=61.32618650692937%
+2025-04-24 09:29:02,970 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.11663062186042%
+2025-04-24 09:29:02,970 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.11663062186042%
+2025-04-24 09:29:02,970 - HVAC_Control - INFO - Processed: Temp=20.6°C, Humidity=8.5g/kg, Fan=61.11663062186042%
+2025-04-24 09:29:02,971 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.251544039772455%
+2025-04-24 09:29:02,971 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.251544039772455%
+2025-04-24 09:29:02,971 - HVAC_Control - INFO - Processed: Temp=20.6°C, Humidity=8.5g/kg, Fan=61.251544039772455%
+2025-04-24 09:29:02,971 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.232248861348715%
+2025-04-24 09:29:02,971 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.232248861348715%
+2025-04-24 09:29:02,971 - HVAC_Control - INFO - Processed: Temp=20.6°C, Humidity=8.5g/kg, Fan=61.232248861348715%
+2025-04-24 09:29:02,971 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.08239400505454%
+2025-04-24 09:29:02,971 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.08239400505454%
+2025-04-24 09:29:02,972 - HVAC_Control - INFO - Processed: Temp=20.6°C, Humidity=8.5g/kg, Fan=61.08239400505454%
+2025-04-24 09:29:02,972 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.064187000060045%
+2025-04-24 09:29:02,972 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.064187000060045%
+2025-04-24 09:29:02,972 - HVAC_Control - INFO - Processed: Temp=20.8°C, Humidity=8.5g/kg, Fan=61.064187000060045%
+2025-04-24 09:29:02,972 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.132806604375155%
+2025-04-24 09:29:02,972 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.132806604375155%
+2025-04-24 09:29:02,972 - HVAC_Control - INFO - Processed: Temp=21.0°C, Humidity=8.5g/kg, Fan=61.132806604375155%
+2025-04-24 09:29:02,973 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.10383151913251%
+2025-04-24 09:29:02,973 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.10383151913251%
+2025-04-24 09:29:02,973 - HVAC_Control - INFO - Processed: Temp=21.1°C, Humidity=8.5g/kg, Fan=61.10383151913251%
+2025-04-24 09:29:02,973 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.127585195833134%
+2025-04-24 09:29:02,973 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.127585195833134%
+2025-04-24 09:29:02,973 - HVAC_Control - INFO - Processed: Temp=21.2°C, Humidity=8.5g/kg, Fan=61.127585195833134%
+2025-04-24 09:29:02,973 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.0915286923123%
+2025-04-24 09:29:02,973 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.0915286923123%
+2025-04-24 09:29:02,974 - HVAC_Control - INFO - Processed: Temp=21.0°C, Humidity=8.5g/kg, Fan=61.0915286923123%
+2025-04-24 09:29:02,974 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.96876026144687%
+2025-04-24 09:29:02,974 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.96876026144687%
+2025-04-24 09:29:02,974 - HVAC_Control - INFO - Processed: Temp=21.1°C, Humidity=8.5g/kg, Fan=60.96876026144687%
+2025-04-24 09:29:02,974 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.027470003898465%
+2025-04-24 09:29:02,974 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.027470003898465%
+2025-04-24 09:29:02,974 - HVAC_Control - INFO - Processed: Temp=20.9°C, Humidity=8.5g/kg, Fan=61.027470003898465%
+2025-04-24 09:29:02,975 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.93009716805664%
+2025-04-24 09:29:02,975 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.93009716805664%
+2025-04-24 09:29:02,975 - HVAC_Control - INFO - Processed: Temp=20.9°C, Humidity=8.6g/kg, Fan=60.93009716805664%
+2025-04-24 09:29:02,975 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.84734085725173%
+2025-04-24 09:29:02,975 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.84734085725173%
+2025-04-24 09:29:02,975 - HVAC_Control - INFO - Processed: Temp=21.0°C, Humidity=8.6g/kg, Fan=60.84734085725173%
+2025-04-24 09:29:02,975 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.8061695400896%
+2025-04-24 09:29:02,976 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.8061695400896%
+2025-04-24 09:29:02,976 - HVAC_Control - INFO - Processed: Temp=21.0°C, Humidity=8.6g/kg, Fan=60.8061695400896%
+2025-04-24 09:29:02,976 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.965069245777116%
+2025-04-24 09:29:02,976 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.965069245777116%
+2025-04-24 09:29:02,976 - HVAC_Control - INFO - Processed: Temp=20.9°C, Humidity=8.5g/kg, Fan=60.965069245777116%
+2025-04-24 09:29:02,976 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.98490356623611%
+2025-04-24 09:29:02,977 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.98490356623611%
+2025-04-24 09:29:02,977 - HVAC_Control - INFO - Processed: Temp=21.0°C, Humidity=8.5g/kg, Fan=60.98490356623611%
+2025-04-24 09:29:02,977 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.034625959942005%
+2025-04-24 09:29:02,977 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.034625959942005%
+2025-04-24 09:29:02,977 - HVAC_Control - INFO - Processed: Temp=21.0°C, Humidity=8.5g/kg, Fan=61.034625959942005%
+2025-04-24 09:29:02,977 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.30484231885592%
+2025-04-24 09:29:02,978 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.30484231885592%
+2025-04-24 09:29:02,978 - HVAC_Control - INFO - Processed: Temp=21.0°C, Humidity=8.4g/kg, Fan=61.30484231885592%
+2025-04-24 09:29:02,978 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.04451689461353%
+2025-04-24 09:29:02,978 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.04451689461353%
+2025-04-24 09:29:02,978 - HVAC_Control - INFO - Processed: Temp=20.9°C, Humidity=8.5g/kg, Fan=61.04451689461353%
+2025-04-24 09:29:02,978 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.00410753881701%
+2025-04-24 09:29:02,979 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.00410753881701%
+2025-04-24 09:29:02,979 - HVAC_Control - INFO - Processed: Temp=20.9°C, Humidity=8.5g/kg, Fan=61.00410753881701%
+2025-04-24 09:29:02,979 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.83944763908206%
+2025-04-24 09:29:02,979 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.83944763908206%
+2025-04-24 09:29:02,979 - HVAC_Control - INFO - Processed: Temp=20.9°C, Humidity=8.6g/kg, Fan=60.83944763908206%
+2025-04-24 09:29:02,979 - HVAC_Control - INFO - Set Supply Fan Controller speed to 60.735743079208525%
+2025-04-24 09:29:02,979 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 60.735743079208525%
+2025-04-24 09:29:02,981 - HVAC_Control - INFO - Processed: Temp=20.8°C, Humidity=8.6g/kg, Fan=60.735743079208525%
+2025-04-24 09:29:02,981 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.19450990988686%
+2025-04-24 09:29:02,981 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.19450990988686%
+2025-04-24 09:29:02,981 - HVAC_Control - INFO - Processed: Temp=20.6°C, Humidity=8.7g/kg, Fan=61.19450990988686%
+2025-04-24 09:29:02,981 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.31433867834104%
+2025-04-24 09:29:02,981 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.31433867834104%
+2025-04-24 09:29:02,982 - HVAC_Control - INFO - Processed: Temp=20.6°C, Humidity=8.7g/kg, Fan=61.31433867834104%
+2025-04-24 09:29:02,982 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.444259255408525%
+2025-04-24 09:29:02,982 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.444259255408525%
+2025-04-24 09:29:02,982 - HVAC_Control - INFO - Processed: Temp=20.5°C, Humidity=8.8g/kg, Fan=61.444259255408525%
+2025-04-24 09:29:02,982 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.57553234551652%
+2025-04-24 09:29:02,982 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.57553234551652%
+2025-04-24 09:29:02,983 - HVAC_Control - INFO - Processed: Temp=20.5°C, Humidity=8.9g/kg, Fan=61.57553234551652%
+2025-04-24 09:29:02,983 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.18796341069406%
+2025-04-24 09:29:02,983 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.18796341069406%
+2025-04-24 09:29:02,983 - HVAC_Control - INFO - Processed: Temp=20.6°C, Humidity=8.8g/kg, Fan=61.18796341069406%
+2025-04-24 09:29:02,983 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.05877910097598%
+2025-04-24 09:29:02,984 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.05877910097598%
+2025-04-24 09:29:02,984 - HVAC_Control - INFO - Processed: Temp=20.6°C, Humidity=8.8g/kg, Fan=61.05877910097598%
+2025-04-24 09:29:02,984 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.58025929522056%
+2025-04-24 09:29:02,984 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.58025929522056%
+2025-04-24 09:29:02,984 - HVAC_Control - INFO - Processed: Temp=20.5°C, Humidity=8.8g/kg, Fan=61.58025929522056%
+2025-04-24 09:29:02,984 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.586378646022595%
+2025-04-24 09:29:02,985 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.586378646022595%
+2025-04-24 09:29:02,985 - HVAC_Control - INFO - Processed: Temp=20.5°C, Humidity=8.9g/kg, Fan=61.586378646022595%
+2025-04-24 09:29:02,985 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.516586422681726%
+2025-04-24 09:29:02,985 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.516586422681726%
+2025-04-24 09:29:02,985 - HVAC_Control - INFO - Processed: Temp=20.5°C, Humidity=8.9g/kg, Fan=61.516586422681726%
+2025-04-24 09:29:02,985 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.450395060886606%
+2025-04-24 09:29:02,986 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.450395060886606%
+2025-04-24 09:29:02,986 - HVAC_Control - INFO - Processed: Temp=20.5°C, Humidity=8.9g/kg, Fan=61.450395060886606%
+2025-04-24 09:29:02,986 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.59711158382068%
+2025-04-24 09:29:02,986 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.59711158382068%
+2025-04-24 09:29:02,986 - HVAC_Control - INFO - Processed: Temp=20.5°C, Humidity=8.9g/kg, Fan=61.59711158382068%
+2025-04-24 09:29:02,986 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.55581474606491%
+2025-04-24 09:29:02,986 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.55581474606491%
+2025-04-24 09:29:02,987 - HVAC_Control - INFO - Processed: Temp=20.5°C, Humidity=9.0g/kg, Fan=61.55581474606491%
+2025-04-24 09:29:02,987 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.914366814762076%
+2025-04-24 09:29:02,987 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.914366814762076%
+2025-04-24 09:29:02,987 - HVAC_Control - INFO - Processed: Temp=20.4°C, Humidity=9.0g/kg, Fan=61.914366814762076%
+2025-04-24 09:29:02,987 - HVAC_Control - INFO - Set Supply Fan Controller speed to 62.07254293139643%
+2025-04-24 09:29:02,987 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 62.07254293139643%
+2025-04-24 09:29:02,987 - HVAC_Control - INFO - Processed: Temp=20.3°C, Humidity=9.0g/kg, Fan=62.07254293139643%
+2025-04-24 09:29:02,988 - HVAC_Control - INFO - Set Supply Fan Controller speed to 62.215544818716786%
+2025-04-24 09:29:02,988 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 62.215544818716786%
+2025-04-24 09:29:02,988 - HVAC_Control - INFO - Processed: Temp=20.3°C, Humidity=9.0g/kg, Fan=62.215544818716786%
+2025-04-24 09:29:02,988 - HVAC_Control - INFO - Set Supply Fan Controller speed to 62.41246952009277%
+2025-04-24 09:29:02,988 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 62.41246952009277%
+2025-04-24 09:29:02,988 - HVAC_Control - INFO - Processed: Temp=20.2°C, Humidity=9.0g/kg, Fan=62.41246952009277%
+2025-04-24 09:29:02,988 - HVAC_Control - INFO - Set Supply Fan Controller speed to 62.70410448533063%
+2025-04-24 09:29:02,988 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 62.70410448533063%
+2025-04-24 09:29:02,989 - HVAC_Control - INFO - Processed: Temp=20.1°C, Humidity=9.0g/kg, Fan=62.70410448533063%
+2025-04-24 09:29:02,989 - HVAC_Control - INFO - Set Supply Fan Controller speed to 63.08995649567058%
+2025-04-24 09:29:02,989 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 63.08995649567058%
+2025-04-24 09:29:02,989 - HVAC_Control - INFO - Processed: Temp=20.0°C, Humidity=9.0g/kg, Fan=63.08995649567058%
+2025-04-24 09:29:02,989 - HVAC_Control - INFO - Set Supply Fan Controller speed to 63.471808353430404%
+2025-04-24 09:29:02,990 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 63.471808353430404%
+2025-04-24 09:29:02,990 - HVAC_Control - INFO - Processed: Temp=19.8°C, Humidity=8.9g/kg, Fan=63.471808353430404%
+2025-04-24 09:29:02,990 - HVAC_Control - INFO - Set Supply Fan Controller speed to 63.377913941415734%
+2025-04-24 09:29:02,990 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 63.377913941415734%
+2025-04-24 09:29:02,990 - HVAC_Control - INFO - Processed: Temp=19.9°C, Humidity=8.9g/kg, Fan=63.377913941415734%
+2025-04-24 09:29:02,990 - HVAC_Control - INFO - Set Supply Fan Controller speed to 63.201432610591446%
+2025-04-24 09:29:02,990 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 63.201432610591446%
+2025-04-24 09:29:02,991 - HVAC_Control - INFO - Processed: Temp=19.9°C, Humidity=8.9g/kg, Fan=63.201432610591446%
+2025-04-24 09:29:02,991 - HVAC_Control - INFO - Set Supply Fan Controller speed to 63.56864440257898%
+2025-04-24 09:29:02,991 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 63.56864440257898%
+2025-04-24 09:29:02,991 - HVAC_Control - INFO - Processed: Temp=19.8°C, Humidity=8.9g/kg, Fan=63.56864440257898%
+2025-04-24 09:29:02,991 - HVAC_Control - INFO - Set Supply Fan Controller speed to 63.65295998742778%
+2025-04-24 09:29:02,991 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 63.65295998742778%
+2025-04-24 09:29:02,992 - HVAC_Control - INFO - Processed: Temp=19.8°C, Humidity=9.0g/kg, Fan=63.65295998742778%
+2025-04-24 09:29:02,992 - HVAC_Control - INFO - Set Supply Fan Controller speed to 63.846529787039465%
+2025-04-24 09:29:02,992 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 63.846529787039465%
+2025-04-24 09:29:02,992 - HVAC_Control - INFO - Processed: Temp=19.7°C, Humidity=9.1g/kg, Fan=63.846529787039465%
+2025-04-24 09:29:02,992 - HVAC_Control - INFO - Set Supply Fan Controller speed to 63.53382268097936%
+2025-04-24 09:29:02,992 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 63.53382268097936%
+2025-04-24 09:29:02,992 - HVAC_Control - INFO - Processed: Temp=19.8°C, Humidity=9.2g/kg, Fan=63.53382268097936%
+2025-04-24 09:29:02,993 - HVAC_Control - INFO - Set Supply Fan Controller speed to 63.693630122615644%
+2025-04-24 09:29:02,993 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 63.693630122615644%
+2025-04-24 09:29:02,993 - HVAC_Control - INFO - Processed: Temp=19.8°C, Humidity=9.3g/kg, Fan=63.693630122615644%
+2025-04-24 09:29:02,993 - HVAC_Control - INFO - Set Supply Fan Controller speed to 63.03047608818608%
+2025-04-24 09:29:02,993 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 63.03047608818608%
+2025-04-24 09:29:02,993 - HVAC_Control - INFO - Processed: Temp=20.0°C, Humidity=9.3g/kg, Fan=63.03047608818608%
+2025-04-24 09:29:02,993 - HVAC_Control - INFO - Set Supply Fan Controller speed to 63.03795194296905%
+2025-04-24 09:29:02,993 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 63.03795194296905%
+2025-04-24 09:29:02,994 - HVAC_Control - INFO - Processed: Temp=20.0°C, Humidity=9.3g/kg, Fan=63.03795194296905%
+2025-04-24 09:29:02,994 - HVAC_Control - INFO - Set Supply Fan Controller speed to 62.959461623116795%
+2025-04-24 09:29:02,994 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 62.959461623116795%
+2025-04-24 09:29:02,994 - HVAC_Control - INFO - Processed: Temp=20.0°C, Humidity=9.3g/kg, Fan=62.959461623116795%
+2025-04-24 09:29:02,995 - HVAC_Control - INFO - Set Supply Fan Controller speed to 62.473363508114645%
+2025-04-24 09:29:02,995 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 62.473363508114645%
+2025-04-24 09:29:02,995 - HVAC_Control - INFO - Processed: Temp=20.2°C, Humidity=9.3g/kg, Fan=62.473363508114645%
+2025-04-24 09:29:02,995 - HVAC_Control - INFO - Set Supply Fan Controller speed to 62.37194512610178%
+2025-04-24 09:29:02,995 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 62.37194512610178%
+2025-04-24 09:29:02,995 - HVAC_Control - INFO - Processed: Temp=20.2°C, Humidity=9.3g/kg, Fan=62.37194512610178%
+2025-04-24 09:29:02,996 - HVAC_Control - INFO - Set Supply Fan Controller speed to 62.393948241804566%
+2025-04-24 09:29:02,996 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 62.393948241804566%
+2025-04-24 09:29:02,996 - HVAC_Control - INFO - Processed: Temp=20.2°C, Humidity=9.2g/kg, Fan=62.393948241804566%
+2025-04-24 09:29:02,996 - HVAC_Control - INFO - Set Supply Fan Controller speed to 62.675709601910754%
+2025-04-24 09:29:02,996 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 62.675709601910754%
+2025-04-24 09:29:02,997 - HVAC_Control - INFO - Processed: Temp=20.1°C, Humidity=9.3g/kg, Fan=62.675709601910754%
+2025-04-24 09:29:02,997 - HVAC_Control - INFO - Set Supply Fan Controller speed to 62.6991221248029%
+2025-04-24 09:29:02,997 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 62.6991221248029%
+2025-04-24 09:29:02,997 - HVAC_Control - INFO - Processed: Temp=20.1°C, Humidity=9.1g/kg, Fan=62.6991221248029%
+2025-04-24 09:29:02,997 - HVAC_Control - INFO - Set Supply Fan Controller speed to 63.040937795927064%
+2025-04-24 09:29:02,997 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 63.040937795927064%
+2025-04-24 09:29:02,998 - HVAC_Control - INFO - Processed: Temp=20.0°C, Humidity=9.1g/kg, Fan=63.040937795927064%
+2025-04-24 09:29:02,998 - HVAC_Control - INFO - Set Supply Fan Controller speed to 63.07528518975377%
+2025-04-24 09:29:02,998 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 63.07528518975377%
+2025-04-24 09:29:02,998 - HVAC_Control - INFO - Processed: Temp=20.0°C, Humidity=9.0g/kg, Fan=63.07528518975377%
+2025-04-24 09:29:02,998 - HVAC_Control - INFO - Set Supply Fan Controller speed to 62.97876215225486%
+2025-04-24 09:29:02,998 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 62.97876215225486%
+2025-04-24 09:29:02,999 - HVAC_Control - INFO - Processed: Temp=20.0°C, Humidity=9.1g/kg, Fan=62.97876215225486%
+2025-04-24 09:29:02,999 - HVAC_Control - INFO - Set Supply Fan Controller speed to 63.05150776631386%
+2025-04-24 09:29:02,999 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 63.05150776631386%
+2025-04-24 09:29:02,999 - HVAC_Control - INFO - Processed: Temp=20.0°C, Humidity=9.2g/kg, Fan=63.05150776631386%
+2025-04-24 09:29:02,999 - HVAC_Control - INFO - Set Supply Fan Controller speed to 63.35160590278437%
+2025-04-24 09:29:03,000 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 63.35160590278437%
+2025-04-24 09:29:03,000 - HVAC_Control - INFO - Processed: Temp=19.9°C, Humidity=9.1g/kg, Fan=63.35160590278437%
+2025-04-24 09:29:03,000 - HVAC_Control - INFO - Set Supply Fan Controller speed to 63.676142449476714%
+2025-04-24 09:29:03,000 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 63.676142449476714%
+2025-04-24 09:29:03,000 - HVAC_Control - INFO - Processed: Temp=19.8°C, Humidity=9.2g/kg, Fan=63.676142449476714%
+2025-04-24 09:29:03,001 - HVAC_Control - INFO - Set Supply Fan Controller speed to 63.07426363393529%
+2025-04-24 09:29:03,001 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 63.07426363393529%
+2025-04-24 09:29:03,001 - HVAC_Control - INFO - Processed: Temp=20.0°C, Humidity=9.1g/kg, Fan=63.07426363393529%
+2025-04-24 09:29:03,001 - HVAC_Control - INFO - Set Supply Fan Controller speed to 62.70269320533959%
+2025-04-24 09:29:03,002 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 62.70269320533959%
+2025-04-24 09:29:03,002 - HVAC_Control - INFO - Processed: Temp=20.1°C, Humidity=9.1g/kg, Fan=62.70269320533959%
+2025-04-24 09:29:03,002 - HVAC_Control - INFO - Set Supply Fan Controller speed to 63.014551550644825%
+2025-04-24 09:29:03,002 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 63.014551550644825%
+2025-04-24 09:29:03,002 - HVAC_Control - INFO - Processed: Temp=20.0°C, Humidity=9.1g/kg, Fan=63.014551550644825%
+2025-04-24 09:29:03,002 - HVAC_Control - INFO - Set Supply Fan Controller speed to 62.94372989385978%
+2025-04-24 09:29:03,002 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 62.94372989385978%
+2025-04-24 09:29:03,003 - HVAC_Control - INFO - Processed: Temp=20.0°C, Humidity=9.1g/kg, Fan=62.94372989385978%
+2025-04-24 09:29:03,003 - HVAC_Control - INFO - Set Supply Fan Controller speed to 63.47962163872592%
+2025-04-24 09:29:03,003 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 63.47962163872592%
+2025-04-24 09:29:03,003 - HVAC_Control - INFO - Processed: Temp=19.8°C, Humidity=9.1g/kg, Fan=63.47962163872592%
+2025-04-24 09:29:03,003 - HVAC_Control - INFO - Set Supply Fan Controller speed to 64.18252592151215%
+2025-04-24 09:29:03,003 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 64.18252592151215%
+2025-04-24 09:29:03,004 - HVAC_Control - INFO - Processed: Temp=19.6°C, Humidity=9.1g/kg, Fan=64.18252592151215%
+2025-04-24 09:29:03,004 - HVAC_Control - INFO - Set Supply Fan Controller speed to 63.997603428757714%
+2025-04-24 09:29:03,004 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 63.997603428757714%
+2025-04-24 09:29:03,004 - HVAC_Control - INFO - Processed: Temp=19.7°C, Humidity=9.2g/kg, Fan=63.997603428757714%
+2025-04-24 09:29:03,004 - HVAC_Control - INFO - Set Supply Fan Controller speed to 63.75155585498983%
+2025-04-24 09:29:03,004 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 63.75155585498983%
+2025-04-24 09:29:03,005 - HVAC_Control - INFO - Processed: Temp=19.7°C, Humidity=9.1g/kg, Fan=63.75155585498983%
+2025-04-24 09:29:03,005 - HVAC_Control - INFO - Set Supply Fan Controller speed to 63.64076500942002%
+2025-04-24 09:29:03,005 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 63.64076500942002%
+2025-04-24 09:29:03,005 - HVAC_Control - INFO - Processed: Temp=19.8°C, Humidity=9.2g/kg, Fan=63.64076500942002%
+2025-04-24 09:29:03,005 - HVAC_Control - INFO - Set Supply Fan Controller speed to 63.961466195258424%
+2025-04-24 09:29:03,005 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 63.961466195258424%
+2025-04-24 09:29:03,005 - HVAC_Control - INFO - Processed: Temp=19.7°C, Humidity=9.2g/kg, Fan=63.961466195258424%
+2025-04-24 09:29:03,006 - HVAC_Control - INFO - Set Supply Fan Controller speed to 63.46604523868152%
+2025-04-24 09:29:03,006 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 63.46604523868152%
+2025-04-24 09:29:03,006 - HVAC_Control - INFO - Processed: Temp=19.8°C, Humidity=9.2g/kg, Fan=63.46604523868152%
+2025-04-24 09:29:03,006 - HVAC_Control - INFO - Set Supply Fan Controller speed to 63.29088134665758%
+2025-04-24 09:29:03,006 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 63.29088134665758%
+2025-04-24 09:29:03,006 - HVAC_Control - INFO - Processed: Temp=19.9°C, Humidity=9.2g/kg, Fan=63.29088134665758%
+2025-04-24 09:29:03,006 - HVAC_Control - INFO - Set Supply Fan Controller speed to 63.018561396300605%
+2025-04-24 09:29:03,007 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 63.018561396300605%
+2025-04-24 09:29:03,007 - HVAC_Control - INFO - Processed: Temp=20.0°C, Humidity=9.1g/kg, Fan=63.018561396300605%
+2025-04-24 09:29:03,007 - HVAC_Control - INFO - Set Supply Fan Controller speed to 63.70013650093922%
+2025-04-24 09:29:03,007 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 63.70013650093922%
+2025-04-24 09:29:03,007 - HVAC_Control - INFO - Processed: Temp=19.8°C, Humidity=9.1g/kg, Fan=63.70013650093922%
+2025-04-24 09:29:03,007 - HVAC_Control - INFO - Set Supply Fan Controller speed to 63.584430276832926%
+2025-04-24 09:29:03,007 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 63.584430276832926%
+2025-04-24 09:29:03,008 - HVAC_Control - INFO - Processed: Temp=19.8°C, Humidity=9.1g/kg, Fan=63.584430276832926%
+2025-04-24 09:29:03,008 - HVAC_Control - INFO - Set Supply Fan Controller speed to 63.62280217148803%
+2025-04-24 09:29:03,008 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 63.62280217148803%
+2025-04-24 09:29:03,008 - HVAC_Control - INFO - Processed: Temp=19.8°C, Humidity=9.2g/kg, Fan=63.62280217148803%
+2025-04-24 09:29:03,008 - HVAC_Control - INFO - Set Supply Fan Controller speed to 63.45459351146431%
+2025-04-24 09:29:03,008 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 63.45459351146431%
+2025-04-24 09:29:03,009 - HVAC_Control - INFO - Processed: Temp=19.8°C, Humidity=9.2g/kg, Fan=63.45459351146431%
+2025-04-24 09:29:03,009 - HVAC_Control - INFO - Set Supply Fan Controller speed to 63.25576543820094%
+2025-04-24 09:29:03,009 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 63.25576543820094%
+2025-04-24 09:29:03,009 - HVAC_Control - INFO - Processed: Temp=19.9°C, Humidity=9.2g/kg, Fan=63.25576543820094%
+2025-04-24 09:29:03,009 - HVAC_Control - INFO - Set Supply Fan Controller speed to 63.58299436921192%
+2025-04-24 09:29:03,010 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 63.58299436921192%
+2025-04-24 09:29:03,010 - HVAC_Control - INFO - Processed: Temp=19.8°C, Humidity=9.2g/kg, Fan=63.58299436921192%
+2025-04-24 09:29:03,010 - HVAC_Control - INFO - Set Supply Fan Controller speed to 63.742566128458435%
+2025-04-24 09:29:03,010 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 63.742566128458435%
+2025-04-24 09:29:03,010 - HVAC_Control - INFO - Processed: Temp=19.8°C, Humidity=9.1g/kg, Fan=63.742566128458435%
+2025-04-24 09:29:03,011 - HVAC_Control - INFO - Set Supply Fan Controller speed to 63.69809775443878%
+2025-04-24 09:29:03,011 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 63.69809775443878%
+2025-04-24 09:29:03,011 - HVAC_Control - INFO - Processed: Temp=19.8°C, Humidity=9.0g/kg, Fan=63.69809775443878%
+2025-04-24 09:29:03,011 - HVAC_Control - INFO - Set Supply Fan Controller speed to 63.117263517437934%
+2025-04-24 09:29:03,011 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 63.117263517437934%
+2025-04-24 09:29:03,012 - HVAC_Control - INFO - Processed: Temp=20.0°C, Humidity=9.1g/kg, Fan=63.117263517437934%
+2025-04-24 09:29:03,012 - HVAC_Control - INFO - Set Supply Fan Controller speed to 63.32443886034684%
+2025-04-24 09:29:03,012 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 63.32443886034684%
+2025-04-24 09:29:03,012 - HVAC_Control - INFO - Processed: Temp=19.9°C, Humidity=9.0g/kg, Fan=63.32443886034684%
+2025-04-24 09:29:03,012 - HVAC_Control - INFO - Set Supply Fan Controller speed to 63.3461589564383%
+2025-04-24 09:29:03,012 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 63.3461589564383%
+2025-04-24 09:29:03,013 - HVAC_Control - INFO - Processed: Temp=19.9°C, Humidity=9.1g/kg, Fan=63.3461589564383%
+2025-04-24 09:29:03,013 - HVAC_Control - INFO - Set Supply Fan Controller speed to 63.11581142419614%
+2025-04-24 09:29:03,013 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 63.11581142419614%
+2025-04-24 09:29:03,013 - HVAC_Control - INFO - Processed: Temp=20.0°C, Humidity=9.1g/kg, Fan=63.11581142419614%
+2025-04-24 09:29:03,013 - HVAC_Control - INFO - Set Supply Fan Controller speed to 63.27889401484785%
+2025-04-24 09:29:03,014 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 63.27889401484785%
+2025-04-24 09:29:03,014 - HVAC_Control - INFO - Processed: Temp=19.9°C, Humidity=9.1g/kg, Fan=63.27889401484785%
+2025-04-24 09:29:03,014 - HVAC_Control - INFO - Set Supply Fan Controller speed to 63.69444115810004%
+2025-04-24 09:29:03,014 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 63.69444115810004%
+2025-04-24 09:29:03,014 - HVAC_Control - INFO - Processed: Temp=19.8°C, Humidity=9.1g/kg, Fan=63.69444115810004%
+2025-04-24 09:29:03,014 - HVAC_Control - INFO - Set Supply Fan Controller speed to 63.815090224142445%
+2025-04-24 09:29:03,015 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 63.815090224142445%
+2025-04-24 09:29:03,015 - HVAC_Control - INFO - Processed: Temp=19.7°C, Humidity=9.1g/kg, Fan=63.815090224142445%
+2025-04-24 09:29:03,015 - HVAC_Control - INFO - Set Supply Fan Controller speed to 64.18933300645057%
+2025-04-24 09:29:03,015 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 64.18933300645057%
+2025-04-24 09:29:03,015 - HVAC_Control - INFO - Processed: Temp=19.6°C, Humidity=9.1g/kg, Fan=64.18933300645057%
+2025-04-24 09:29:03,015 - HVAC_Control - INFO - Set Supply Fan Controller speed to 64.02434320567515%
+2025-04-24 09:29:03,016 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 64.02434320567515%
+2025-04-24 09:29:03,016 - HVAC_Control - INFO - Processed: Temp=19.7°C, Humidity=9.1g/kg, Fan=64.02434320567515%
+2025-04-24 09:29:03,016 - HVAC_Control - INFO - Set Supply Fan Controller speed to 63.661524915917695%
+2025-04-24 09:29:03,017 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 63.661524915917695%
+2025-04-24 09:29:03,017 - HVAC_Control - INFO - Processed: Temp=19.8°C, Humidity=9.0g/kg, Fan=63.661524915917695%
+2025-04-24 09:29:03,017 - HVAC_Control - INFO - Set Supply Fan Controller speed to 63.41270062881744%
+2025-04-24 09:29:03,017 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 63.41270062881744%
+2025-04-24 09:29:03,017 - HVAC_Control - INFO - Processed: Temp=19.9°C, Humidity=9.0g/kg, Fan=63.41270062881744%
+2025-04-24 09:29:03,017 - HVAC_Control - INFO - Set Supply Fan Controller speed to 63.359381502171004%
+2025-04-24 09:29:03,018 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 63.359381502171004%
+2025-04-24 09:29:03,018 - HVAC_Control - INFO - Processed: Temp=19.9°C, Humidity=8.9g/kg, Fan=63.359381502171004%
+2025-04-24 09:29:03,018 - HVAC_Control - INFO - Set Supply Fan Controller speed to 62.99080118932348%
+2025-04-24 09:29:03,018 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 62.99080118932348%
+2025-04-24 09:29:03,018 - HVAC_Control - INFO - Processed: Temp=20.0°C, Humidity=8.8g/kg, Fan=62.99080118932348%
+2025-04-24 09:29:03,018 - HVAC_Control - INFO - Set Supply Fan Controller speed to 62.973220215087274%
+2025-04-24 09:29:03,018 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 62.973220215087274%
+2025-04-24 09:29:03,019 - HVAC_Control - INFO - Processed: Temp=20.0°C, Humidity=8.8g/kg, Fan=62.973220215087274%
+2025-04-24 09:29:03,019 - HVAC_Control - INFO - Set Supply Fan Controller speed to 62.356452364239296%
+2025-04-24 09:29:03,019 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 62.356452364239296%
+2025-04-24 09:29:03,019 - HVAC_Control - INFO - Processed: Temp=20.2°C, Humidity=8.8g/kg, Fan=62.356452364239296%
+2025-04-24 09:29:03,019 - HVAC_Control - INFO - Set Supply Fan Controller speed to 62.70969597917845%
+2025-04-24 09:29:03,019 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 62.70969597917845%
+2025-04-24 09:29:03,019 - HVAC_Control - INFO - Processed: Temp=20.1°C, Humidity=8.8g/kg, Fan=62.70969597917845%
+2025-04-24 09:29:03,020 - HVAC_Control - INFO - Set Supply Fan Controller speed to 62.946601268100544%
+2025-04-24 09:29:03,020 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 62.946601268100544%
+2025-04-24 09:29:03,020 - HVAC_Control - INFO - Processed: Temp=20.0°C, Humidity=8.9g/kg, Fan=62.946601268100544%
+2025-04-24 09:29:03,020 - HVAC_Control - INFO - Set Supply Fan Controller speed to 63.25078442621168%
+2025-04-24 09:29:03,021 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 63.25078442621168%
+2025-04-24 09:29:03,021 - HVAC_Control - INFO - Processed: Temp=19.9°C, Humidity=8.9g/kg, Fan=63.25078442621168%
+2025-04-24 09:29:03,021 - HVAC_Control - INFO - Set Supply Fan Controller speed to 63.00090446841425%
+2025-04-24 09:29:03,021 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 63.00090446841425%
+2025-04-24 09:29:03,021 - HVAC_Control - INFO - Processed: Temp=20.0°C, Humidity=8.9g/kg, Fan=63.00090446841425%
+2025-04-24 09:29:03,022 - HVAC_Control - INFO - Set Supply Fan Controller speed to 62.39778138914862%
+2025-04-24 09:29:03,022 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 62.39778138914862%
+2025-04-24 09:29:03,022 - HVAC_Control - INFO - Processed: Temp=20.2°C, Humidity=9.0g/kg, Fan=62.39778138914862%
+2025-04-24 09:29:03,022 - HVAC_Control - INFO - Set Supply Fan Controller speed to 62.324878049850554%
+2025-04-24 09:29:03,022 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 62.324878049850554%
+2025-04-24 09:29:03,022 - HVAC_Control - INFO - Processed: Temp=20.2°C, Humidity=9.0g/kg, Fan=62.324878049850554%
+2025-04-24 09:29:03,023 - HVAC_Control - INFO - Set Supply Fan Controller speed to 62.29602113977355%
+2025-04-24 09:29:03,023 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 62.29602113977355%
+2025-04-24 09:29:03,023 - HVAC_Control - INFO - Processed: Temp=20.2°C, Humidity=8.9g/kg, Fan=62.29602113977355%
+2025-04-24 09:29:03,023 - HVAC_Control - INFO - Set Supply Fan Controller speed to 62.21025417519636%
+2025-04-24 09:29:03,023 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 62.21025417519636%
+2025-04-24 09:29:03,024 - HVAC_Control - INFO - Processed: Temp=20.3°C, Humidity=8.9g/kg, Fan=62.21025417519636%
+2025-04-24 09:29:03,024 - HVAC_Control - INFO - Set Supply Fan Controller speed to 62.188739262947266%
+2025-04-24 09:29:03,024 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 62.188739262947266%
+2025-04-24 09:29:03,024 - HVAC_Control - INFO - Processed: Temp=20.3°C, Humidity=9.0g/kg, Fan=62.188739262947266%
+2025-04-24 09:29:03,025 - HVAC_Control - INFO - Set Supply Fan Controller speed to 62.91674034499747%
+2025-04-24 09:29:03,025 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 62.91674034499747%
+2025-04-24 09:29:03,025 - HVAC_Control - INFO - Processed: Temp=20.0°C, Humidity=9.0g/kg, Fan=62.91674034499747%
+2025-04-24 09:29:03,025 - HVAC_Control - INFO - Set Supply Fan Controller speed to 63.07906791947708%
+2025-04-24 09:29:03,025 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 63.07906791947708%
+2025-04-24 09:29:03,025 - HVAC_Control - INFO - Processed: Temp=20.0°C, Humidity=9.0g/kg, Fan=63.07906791947708%
+2025-04-24 09:29:03,026 - HVAC_Control - INFO - Set Supply Fan Controller speed to 63.05225963835126%
+2025-04-24 09:29:03,026 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 63.05225963835126%
+2025-04-24 09:29:03,026 - HVAC_Control - INFO - Processed: Temp=20.0°C, Humidity=9.0g/kg, Fan=63.05225963835126%
+2025-04-24 09:29:03,026 - HVAC_Control - INFO - Set Supply Fan Controller speed to 62.61365292226776%
+2025-04-24 09:29:03,026 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 62.61365292226776%
+2025-04-24 09:29:03,027 - HVAC_Control - INFO - Processed: Temp=20.1°C, Humidity=9.1g/kg, Fan=62.61365292226776%
+2025-04-24 09:29:03,027 - HVAC_Control - INFO - Set Supply Fan Controller speed to 63.08690186656925%
+2025-04-24 09:29:03,027 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 63.08690186656925%
+2025-04-24 09:29:03,027 - HVAC_Control - INFO - Processed: Temp=20.0°C, Humidity=9.0g/kg, Fan=63.08690186656925%
+2025-04-24 09:29:03,029 - HVAC_Control - INFO - Set Supply Fan Controller speed to 62.953881155977406%
+2025-04-24 09:29:03,029 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 62.953881155977406%
+2025-04-24 09:29:03,029 - HVAC_Control - INFO - Processed: Temp=20.0°C, Humidity=8.9g/kg, Fan=62.953881155977406%
+2025-04-24 09:29:03,030 - HVAC_Control - INFO - Set Supply Fan Controller speed to 62.28428088779853%
+2025-04-24 09:29:03,030 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 62.28428088779853%
+2025-04-24 09:29:03,030 - HVAC_Control - INFO - Processed: Temp=20.2°C, Humidity=8.9g/kg, Fan=62.28428088779853%
+2025-04-24 09:29:03,030 - HVAC_Control - INFO - Set Supply Fan Controller speed to 62.10891358498955%
+2025-04-24 09:29:03,031 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 62.10891358498955%
+2025-04-24 09:29:03,031 - HVAC_Control - INFO - Processed: Temp=20.3°C, Humidity=8.9g/kg, Fan=62.10891358498955%
+2025-04-24 09:29:03,031 - HVAC_Control - INFO - Set Supply Fan Controller speed to 61.91832769074118%
+2025-04-24 09:29:03,031 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 61.91832769074118%
+2025-04-24 09:29:03,031 - HVAC_Control - INFO - Processed: Temp=20.4°C, Humidity=9.0g/kg, Fan=61.91832769074118%
+2025-04-24 09:29:03,032 - HVAC_Control - INFO - Set Supply Fan Controller speed to 62.300586753015985%
+2025-04-24 09:29:03,032 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 62.300586753015985%
+2025-04-24 09:29:03,032 - HVAC_Control - INFO - Processed: Temp=20.2°C, Humidity=9.0g/kg, Fan=62.300586753015985%
+2025-04-24 09:29:03,032 - HVAC_Control - INFO - Set Supply Fan Controller speed to 62.39461497284141%
+2025-04-24 09:29:03,032 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 62.39461497284141%
+2025-04-24 09:29:03,033 - HVAC_Control - INFO - Processed: Temp=20.2°C, Humidity=9.0g/kg, Fan=62.39461497284141%
+2025-04-24 09:29:03,033 - HVAC_Control - INFO - Set Supply Fan Controller speed to 62.44650353256006%
+2025-04-24 09:29:03,033 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 62.44650353256006%
+2025-04-24 09:29:03,033 - HVAC_Control - INFO - Processed: Temp=20.2°C, Humidity=9.0g/kg, Fan=62.44650353256006%
+2025-04-24 09:29:03,033 - HVAC_Control - INFO - Set Supply Fan Controller speed to 62.76171001787466%
+2025-04-24 09:29:03,033 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 62.76171001787466%
+2025-04-24 09:29:03,034 - HVAC_Control - INFO - Processed: Temp=20.1°C, Humidity=9.0g/kg, Fan=62.76171001787466%
+2025-04-24 09:29:03,034 - HVAC_Control - INFO - Set Supply Fan Controller speed to 63.180614578599325%
+2025-04-24 09:29:03,034 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 63.180614578599325%
+2025-04-24 09:29:03,034 - HVAC_Control - INFO - Processed: Temp=19.9°C, Humidity=9.0g/kg, Fan=63.180614578599325%
+2025-04-24 09:29:03,034 - HVAC_Control - INFO - Set Supply Fan Controller speed to 62.45212514247309%
+2025-04-24 09:29:03,035 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 62.45212514247309%
+2025-04-24 09:29:03,035 - HVAC_Control - INFO - Processed: Temp=20.2°C, Humidity=9.0g/kg, Fan=62.45212514247309%
+2025-04-24 09:29:03,035 - HVAC_Control - INFO - Set Supply Fan Controller speed to 62.81919190409408%
+2025-04-24 09:29:03,035 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 62.81919190409408%
+2025-04-24 09:29:03,035 - HVAC_Control - INFO - Processed: Temp=20.1°C, Humidity=8.9g/kg, Fan=62.81919190409408%
+2025-04-24 09:29:03,035 - HVAC_Control - INFO - Set Supply Fan Controller speed to 63.08266784831079%
+2025-04-24 09:29:03,036 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 63.08266784831079%
+2025-04-24 09:29:03,036 - HVAC_Control - INFO - Processed: Temp=20.0°C, Humidity=8.9g/kg, Fan=63.08266784831079%
+2025-04-24 09:29:03,036 - HVAC_Control - INFO - Set Supply Fan Controller speed to 62.916616240946055%
+2025-04-24 09:29:03,036 - HVAC_Control - INFO - Set Exhaust Fan Controller speed to 62.916616240946055%
+2025-04-24 09:29:03,036 - HVAC_Control - INFO - Processed: Temp=20.0°C, Humidity=8.9g/kg, Fan=62.916616240946055%
+2025-04-24 09:29:03,036 - HVAC_Control - INFO - Simulation complete. Final T=19.86°C, RH=8.92g/kg
+2025-04-24 09:29:45,570 - HVAC_Control - INFO - Simulation results plotted and saved to simulation_results.png
