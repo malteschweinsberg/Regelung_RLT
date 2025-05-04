@@ -1,60 +1,69 @@
-"""
-Datei: main.py
-Datum: 2025-05-03
-Beschreibung:
-    Startet und steuert die Simulation der RLT-Anlage.
-    Initialisiert alle Module, liest die Konfiguration und verwaltet den Simulationsablauf.
-"""
+import numpy as np
 
+def rel_feuchte_zu_abs(rel_feuchte, temp):
+    sättigungsdruck = 611.2 * np.exp(17.62 * temp / (243.12 + temp))  # [Pa]
+    abs_feuchte = 0.622 * (rel_feuchte/100 * sättigungsdruck) / (101325 - rel_feuchte/100 * sättigungsdruck)
+    return abs_feuchte
 
-def berechne_zustand(prev, dt, config):
-    """
-    Berechnet den neuen Raumzustand mittels Euler-Integration
-    Args:
-        prev: Vorheriger Zustand (Temperatur, Feuchte)
-        dt: Zeitschritt [s]
-        config: Konfigurationsparameter
+def abs_feuchte_zu_rel(abs_feuchte, temp):
+    sättigungsdruck = 611.2 * np.exp(17.62 * temp / (243.12 + temp))
+    partialdruck = (abs_feuchte * 101325) / (0.622 + abs_feuchte)
+    return np.clip((partialdruck / sättigungsdruck) * 100, 0, 100)
 
-    Returns:
-        new_temp: Neue Raumtemperatur [°C]
-        new_feuchte: Neue Raumfeuchte [%rF]
-    """
+def berechne_zustand(state, dt, config, m_heiz, m_kuehl, m_befeucht):
+    x_raum = rel_feuchte_zu_abs(state["rel_feuchte_raum"], state["temp_raum"])
+    x_aussen = rel_feuchte_zu_abs(state["rel_feuchte_aussen"], state["temp_aussen"])
 
-    # Wärmebilanzgleichung
-    Q_heizung = ANLAGE['heizung_temp'] * massenstrom_heizung
-    Q_kuehlung = ANLAGE['kuehler_temp'] * massenstrom_kuehler
-    dT = ((Q_heizung - Q_kuehler + config.ANLAGE['waermelast'])
-          / (m_luft * c_luft)) * dt  # Euler-Integration
+    gesamtstrom = m_heiz + m_kuehl
+    dT_intern = (config["waermelast"] * dt) / (config["raumvolumen"] * config["luftdichte"] * config["c_luft"])
+    if gesamtstrom < 0.01:
+        return {
+            "temp_raum": state["temp_raum"] + dT_intern,
+            "rel_feuchte_raum": state["rel_feuchte_raum"],
+            "temp_aussen": state["temp_aussen"],
+            "rel_feuchte_aussen": state["rel_feuchte_aussen"],
+            "massenstrom_heizung": m_heiz,
+            "massenstrom_kuehler": m_kuehl,
+            "massenstrom_befeuchter": m_befeucht,
+            "rotor_drehzahl": 0
+        }
 
-    # Feuchtebilanz mit Rotorwirkung
-    rotor_feuchte = berechne_rotorwirkung(...)  # Siehe unten
-    dh = ((m_befeuchter + rotor_feuchte - m_entfeuchter)
-          / V_raum) * dt
+    zuluft_temp = (m_heiz * config["heizung_temp"] + m_kuehl * config["kuehler_temp"]) / gesamtstrom
 
-    return new_temp, new_feuchte
+    if config["rotor_effizienz"] > 0:
+        h_aussen = 1.006 * state["temp_aussen"] + x_aussen * (2501 + 1.86 * state["temp_aussen"])
+        h_abluft = 1.006 * state["temp_raum"] + x_raum * (2501 + 1.86 * state["temp_raum"])
+        delta_h = h_abluft - h_aussen
+        if delta_h > 0:
+            zuluft_temp = state["temp_aussen"] + delta_h * config["rotor_effizienz"] / 1.006
+            rotor_leistung = config["rotor_effizienz"] * 100
+        else:
+            rotor_leistung = 0
+    else:
+        rotor_leistung = 0
 
+    zuluft_feuchte = x_aussen
+    if m_kuehl > 0 and config["kuehler_temp"] < 10:
+        zuluft_feuchte = rel_feuchte_zu_abs(90, config["kuehler_temp"])
+    if m_befeucht > 0:
+        befeuchtung = m_befeucht * config["max_befeuchtung"] / 3600
+        zuluft_feuchte += befeuchtung / gesamtstrom
 
-def enthalpie_berechnung(temp, feuchte):
-    """
-    Berechnet die spezifische Enthalpie nach:
-    h = 1.006*T + x*(2501 + 1.86*T) [kJ/kg]
-    mit x = absolute Feuchte [kg/kg]
-    """
-    x = feuchte_absolut(feuchte, temp)
-    return 1.006 * temp + x * (2501 + 1.86 * temp)
+    Q_zu = gesamtstrom * config["c_luft"] * (zuluft_temp - state["temp_raum"])
+    dT = (Q_zu + config["waermelast"]) * dt / (config["raumvolumen"] * config["luftdichte"] * config["c_luft"])
+    dX = gesamtstrom * (zuluft_feuchte - x_raum) * dt / (config["raumvolumen"] * config["luftdichte"])
 
+    neue_temp = state["temp_raum"] + dT
+    neues_x = x_raum + dX
+    neue_rel_feuchte = abs_feuchte_zu_rel(neues_x, neue_temp)
 
-def berechne_rotorwirkung(aussen, abluft, soll, effizienz):
-    """
-    Modelliert den Rotationswärmetauscher nach dem ε-NTU-Ansatz
-    Returns:
-        Feuchteänderung durch Rotor [kg/s]
-    """
-    h_aussen = enthalpie_berechnung(aussen.temp, aussen.feuchte)
-    h_abluft = enthalpie_berechnung(abluft.temp, abluft.feuchte)
-    h_soll = enthalpie_berechnung(soll.temp, soll.feuchte)
-
-    # MIN-Logik aus Regelkreis 1.3
-    h_diff = min(abs(h_aussen - h_soll), abs(h_abluft - h_soll))
-
-    return effizienz * h_diff * massenstrom
+    return {
+        "temp_raum": neue_temp,
+        "rel_feuchte_raum": neue_rel_feuchte,
+        "temp_aussen": state["temp_aussen"],
+        "rel_feuchte_aussen": state["rel_feuchte_aussen"],
+        "massenstrom_heizung": m_heiz,
+        "massenstrom_kuehler": m_kuehl,
+        "massenstrom_befeuchter": m_befeucht,
+        "rotor_drehzahl": rotor_leistung
+    }

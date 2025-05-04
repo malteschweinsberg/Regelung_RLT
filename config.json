@@ -1,0 +1,40 @@
+{
+    "SIMULATION": {
+        "beschleunigungsfaktor": 105.0,
+        "zeitschritt": 60,
+        "dauer": 86400,
+        "soll_temp": 30.0,
+        "soll_rel_feuchte": 60.0,
+        "initial": {
+            "temp_raum": 20.0,
+            "rel_feuchte_raum": 45.0,
+            "temp_aussen": 15.0,
+            "rel_feuchte_aussen": 40.0
+        }
+    },
+    "REGELUNG": {
+        "temp": {
+            "Kp": 0.2,
+            "Ti": 1200,
+            "Td": 30,
+            "deadband": 0.5
+        },
+        "feuchte": {
+            "Kp": 0.05,
+            "Ti": 1800,
+            "Td": 0,
+            "deadband": 3.0
+        }
+    },
+    "ANLAGE": {
+        "rotor_effizienz": 0.75,
+        "max_massenstrom": 2.5,
+        "kuehler_temp": 7.0,
+        "heizung_temp": 45.0,
+        "waermelast": 1500.0,
+        "raumvolumen": 50.0,
+        "luftdichte": 1.2,
+        "c_luft": 1005,
+        "max_befeuchtung": 0.2
+    }
+}
