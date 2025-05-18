@@ -1,22 +1,28 @@
 {
-  "zeitschritt_min": 5,
-  "simulationsfaktor": 1,
-  "raum_volumen_m3": 80,
-  "luft_dichte_kg_m3": 1.2,
-  "luft_cp_kj_kgK": 1.005,
-  "aussen_temp_C": 10,
-  "aussen_feuchte_g_kg": 5,
-  "raum_temp_C": 21,
-  "raum_feuchte_g_kg": 7,
-  "soll_raum_temp_C": 22,
-  "soll_raum_feuchte_g_kg": 9,
-  "erhitzer_temp_C": 40,
-  "kuehler_temp_C": 8,
-  "zuluft_volumenstrom_m3_h": 400,
-  "abluft_volumenstrom_m3_h": 400,
-  "wrg_eta_min": 0.65,
-  "wrg_eta_max": 0.85,
-  "wrg_n_max": 100,
-  "wrg_n_start": 50,
-  "wrg_feuchteuebertragung": 0.6
+  "simulation": {
+    "t_sp": 60,
+    "T_AUL": 5,
+    "T_SOL_R": 21
+  },
+  "waermetauscher": {
+    "n_WRG": 0.7
+  },
+  "erhitzer": {
+    "A_ERH": 2.0,
+    "k_ERH": 50.0,
+    "T_O_ERH": 50.0,
+    "T_DIF_ERH": 5,
+    "c_ERH": 1005
+  },
+  "kuehler": {
+    "A_KUL": 2.0,
+    "k_KUL": 40.0,
+    "T_O_KUL": 7.0,
+    "T_DIF_KUL": 5,
+    "c_KUL": 1005
+  },
+  "raum": {
+    "V_R": 100.0,
+    "T_R_init": 21.0
+  }
 }

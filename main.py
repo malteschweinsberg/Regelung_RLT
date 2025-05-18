@@ -1,70 +1,69 @@
 import json
+import time
 from pi_regler import PIRegler
-from erhitzer import erhitzer_ausgang_temp
-from kuehler import kuehler_ausgang_temp
-from wrg import wrg_ausgang_temp, wrg_eta_von_drehzahl
-from physik import volumenstrom_zu_massenstrom, kg_h_zu_kg_s
-from plot import plot_zeitreihen
+from visualisation import Visualisierung
 
-def lade_config():
-    with open("config.json", "r") as f:
-        return json.load(f)
+with open("config.json") as f:
+    config = json.load(f)
 
-config = lade_config()
-dt = config["zeitschritt_min"] * 60 * config["simulationsfaktor"]
+# Simulationseinstellungen
+t_sp = config["simulation"]["t_sp"]             #Geschwindigkeit der Simulation (z. B. 60-fach schneller als Echtzeit)
+dt = 1 / t_sp                                   #Reale Zeit pro Simulationsschritt
+T_AUL = config["simulation"]["T_AUL"]           #Außenlufttemperatur
+T_SOL_R = config["simulation"]["T_SOL_R"]       #Ziel-Raumtemperatur
+V_R = config["raum"]["V_R"]                     #Aktuelle Raumtemperatur
+T_R = config["raum"]["T_R_init"]                #Raumvolumen (könnte für Wärmekapazität wichtig sein)
 
-zeit = [0]
-theta_raum = [config["raum_temp_C"]]
-x_raum = [config["raum_feuchte_g_kg"]]
-theta_zul = [config["raum_temp_C"]]
-m_dot_erh = [0]
-m_dot_kueh = [0]
-n_wrg = [config["wrg_n_start"]]
-theta_aussen = [config["aussen_temp_C"]]
-x_aussen = [config["aussen_feuchte_g_kg"]]
+# Initialwerte
+T_ZUL = T_WRG = T_ERH = T_KUL = T_AUL
+T_ABL = T_R  # Abluft = Raumtemperatur
 
-regler_raum = PIRegler(3, 15*60, dt)
-regler_zul = PIRegler(25, 2*60, dt)
-regler_kueh = PIRegler(12, 2*60, dt)
+# WRG Logik
+def berechne_WRG(T_AUL, T_ABL, T_SOL_R):
+    return ((T_ABL > T_AUL and T_AUL < T_SOL_R) or (T_ABL > T_SOL_R and T_AUL > T_ABL))
 
-for t in range(1, 201):  # 200 Schritte als Beispiel
-    if t % 10 == 0:
-        config = lade_config()
+# Regler
+regler_T_ZUL = PIRegler(3, 15*60, dt)
+regler_ERH = PIRegler(25, 2*60, dt)
+regler_KUL = PIRegler(12, 2*60, dt)
 
-    e_raum = config["soll_raum_temp_C"] - theta_raum[-1]
-    theta_zul_soll = theta_raum[-1] + regler_raum.step(e_raum)
-    theta_zul_soll = max(min(theta_zul_soll, 30), 10)
+vis = Visualisierung()
 
-    e_zul = theta_zul_soll - theta_zul[-1]
-    m_erh = max(0, regler_zul.step(e_zul))
-    m_kueh = max(0, -regler_kueh.step(e_zul))
+for t in range(0, 3600):  # 1 Stunde simulieren
+    # WRG aktiv?
+    wrg_on = berechne_WRG(T_AUL, T_ABL, T_SOL_R)
+    if wrg_on:
+        n_WRG = config["waermetauscher"]["n_WRG"]
+        if T_AUL < T_ABL:
+            T_WRG = T_AUL + n_WRG * (T_ABL - T_AUL)
+        else:
+            T_WRG = T_AUL - n_WRG * (T_AUL - T_ABL)
+    else:
+        T_WRG = T_AUL
 
-    eta_wrg = wrg_eta_von_drehzahl(n_wrg[-1], config["wrg_n_max"], config["wrg_eta_min"], config["wrg_eta_max"])
-    theta_wrg = wrg_ausgang_temp(theta_raum[-1], config["aussen_temp_C"], eta_wrg)
+    # Regelung T_ZUL
+    T_SOL_ZUL = regler_T_ZUL.update(T_SOL_R, T_R)
+    dTZUL = T_SOL_ZUL - T_WRG
 
-    m_dot = volumenstrom_zu_massenstrom(config["zuluft_volumenstrom_m3_h"], config["luft_dichte_kg_m3"])
-    m_dot_s = kg_h_zu_kg_s(m_dot)
-    theta_nach_erh = erhitzer_ausgang_temp(theta_wrg, m_erh, config["erhitzer_temp_C"], config["luft_cp_kj_kgK"])
-    theta_nach_kueh = kuehler_ausgang_temp(theta_nach_erh, m_kueh, config["kuehler_temp_C"], config["luft_cp_kj_kgK"])
+    # Heizen oder Kühlen
+    if dTZUL > 0:
+        m_ERH = regler_ERH.update(T_SOL_ZUL, T_WRG)
+        params = config["erhitzer"]
+        T_ERH = T_WRG + (params["A_ERH"] * params["k_ERH"] * (params["T_O_ERH"] - T_WRG)) / (m_ERH * params["c_ERH"] + 1e-6)
+        T_ZUL = T_ERH
+        m_KUL = 0
+    else:
+        m_KUL = regler_KUL.update(T_SOL_ZUL, T_WRG)
+        params = config["kuehler"]
+        T_KUL = T_WRG + (params["A_KUL"] * params["k_KUL"] * (params["T_O_KUL"] - T_WRG)) / (m_KUL * params["c_KUL"] + 1e-6)
+        T_ZUL = T_KUL
+        m_ERH = 0
 
-    cp = config["luft_cp_kj_kgK"] * 1000  # J/kgK
-    V = config["raum_volumen_m3"]
-    rho = config["luft_dichte_kg_m3"]
-    theta_raum_neu = theta_raum[-1] + dt / (V * rho) * m_dot_s * (theta_nach_kueh - theta_raum[-1])
+    # Raumtemperatur aktualisieren
+    dT_R = (T_ZUL - T_R) * 0.1  # einfache Wärmezufuhrformel
+    T_R += dT_R
 
-    zeit.append(t * config["zeitschritt_min"])
-    theta_raum.append(theta_raum_neu)
-    theta_zul.append(theta_nach_kueh)
-    m_dot_erh.append(m_erh)
-    m_dot_kueh.append(m_kueh)
-    n_wrg.append(n_wrg[-1])
-    theta_aussen.append(config["aussen_temp_C"])
-    x_aussen.append(config["aussen_feuchte_g_kg"])
-    x_raum.append(x_raum[-1])  # Feuchte noch nicht modelliert
+    vis.add_data(t, T_SOL_R, T_R, m_ERH, m_KUL, wrg_on)
+    time.sleep(dt)
 
-plot_zeitreihen(
-    zeit,
-    [theta_aussen, x_aussen, n_wrg, theta_raum, x_raum, m_dot_erh, m_dot_kueh],
-    ["Außentemperatur [°C]", "Außenfeuchte [g/kg]", "Drehzahl WRG [%]", "Raumtemperatur [°C]", "Raumfeuchte [g/kg]", "Massenstrom Erhitzer [kg/h]", "Massenstrom Kühler [kg/h]"],
-    "Simulation Vollklimaanlage"
-)
+vis.plot()
