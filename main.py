@@ -1,137 +1,70 @@
-import matplotlib.pyplot as plt
-import time
-from config_loader import ConfigLoader
-from pid_controller import PIController
-from simulation import berechne_zustand, rel_feuchte_zu_abs
-from visualization import init_plots, update_plots
+import json
+from pi_regler import PIRegler
+from erhitzer import erhitzer_ausgang_temp
+from kuehler import kuehler_ausgang_temp
+from wrg import wrg_ausgang_temp, wrg_eta_von_drehzahl
+from physik import volumenstrom_zu_massenstrom, kg_h_zu_kg_s
+from plot import plot_zeitreihen
 
-def main():
-    print("RLT-Simulation startet...")
-    config_loader = ConfigLoader("config.json")
-    config = config_loader.config
+def lade_config():
+    with open("config.json", "r") as f:
+        return json.load(f)
 
-    state = {
-        "temp_raum": config["SIMULATION"]["initial"]["temp_raum"],
-        "rel_feuchte_raum": config["SIMULATION"]["initial"]["rel_feuchte_raum"],
-        "temp_aussen": config["SIMULATION"]["initial"]["temp_aussen"],
-        "rel_feuchte_aussen": config["SIMULATION"]["initial"]["rel_feuchte_aussen"]
-    }
+config = lade_config()
+dt = config["zeitschritt_min"] * 60 * config["simulationsfaktor"]
 
-    temp_pid = PIController(
-        config["REGELUNG"]["temp"]["Kp"],
-        config["REGELUNG"]["temp"]["Ti"],
-        config["REGELUNG"]["temp"]["Td"],
-        0,
-        config["ANLAGE"]["max_massenstrom"],
-        config["REGELUNG"]["temp"]["deadband"]
-    )
-    feuchte_pid = PIController(
-        config["REGELUNG"]["feuchte"]["Kp"],
-        config["REGELUNG"]["feuchte"]["Ti"],
-        config["REGELUNG"]["feuchte"]["Td"],
-        0,
-        config["ANLAGE"]["max_befeuchtung"],
-        config["REGELUNG"]["feuchte"]["deadband"]
-    )
+zeit = [0]
+theta_raum = [config["raum_temp_C"]]
+x_raum = [config["raum_feuchte_g_kg"]]
+theta_zul = [config["raum_temp_C"]]
+m_dot_erh = [0]
+m_dot_kueh = [0]
+n_wrg = [config["wrg_n_start"]]
+theta_aussen = [config["aussen_temp_C"]]
+x_aussen = [config["aussen_feuchte_g_kg"]]
 
-    daten = {
-        "zeit": [0],
-        "temp": [state["temp_raum"]],
-        "rel_feuchte_raum": [state["rel_feuchte_raum"]],
-        "m_heiz": [0],
-        "m_kuehl": [0],
-        "m_befeucht": [0],
-        "rotor": [0],
-        "aussen_temp": [state["temp_aussen"]],
-        "rel_feuchte_aussen": [state["rel_feuchte_aussen"]]
-    }
+regler_raum = PIRegler(3, 15*60, dt)
+regler_zul = PIRegler(25, 2*60, dt)
+regler_kueh = PIRegler(12, 2*60, dt)
 
-    fig, lines = init_plots(config)
+for t in range(1, 201):  # 200 Schritte als Beispiel
+    if t % 10 == 0:
+        config = lade_config()
 
-    try:
-        simulations_zeit = 0
-        print("Simulation läuft... (Strg+C zum Beenden)")
-        while simulations_zeit < config["SIMULATION"]["dauer"]:
-            if config_loader.check_and_reload():
-                config = config_loader.config
-                print(f"Neue Sollwerte: T={config['SIMULATION']['soll_temp']}°C, rF={config['SIMULATION']['soll_rel_feuchte']}%")
-                temp_pid = PIController(
-                    config["REGELUNG"]["temp"]["Kp"],
-                    config["REGELUNG"]["temp"]["Ti"],
-                    config["REGELUNG"]["temp"]["Td"],
-                    0,
-                    config["ANLAGE"]["max_massenstrom"],
-                    config["REGELUNG"]["temp"]["deadband"]
-                )
-                feuchte_pid = PIController(
-                    config["REGELUNG"]["feuchte"]["Kp"],
-                    config["REGELUNG"]["feuchte"]["Ti"],
-                    config["REGELUNG"]["feuchte"]["Td"],
-                    0,
-                    config["ANLAGE"]["max_befeuchtung"],
-                    config["REGELUNG"]["feuchte"]["deadband"]
-                )
+    e_raum = config["soll_raum_temp_C"] - theta_raum[-1]
+    theta_zul_soll = theta_raum[-1] + regler_raum.step(e_raum)
+    theta_zul_soll = max(min(theta_zul_soll, 30), 10)
 
-            temp_diff = config["SIMULATION"]["soll_temp"] - state["temp_raum"]
-            if temp_diff > 0:
-                m_heiz = temp_pid.compute(
-                    config["SIMULATION"]["soll_temp"],
-                    state["temp_raum"],
-                    config["SIMULATION"]["zeitschritt"]
-                )
-                m_kuehl = 0
-            else:
-                m_kuehl = temp_pid.compute(
-                    state["temp_raum"],
-                    config["SIMULATION"]["soll_temp"],
-                    config["SIMULATION"]["zeitschritt"]
-                )
-                m_heiz = 0
+    e_zul = theta_zul_soll - theta_zul[-1]
+    m_erh = max(0, regler_zul.step(e_zul))
+    m_kueh = max(0, -regler_kueh.step(e_zul))
 
-            feuchte_diff = config["SIMULATION"]["soll_rel_feuchte"] - state["rel_feuchte_raum"]
-            if abs(feuchte_diff) <= config["REGELUNG"]["feuchte"]["deadband"]:
-                m_befeucht = 0
-            elif feuchte_diff > 0:
-                m_befeucht = feuchte_pid.compute(
-                    config["SIMULATION"]["soll_rel_feuchte"],
-                    state["rel_feuchte_raum"],
-                    config["SIMULATION"]["zeitschritt"]
-                )
-            else:
-                m_befeucht = 0
-                if m_kuehl < 0.1 and temp_diff < 0:
-                    m_kuehl = 0.2
+    eta_wrg = wrg_eta_von_drehzahl(n_wrg[-1], config["wrg_n_max"], config["wrg_eta_min"], config["wrg_eta_max"])
+    theta_wrg = wrg_ausgang_temp(theta_raum[-1], config["aussen_temp_C"], eta_wrg)
 
-            state = berechne_zustand(
-                state,
-                config["SIMULATION"]["zeitschritt"],
-                config["ANLAGE"],
-                m_heiz,
-                m_kuehl,
-                m_befeucht
-            )
+    m_dot = volumenstrom_zu_massenstrom(config["zuluft_volumenstrom_m3_h"], config["luft_dichte_kg_m3"])
+    m_dot_s = kg_h_zu_kg_s(m_dot)
+    theta_nach_erh = erhitzer_ausgang_temp(theta_wrg, m_erh, config["erhitzer_temp_C"], config["luft_cp_kj_kgK"])
+    theta_nach_kueh = kuehler_ausgang_temp(theta_nach_erh, m_kueh, config["kuehler_temp_C"], config["luft_cp_kj_kgK"])
 
-            simulations_zeit += config["SIMULATION"]["zeitschritt"]
-            daten["zeit"].append(simulations_zeit)
-            daten["temp"].append(state["temp_raum"])
-            daten["rel_feuchte_raum"].append(state["rel_feuchte_raum"])
-            daten["m_heiz"].append(m_heiz)
-            daten["m_kuehl"].append(m_kuehl)
-            daten["m_befeucht"].append(m_befeucht)
-            daten["rotor"].append(state["rotor_drehzahl"])
-            daten["aussen_temp"].append(state["temp_aussen"])
-            daten["rel_feuchte_aussen"].append(state["rel_feuchte_aussen"])
+    cp = config["luft_cp_kj_kgK"] * 1000  # J/kgK
+    V = config["raum_volumen_m3"]
+    rho = config["luft_dichte_kg_m3"]
+    theta_raum_neu = theta_raum[-1] + dt / (V * rho) * m_dot_s * (theta_nach_kueh - theta_raum[-1])
 
-            update_plots(daten, lines)
-            plt.pause(config["SIMULATION"]["zeitschritt"]/config["SIMULATION"]["beschleunigungsfaktor"])
+    zeit.append(t * config["zeitschritt_min"])
+    theta_raum.append(theta_raum_neu)
+    theta_zul.append(theta_nach_kueh)
+    m_dot_erh.append(m_erh)
+    m_dot_kueh.append(m_kueh)
+    n_wrg.append(n_wrg[-1])
+    theta_aussen.append(config["aussen_temp_C"])
+    x_aussen.append(config["aussen_feuchte_g_kg"])
+    x_raum.append(x_raum[-1])  # Feuchte noch nicht modelliert
 
-    except KeyboardInterrupt:
-        print("\nSimulation manuell gestoppt")
-    except Exception as e:
-        print(f"\nKritischer Fehler: {str(e)}")
-
-    plt.ioff()
-    plt.show()
-
-if __name__ == "__main__":
-    main()
+plot_zeitreihen(
+    zeit,
+    [theta_aussen, x_aussen, n_wrg, theta_raum, x_raum, m_dot_erh, m_dot_kueh],
+    ["Außentemperatur [°C]", "Außenfeuchte [g/kg]", "Drehzahl WRG [%]", "Raumtemperatur [°C]", "Raumfeuchte [g/kg]", "Massenstrom Erhitzer [kg/h]", "Massenstrom Kühler [kg/h]"],
+    "Simulation Vollklimaanlage"
+)
