@@ -29,7 +29,7 @@ regler_KUL = PIRegler(12, 2*60, dt)
 
 vis = Visualisierung()
 
-for t in range(0, 3600):  # 1 Stunde simulieren
+for t in range(0, 60):  # 1 Stunde simulieren
     # WRG aktiv?
     wrg_on = berechne_WRG(T_AUL, T_ABL, T_SOL_R)
     if wrg_on:
@@ -49,9 +49,13 @@ for t in range(0, 3600):  # 1 Stunde simulieren
     if dTZUL > 0:
         m_ERH = regler_ERH.update(T_SOL_ZUL, T_WRG)
         params = config["erhitzer"]
-        T_ERH = T_WRG + (params["A_ERH"] * params["k_ERH"] * (params["T_O_ERH"] - T_WRG)) / (m_ERH * params["c_ERH"] + 1e-6)
+        #T_ERH = T_WRG + (params["A_ERH"] * params["k_ERH"] * (params["T_O_ERH"] - T_WRG)) / (m_ERH * params["c_ERH"] + 1e-6)
+        #T_ERH = -1 * m_ERH * params["c_ERH"] * params["T_DIF_ERH"] / (params["A_ERH"] * params["k_ERH"]) + params["T_O_ERH"]
+        #T_ERH = (params["k_ERH"] * params["A_ERH"] * params["T_O_ERH"] + (m_ERH * params["c_ERH"] - (params["k_ERH"] * params["A_ERH"]) / 2) * T_WRG) / (m_ERH * params["c_ERH"] + params["k_ERH"] * params["A_ERH"] * 2)
+        T_ERH = T_WRG + (m_ERH * params["c_WAS"] * params["T_DIF_ERH"]) / (params["c_LUF"] * params["c_LUF"])
         T_ZUL = T_ERH
         m_KUL = 0
+        print('T_WRG:', T_WRG, 'T_ERH:', T_ERH)
     else:
         m_KUL = regler_KUL.update(T_SOL_ZUL, T_WRG)
         params = config["kuehler"]

@@ -3,16 +3,19 @@
     "t_sp": 60,
     "T_AUL": 5,
     "T_SOL_R": 21
+
   },
   "waermetauscher": {
     "n_WRG": 0.7
   },
   "erhitzer": {
     "A_ERH": 2.0,
-    "k_ERH": 50.0,
+    "k_ERH": 10.0,
     "T_O_ERH": 50.0,
-    "T_DIF_ERH": 5,
-    "c_ERH": 1005
+    "T_DIF_ERH": 10,
+    "c_LUF": 1005,
+    "m_LUF": 0.5,
+    "c_WAS": 4180
   },
   "kuehler": {
     "A_KUL": 2.0,
@@ -23,6 +26,6 @@
   },
   "raum": {
     "V_R": 100.0,
-    "T_R_init": 21.0
+    "T_R_init": 15.0
   }
 }
