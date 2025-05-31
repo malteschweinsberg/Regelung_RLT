@@ -8,7 +8,7 @@ with open("config.json") as f:
 
 # Simulationseinstellungen
 t_sp = config["simulation"]["t_sp"]             #Geschwindigkeit der Simulation (z. B. 60-fach schneller als Echtzeit)
-dt = 1 / t_sp                                   #Reale Zeit pro Simulationsschritt
+dt = 0.1 / t_sp                                   #Reale Zeit pro Simulationsschritt
 T_AUL = config["simulation"]["T_AUL"]           #Außenlufttemperatur
 T_SOL_R = config["simulation"]["T_SOL_R"]       #Ziel-Raumtemperatur
 V_R = config["raum"]["V_R"]                     #Aktuelle Raumtemperatur
@@ -29,7 +29,7 @@ regler_KUL = PIRegler(2.1, 1, dt, 0 )
 
 vis = Visualisierung()
 
-for t in range(0, 60):  # 1 Stunde simulieren
+for t in range(0, 3600):  # 1 Stunde simulieren
     # WRG aktiv?
     wrg_on = berechne_WRG(T_AUL, T_ABL, T_SOL_R)
     if wrg_on:
