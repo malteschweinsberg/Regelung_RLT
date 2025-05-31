@@ -7,14 +7,16 @@ class Visualisierung:
         self.time = []
         self.T_R_soll = []
         self.T_R = []
+        self.T_ZUL = []
         self.m_ERH = []
         self.m_KUL = []
         self.wrg_status = []
 
-    def add_data(self, t, T_R_soll, T_R, m_ERH, m_KUL, wrg_on):
+    def add_data(self, t, T_R_soll, T_R, T_ZUL, m_ERH, m_KUL, wrg_on):
         self.time.append(t)
         self.T_R_soll.append(T_R_soll)
         self.T_R.append(T_R)
+        self.T_ZUL.append(T_ZUL)
         self.m_ERH.append(m_ERH)
         self.m_KUL.append(m_KUL)
         self.wrg_status.append(int(wrg_on))
@@ -24,6 +26,7 @@ class Visualisierung:
 
         axs[0].plot(self.time, self.T_R, label="Ist Raumtemperatur")
         axs[0].plot(self.time, self.T_R_soll, label="Soll Raumtemperatur")
+        axs[0].plot(self.time, self.T_ZUL, label="Zulfuttemperatur")
         axs[0].legend()
         axs[0].set_ylabel("Temperatur [°C]")
 

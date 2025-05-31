@@ -11,4 +11,7 @@ class PIRegler:
     def update(self, soll, ist):
         fehler = soll - ist
         self.integral += fehler * self.dt
+        #if self.kp == 25:
+         #   print('KP:',self.kp,'soll:',soll,'-ist:',ist,'Fehler:',fehler, 'Integral:', self.integral, 'tn:', self.tn)
         return self.kp * (fehler + self.integral / self.tn)
+

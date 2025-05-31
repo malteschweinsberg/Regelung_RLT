@@ -1,7 +1,7 @@
 {
   "simulation": {
     "t_sp": 60,
-    "T_AUL": 5,
+    "T_AUL": 35,
     "T_SOL_R": 21
 
   },
@@ -22,10 +22,12 @@
     "k_KUL": 40.0,
     "T_O_KUL": 7.0,
     "T_DIF_KUL": 5,
-    "c_KUL": 1005
+    "c_LUF": 1005,
+    "m_LUF": 0.5,
+    "c_WAS": 4180
   },
   "raum": {
-    "V_R": 100.0,
+    "V_R": 1000.0,
     "T_R_init": 15.0
   }
 }

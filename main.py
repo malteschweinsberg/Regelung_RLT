@@ -42,24 +42,21 @@ for t in range(0, 60):  # 1 Stunde simulieren
         T_WRG = T_AUL
 
     # Regelung T_ZUL
-    T_SOL_ZUL = regler_T_ZUL.update(T_SOL_R, T_R)
+    T_SOL_ZUL = T_R + regler_T_ZUL.update(T_SOL_R, T_R)
+    print(T_SOL_ZUL)
     dTZUL = T_SOL_ZUL - T_WRG
 
     # Heizen oder Kühlen
     if dTZUL > 0:
-        m_ERH = regler_ERH.update(T_SOL_ZUL, T_WRG)
+        m_ERH = regler_ERH.update(T_SOL_ZUL, T_ZUL)
         params = config["erhitzer"]
-        #T_ERH = T_WRG + (params["A_ERH"] * params["k_ERH"] * (params["T_O_ERH"] - T_WRG)) / (m_ERH * params["c_ERH"] + 1e-6)
-        #T_ERH = -1 * m_ERH * params["c_ERH"] * params["T_DIF_ERH"] / (params["A_ERH"] * params["k_ERH"]) + params["T_O_ERH"]
-        #T_ERH = (params["k_ERH"] * params["A_ERH"] * params["T_O_ERH"] + (m_ERH * params["c_ERH"] - (params["k_ERH"] * params["A_ERH"]) / 2) * T_WRG) / (m_ERH * params["c_ERH"] + params["k_ERH"] * params["A_ERH"] * 2)
         T_ERH = T_WRG + (m_ERH * params["c_WAS"] * params["T_DIF_ERH"]) / (params["c_LUF"] * params["c_LUF"])
         T_ZUL = T_ERH
         m_KUL = 0
-        print('T_WRG:', T_WRG, 'T_ERH:', T_ERH)
     else:
-        m_KUL = regler_KUL.update(T_SOL_ZUL, T_WRG)
+        m_KUL = regler_KUL.update(T_SOL_ZUL, T_ZUL)
         params = config["kuehler"]
-        T_KUL = T_WRG + (params["A_KUL"] * params["k_KUL"] * (params["T_O_KUL"] - T_WRG)) / (m_KUL * params["c_KUL"] + 1e-6)
+        T_KUL = T_WRG + (m_KUL * params["c_WAS"] * params["T_DIF_KUL"]) / (params["c_LUF"] * params["c_LUF"])
         T_ZUL = T_KUL
         m_ERH = 0
 
@@ -67,7 +64,7 @@ for t in range(0, 60):  # 1 Stunde simulieren
     dT_R = (T_ZUL - T_R) * 0.1  # einfache Wärmezufuhrformel
     T_R += dT_R
 
-    vis.add_data(t, T_SOL_R, T_R, m_ERH, m_KUL, wrg_on)
+    vis.add_data(t, T_SOL_R, T_R, T_ZUL, m_ERH, m_KUL, wrg_on)
     time.sleep(dt)
 
 vis.plot()
