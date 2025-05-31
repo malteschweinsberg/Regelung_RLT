@@ -1,5 +1,3 @@
-import matplotlib
-matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt  # zwingt matplotlib, das richtige GUI-Backend zu benutzen
 
 class Visualisierung:
@@ -8,15 +6,19 @@ class Visualisierung:
         self.T_R_soll = []
         self.T_R = []
         self.T_ZUL = []
+        self.T_Sol_ZUL = []
+        self.T_WRG_ = []
         self.m_ERH = []
         self.m_KUL = []
         self.wrg_status = []
 
-    def add_data(self, t, T_R_soll, T_R, T_ZUL, m_ERH, m_KUL, wrg_on):
+    def add_data(self, t, T_R_soll, T_R, T_ZUL,T_Sol_ZUL,T_WRG_,m_ERH, m_KUL, wrg_on):
         self.time.append(t)
         self.T_R_soll.append(T_R_soll)
         self.T_R.append(T_R)
         self.T_ZUL.append(T_ZUL)
+        self.T_Sol_ZUL.append(T_Sol_ZUL)
+        self.T_WRG_.append(T_WRG_)
         self.m_ERH.append(m_ERH)
         self.m_KUL.append(m_KUL)
         self.wrg_status.append(int(wrg_on))
@@ -25,8 +27,10 @@ class Visualisierung:
         fig, axs = plt.subplots(3, 1, figsize=(10, 10))
 
         axs[0].plot(self.time, self.T_R, label="Ist Raumtemperatur")
+        axs[0].plot(self.time, self.T_WRG_, label="temperatur nach WRG")
         axs[0].plot(self.time, self.T_R_soll, label="Soll Raumtemperatur")
         axs[0].plot(self.time, self.T_ZUL, label="Zulfuttemperatur")
+        axs[0].plot(self.time, self.T_Sol_ZUL, label="Soll Zulfuttemperatur")
         axs[0].legend()
         axs[0].set_ylabel("Temperatur [°C]")
 

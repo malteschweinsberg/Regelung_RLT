@@ -1,17 +1,18 @@
 class PIRegler:
-    def __init__(self, kp, tn, dt):
+    def __init__(self, kp, ki, dt, integrator_min=None, integrator_max=None):
         self.kp = kp
-        self.tn = tn
+        self.ki = ki
         self.dt = dt
         self.integral = 0.0
+        self.integrator_min = integrator_min
+        self.integrator_max = integrator_max
 
     def reset(self):
         self.integral = 0.0
 
     def update(self, soll, ist):
-        fehler = soll - ist
-        self.integral += fehler * self.dt
-        #if self.kp == 25:
-         #   print('KP:',self.kp,'soll:',soll,'-ist:',ist,'Fehler:',fehler, 'Integral:', self.integral, 'tn:', self.tn)
-        return self.kp * (fehler + self.integral / self.tn)
-
+        fehler = soll - ist #=6
+        self.integral += fehler  # =0,1
+        #if self.kp == 2.1:
+            #print('pro', self.kp * fehler, 'Int', self.ki * self.integral)
+        return self.kp * fehler + self.ki * self.integral
