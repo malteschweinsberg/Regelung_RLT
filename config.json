@@ -29,5 +29,17 @@
   "raum": {
     "V_R": 1000.0,
     "T_R_init": 25.0
-  }
+  },
+  "erhitzer_ventil": {
+    "m_min": 0.0,
+    "m_max": 1.0,
+    "stellgeschwindigkeit": 0.05,
+    "totzeit": 2.0
+},
+"kuehler_ventil": {
+    "m_min": 0.0,
+    "m_max": 1.0,
+    "stellgeschwindigkeit": 0.05,
+    "totzeit": 2.0
+}
 }
