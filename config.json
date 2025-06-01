@@ -1,47 +1,33 @@
 {
   "simulation": {
     "t_sp": 60,
-    "T_AUL": 35,
-    "T_SOL_R": 21,
-    "p_LUF": 1.204
-
+    "T_AUL": 10,
+    "T_SOL_R": 21
   },
   "waermetauscher": {
     "n_WRG": 0.7
   },
   "erhitzer": {
-    "A_ERH": 2.0,
-    "k_ERH": 10.0,
-    "T_O_ERH": 50.0,
-    "T_DIF_ERH": 10,
-    "c_LUF": 1005,
-    "m_LUF": 0.5,
-    "c_WAS": 4180
+    "T_DIF_ERH": 10
   },
   "kuehler": {
-    "A_KUL": 2.0,
-    "k_KUL": 40.0,
-    "T_O_KUL": 7.0,
-    "T_DIF_KUL": 5,
-    "c_LUF": 1005,
-    "m_LUF": 0.5,
-    "c_WAS": 4180
+    "T_DIF_KUL": 5
   },
+  "physik": {
+    "c_LUF": 1005,
+    "c_WAS": 4180,
+    "p_LUF": 1.204
+  },
+    "ventilator": {
+    "m_LUF_min": 0.5,
+    "m_LUF_max": 10.0,
+    "q_w_T": 1,
+    "q_w_X": 0.7
+    },
   "raum": {
     "V_R": 1000.0,
-    "T_R_init": 25.0,
+    "T_R_init": 15.0,
     "Q_IN": 0
-  },
-  "erhitzer_ventil": {
-    "m_min": 0.0,
-    "m_max": 1.0,
-    "stellgeschwindigkeit": 0.05,
-    "totzeit": 2.0
-},
-"kuehler_ventil": {
-    "m_min": 0.0,
-    "m_max": 1.0,
-    "stellgeschwindigkeit": 0.05,
-    "totzeit": 2.0
+  }
 }
-}
+
