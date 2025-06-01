@@ -35,7 +35,6 @@ class Visualisierung:
         axs[0].plot(self.time, self.T_Sol_ZUL, label="Soll Zulufttemperatur", linewidth=1.2, linestyle='--')
         axs[0].legend(loc='upper right', fontsize=9)
         axs[0].set_ylabel("Temperatur [°C]", fontsize=12)
-        axs[0].set_ylim(-10, 50)  # Realistischer Bereich für Temperaturen
         axs[0].grid(True, which='both', linestyle='--', alpha=0.5)
 
         # Massenstromplot
@@ -43,7 +42,6 @@ class Visualisierung:
         axs[1].plot(self.time, self.m_KUL_ist, label="Massenstrom Kühler", linewidth=1.2)
         axs[1].legend(loc='upper right', fontsize=9)
         axs[1].set_ylabel("Massenstrom [kg/s]", fontsize=12)
-        axs[1].set_ylim(-0.1, 1.1)  # Begrenzung auf realistische Werte
         axs[1].grid(True, which='both', linestyle='--', alpha=0.5)
 
         # WRG-Statusplot

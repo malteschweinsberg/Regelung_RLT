@@ -2,7 +2,8 @@
   "simulation": {
     "t_sp": 60,
     "T_AUL": 35,
-    "T_SOL_R": 21
+    "T_SOL_R": 21,
+    "p_LUF": 1.204
 
   },
   "waermetauscher": {
@@ -28,7 +29,8 @@
   },
   "raum": {
     "V_R": 1000.0,
-    "T_R_init": 25.0
+    "T_R_init": 25.0,
+    "Q_IN": 0
   },
   "erhitzer_ventil": {
     "m_min": 0.0,

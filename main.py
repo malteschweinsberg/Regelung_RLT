@@ -13,7 +13,8 @@ T_AUL = config["simulation"]["T_AUL"]           # Außenlufttemperatur
 T_SOL_R = config["simulation"]["T_SOL_R"]       # Ziel-Raumtemperatur
 V_R = config["raum"]["V_R"]                     # Raumvolumen
 T_R = config["raum"]["T_R_init"]                # Anfangs-Raumtemperatur
-
+p_LUF = config["simulation"]["p_LUF"]
+m_LUF = config["erhitzer"]["m_LUF"]
 # Initialwerte
 T_ZUL = T_WRG = T_ERH = T_KUL = T_AUL
 T_ABL = T_R  # Abluft = Raumtemperatur
@@ -29,6 +30,13 @@ m_KUL_puffer = [0.0] * TOTZEIT_SCHRITTE
 # WRG Logik
 def berechne_WRG(T_AUL, T_ABL, T_SOL_R):
     return ((T_ABL > T_AUL and T_AUL < T_SOL_R) or (T_ABL > T_SOL_R and T_AUL > T_ABL))
+
+# Berechnen der Wärmekapazität
+rho = 1.2  # kg/m³
+c_LUF = 1005  # Ws/(kg·K)
+V_R = config["raum"]["V_R"]
+C_Raum = rho * V_R * c_LUF  # Ws/K
+Q_IN = config["raum"]["Q_IN"]  # W
 
 # Regler
 regler_T_ZUL = PIRegler(0.5, 0.1, dt)
@@ -90,8 +98,8 @@ for t in range(0, 3600):  # 1 Stunde simulieren
         T_ZUL = T_WRG
 
     # Raumtemperatur aktualisieren
-    dT_R = (T_ZUL - T_R) * 0.1  # einfache Wärmezufuhrformel
-    T_R += dT_R
+    #dT_R = (T_ZUL - T_R) * 0.1  # einfache Wärmezufuhrformel
+    T_R = (T_R * V_R + p_LUF * m_LUF * T_ZUL)/(V_R + p_LUF * m_LUF)
     T_ABL = T_R
 
     vis.add_data(t, T_SOL_R, T_R, T_ZUL, T_SOL_ZUL, T_WRG, m_ERH, m_KUL, wrg_on)
