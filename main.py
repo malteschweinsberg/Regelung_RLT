@@ -13,14 +13,15 @@ T_AUL = config["simulation"]["T_AUL"]           # Außenlufttemperatur
 T_SOL_R = config["simulation"]["T_SOL_R"]       # Ziel-Raumtemperatur
 V_R = config["raum"]["V_R"]                     # Raumvolumen
 T_R = config["raum"]["T_R_init"]                # Anfangs-Raumtemperatur
-p_LUF = config["simulation"]["p_LUF"]
-m_LUF = config["erhitzer"]["m_LUF"]
+p_LUF = config["physik"]["p_LUF"]
+
 # Initialwerte
 T_ZUL = T_WRG = T_ERH = T_KUL = T_AUL
 T_ABL = T_R  # Abluft = Raumtemperatur
+m_LUF = config["ventilator"]["m_LUF_min"]
 
 # Totzeit und Totzone Parameter
-TOTZEIT_SCHRITTE = 5      # z.B. 5 Simulationsschritte Verzögerung
+TOTZEIT_SCHRITTE = 0      # z.B. 5 Simulationsschritte Verzögerung
 TOTZONE = 0.05           # z.B. 5% Totzone (anpassen je nach Reglerausgabe)
 
 # Puffer für Totzeit (FIFO-Listen)
@@ -29,7 +30,7 @@ m_KUL_puffer = [0.0] * TOTZEIT_SCHRITTE
 
 # WRG Logik
 def berechne_WRG(T_AUL, T_ABL, T_SOL_R):
-    return ((T_ABL > T_AUL and T_AUL < T_SOL_R) or (T_ABL > T_SOL_R and T_AUL > T_ABL))
+    return ((T_ABL > T_AUL and T_AUL < T_SOL_R) or (T_AUL > T_SOL_R and T_AUL > T_ABL))
 
 # Berechnen der Wärmekapazität
 rho = 1.2  # kg/m³
@@ -39,13 +40,13 @@ C_Raum = rho * V_R * c_LUF  # Ws/K
 Q_IN = config["raum"]["Q_IN"]  # W
 
 # Regler
-regler_T_ZUL = PIRegler(0.5, 0.1, dt)
-regler_ERH = PIRegler(0.5, 0.05, dt, 0 )
-regler_KUL = PIRegler(0.5, 0.05, dt, 0 )
+regler_T_ZUL = PIRegler(0.5, 0.3, dt)
+regler_ERH = PIRegler(0.001, 0.004, dt, 0 )
+regler_KUL = PIRegler(0.001, 0.004, dt, 0 )
 
 vis = Visualisierung()
 
-for t in range(0, 3600):  # 1 Stunde simulieren
+for t in range(0, 5000):  # 1 Stunde simulieren
     # WRG aktiv?
     wrg_on = berechne_WRG(T_AUL, T_ABL, T_SOL_R)
     if wrg_on:
@@ -56,12 +57,33 @@ for t in range(0, 3600):  # 1 Stunde simulieren
             T_WRG = T_AUL - n_WRG * (T_AUL - T_ABL)
     else:
         T_WRG = T_AUL
-    print(t, 'Temp. nach WRG:', T_WRG, 'Temp. ABL:', T_ABL, 'Temp. AUL:', T_AUL)
+    #print(t, 'Temp. nach WRG:', T_WRG, 'Temp. ABL:', T_ABL, 'Temp. AUL:', T_AUL)
     # Regelung T_ZUL
 
     T_SOL_ZUL =  regler_T_ZUL.update(T_SOL_R, T_R)
     dTZUL = T_SOL_ZUL - T_WRG
 
+    # Steuerung Ventilator
+    if 15 <= T_SOL_ZUL <= 24:
+        T_SOL_ZUL = T_SOL_ZUL
+    else:
+        dT_RA = abs(T_SOL_R - T_R)
+        dT_RA_w = dT_RA * config["ventilator"]["q_w_T"]
+        if dT_RA_w <= 0.1:
+            m_LUF = config["ventilator"]["m_LUF_min"]
+        elif dT_RA_w >= 2:
+            m_LUF = config["ventilator"]["m_LUF_max"]
+        elif 0.1 < dT_RA_w < 2:
+            m_LUF = config["ventilator"]["m_LUF_min"] + (dT_RA_w - 0.1) / (2-0.1) * (config["ventilator"]["m_LUF_max"] - config["ventilator"]["m_LUF_min"])
+
+
+        #m_LUF = config["ventilator"]["m_LUF_min"] + dT_RA / T_R * (config["ventilator"]["m_LUF_max"] - config["ventilator"]["m_LUF_min"]) / T_R
+        #print('m_luf_min:', config["ventilator"]["m_LUF_min"], 'faktor:', dT_RA / T_R, 'anstieg:',(config["ventilator"]["m_LUF_max"] - config["ventilator"]["m_LUF_min"]) / T_R)
+        if T_SOL_ZUL < 15:
+            T_SOL_ZUL = 15
+        elif T_SOL_ZUL > 24:
+            T_SOL_ZUL = 24
+    print(t, dT_RA_w, T_SOL_ZUL)
     # Heizen oder Kühlen mit Totzeit und Totzone
     if dTZUL > 0:
         m_ERH_roh = regler_ERH.update(T_SOL_ZUL, T_ZUL)
@@ -87,22 +109,24 @@ for t in range(0, 3600):  # 1 Stunde simulieren
 
     # Temperaturberechnung Erhitzer/Kühler
     if m_ERH > 0:
-        params = config["erhitzer"]
-        T_ERH = T_WRG + (m_ERH * params["c_WAS"] * params["T_DIF_ERH"]) / (params["c_LUF"] * params["c_LUF"])
+        params = config["physik"]
+        T_ERH = T_WRG + (m_ERH * params["c_WAS"] * config["erhitzer"]["T_DIF_ERH"]) / (params["c_LUF"] * m_LUF)
         T_ZUL = T_ERH
     elif m_KUL > 0:
-        params = config["kuehler"]
-        T_KUL = T_WRG - (m_KUL * params["c_WAS"] * params["T_DIF_KUL"]) / (params["c_LUF"] * params["c_LUF"])
+        params = config["physik"]
+        T_KUL = T_WRG - (m_KUL * params["c_WAS"] * config["kuehler"]["T_DIF_KUL"]) / (params["c_LUF"] * m_LUF)
         T_ZUL = T_KUL
     else:
         T_ZUL = T_WRG
 
-    # Raumtemperatur aktualisieren
-    #dT_R = (T_ZUL - T_R) * 0.1  # einfache Wärmezufuhrformel
+
+
+
+      # Raumtemperatur aktualisieren
     T_R = (T_R * V_R + p_LUF * m_LUF * T_ZUL)/(V_R + p_LUF * m_LUF)
     T_ABL = T_R
 
-    vis.add_data(t, T_SOL_R, T_R, T_ZUL, T_SOL_ZUL, T_WRG, m_ERH, m_KUL, wrg_on)
+    vis.add_data(t, T_SOL_R, T_R, T_ZUL, T_SOL_ZUL, T_WRG, m_ERH, m_KUL, m_LUF)
     time.sleep(dt)
 
 vis.plot()
