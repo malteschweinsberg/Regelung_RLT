@@ -13,5 +13,6 @@ class PIRegler:
     def update(self, soll, ist):
         fehler = soll - ist #=6
         self.integral += fehler  # =0,1
-        #print('pro', self.kp * fehler, 'Int', self.ki * self.integral)
+        if self.kp == 0.1:
+            print('pro', self.kp * fehler, 'Int', self.ki * self.integral)
         return self.kp * fehler + self.ki * self.integral
