@@ -1,11 +1,35 @@
 import json
 import time
 import random
+import math
 from pi_regler import PIRegler
 from visualisation import Visualisierung
 
 with open("config.json") as f:
     config = json.load(f)
+# Funktions definierung
+def berechne_WRG(T_AUL, T_ABL, T_SOL_R):
+    return ((T_ABL > T_AUL and T_AUL < T_SOL_R) or (T_AUL > T_SOL_R and T_AUL > T_ABL))
+def absolute_to_relative_humidity(T, abs_humidity, pressure=1013.25):
+    """
+    Umrechnung absolute Feuchte (g/m³) in relative Feuchte (%)
+    T: Temperatur in °C
+    abs_humidity: absolute Feuchte in g/m³
+    pressure: Luftdruck in hPa (Standard: 1013,25 hPa)
+    """
+    # Sättigungsdampfdruck nach Sonntag-Formel (hPa)
+    es = 6.112 * math.exp((17.62 * T) / (243.12 + T))
+    # maximale absolute Feuchte (g/m³)
+    abs_max = 216.7 * (es / (T + 273.15))
+    # relative Feuchte (%)
+    rel_humidity = (abs_humidity / abs_max) * 100
+    return rel_humidity
+def absolute_to_relative_humidity(X_ABS, T_X):
+    es = 6.112 * math.exp((17.62 * T_X) / (243.12 + T_X))     # Sättigungsdampfdruck nach der Magnus-Formel (in hPa)
+    abs_max = 216.7 * (es / (T_X + 273.15))     # Maximale absolute Feuchte (g/m³)
+    rel_humidity = (X_ABS / abs_max) * 100     # Relative Feuchte (%)
+    return rel_humidity
+
 
 # Simulationseinstellungen
 t_sp = config["simulation"]["t_sp"]             # Geschwindigkeit der Simulation
@@ -13,15 +37,21 @@ dt = 0.1 / t_sp                                 # Reale Zeit pro Simulationsschr
 
 # Initialwerte
 T_AUL = config["simulation"]["T_AUL"]           # Außenlufttemperatur
+X_AUL = absolute_to_relative_humidity(T_AUL,config["simulation"]["X_AUL"] ) # Außenluftfeuchte
 T_SOL_R = config["simulation"]["T_SOL_R"]       # Ziel-Raumtemperatur
+X_SOL_R = absolute_to_relative_humidity(T_SOL_R, config["simulation"]["X_SOL_R"] )      # Ziel-Raumfeuchte
 V_R = config["raum"]["V_R"]                     # Raumvolumen
 T_R = config["raum"]["T_R_init"]                # Anfangs-Raumtemperatur
+X_R = absolute_to_relative_humidity(T_R, config["raum"]["X_R_init"] )               # Anfangs-Raumfeuchte
 p_LUF = config["physik"]["p_LUF"]
 T_ZUL = T_WRG = T_ERH = T_KUL = T_AUL
+X_ZUL = X_WRG = X_BFT = X_AUL
 T_ABL = T_R  # Abluft = Raumtemperatur
 m_LUF = config["ventilator"]["m_LUF_min"]
 m_LUF_prev = m_LUF  # Initialisiert mit dem Startwert m_LUF_min
 m_ERH = m_KUL = 0
+n_WRG = config["waermetauscher"]["n_WRG"]
+n_BFT = config["befeuchter"]["n_BFT"]
 i = 0
 
 # Berechnen der Wärmekapazität
@@ -37,17 +67,17 @@ m_ERH_puffer = [0.0] * TOTZEIT_SCHRITTE # Puffer für Totzeit (FIFO-Listen)
 m_KUL_puffer = [0.0] * TOTZEIT_SCHRITTE # Puffer für Totzeit (FIFO-Listen)
 
 # Regler
+regler_X_ZUL = PIRegler(0.001, 0.004, dt)
+regler_BFT = PIRegler(0.001, 0.004, dt)
 regler_T_ZUL = PIRegler(0.5, 0.3, dt)
 regler_ERH = PIRegler(0.001, 0.004, dt)
 regler_KUL = PIRegler(0.001, 0.004, dt)
 
-# WRG Logik
-def berechne_WRG(T_AUL, T_ABL, T_SOL_R):
-    return ((T_ABL > T_AUL and T_AUL < T_SOL_R) or (T_AUL > T_SOL_R and T_AUL > T_ABL))
+
 
 vis = Visualisierung()
 
-for t in range(0, 25000):  # Simulationszeitraum
+for t in range(0, 10000):  # Simulationszeitraum
 
     # Simulation Außentemperatur/Raumlast
     if i == 60:
@@ -61,7 +91,7 @@ for t in range(0, 25000):  # Simulationszeitraum
 
         AE_Q = random.uniform(50,50)
         Q_IN = Q_IN + AE_Q
-        # Begrenzung der Temperatur im definierten Rahmen
+        # Begrenzung der Innerenwärmelast im definierten Rahmen
         if Q_IN < 0:
             Q_IN = 0
         elif Q_IN > 1000:
@@ -74,7 +104,6 @@ for t in range(0, 25000):  # Simulationszeitraum
     # WRG aktiv?
     wrg_on = berechne_WRG(T_AUL, T_ABL, T_SOL_R)
     if wrg_on:
-        n_WRG = config["waermetauscher"]["n_WRG"]
         if T_AUL < T_ABL:
             T_WRG = T_AUL + n_WRG * (T_ABL - T_AUL)
         else:
@@ -84,7 +113,7 @@ for t in range(0, 25000):  # Simulationszeitraum
 
     # Regelung T_ZUL
     dT_RA_SOL = abs(T_SOL_R - T_R)
-    if dT_RA_SOL > 0.02:
+    if dT_RA_SOL > 0.02 :
 
         T_SOL_ZUL =  regler_T_ZUL.update(T_SOL_R, T_R)
         dTZUL = T_SOL_ZUL - T_WRG
@@ -159,6 +188,15 @@ for t in range(0, 25000):  # Simulationszeitraum
                 T_ZUL = T_KUL
             else:
                 T_ZUL = T_WRG
+    dX_R = abs(X_SOL_R - X_R)
+    # Feuchte Regelung
+    X_WRG = X_AUL
+    if dX_R >5:
+        X_SOL_ZUL =  regler_X_ZUL.update(X_SOL_R, X_R)
+        dX_ZUL = X_SOL_ZUL - X_ZUL
+        if dX_ZUL > 0:
+            m_BFT = regler_BFT.update(X_SOL_ZUL, X_AUL)
+            X_ZUL = X_AUL + m_BFT * n_BFT
 
     m_LUF_prev = m_LUF  # Speichert den aktuellen Wert für den nächsten Durchlauf
 
@@ -166,10 +204,14 @@ for t in range(0, 25000):  # Simulationszeitraum
     E_QIN = Q_IN * dt  # Energie in Joule, die im Zeitschritt zugeführt wird
     delta_T_QIN = E_QIN / C_Raum  # Temperaturerhöhung in Kelvin (bzw. °C)
     T_R = (T_R * V_R + p_LUF * m_LUF * T_ZUL) / (V_R + p_LUF * m_LUF) + delta_T_QIN
+    X_R = (V_R * X_R + p_LUF * m_LUF * X_ZUL) / (V_R + p_LUF * m_LUF)
+    X_R_rel = absolute_to_relative_humidity(X_R,T_R)
+    X_ZUL_rel = absolute_to_relative_humidity(X_ZUL,T_ZUL)
+    X_SOL_ZUL_rel = absolute_to_relative_humidity(X_SOL_ZUL,T_SOL_ZUL)
     T_ABL = T_R
 
-    print(t," T_SOL_ZUL: ", round(T_SOL_ZUL,3), " T_ZUL: ", round(T_ZUL,3), " T_R: ", round(T_R,3), " T_ABL: ", round(T_ABL,3))
-    vis.add_data(t, T_SOL_R, T_R, T_ZUL, T_SOL_ZUL, T_WRG, m_ERH, m_KUL, m_LUF)
+    #print(t," T_SOL_ZUL: ", round(T_SOL_ZUL,3), " T_ZUL: ", round(T_ZUL,3), " T_R: ", round(T_R,3), " T_ABL: ", round(T_ABL,3))
+    vis.add_data(t, T_SOL_R, T_R, T_ZUL, T_SOL_ZUL, T_WRG, m_ERH, m_KUL, m_LUF, X_R, X_SOL_R, X_SOL_ZUL, X_ZUL)
     time.sleep(dt)
 
 vis.plot()
