@@ -1,5 +1,6 @@
 import json
 import time
+import random
 from pi_regler import PIRegler
 from visualisation import Visualisierung
 
@@ -9,44 +10,67 @@ with open("config.json") as f:
 # Simulationseinstellungen
 t_sp = config["simulation"]["t_sp"]             # Geschwindigkeit der Simulation
 dt = 0.1 / t_sp                                 # Reale Zeit pro Simulationsschritt
+
+# Initialwerte
 T_AUL = config["simulation"]["T_AUL"]           # Außenlufttemperatur
 T_SOL_R = config["simulation"]["T_SOL_R"]       # Ziel-Raumtemperatur
 V_R = config["raum"]["V_R"]                     # Raumvolumen
 T_R = config["raum"]["T_R_init"]                # Anfangs-Raumtemperatur
 p_LUF = config["physik"]["p_LUF"]
-
-# Initialwerte
 T_ZUL = T_WRG = T_ERH = T_KUL = T_AUL
 T_ABL = T_R  # Abluft = Raumtemperatur
 m_LUF = config["ventilator"]["m_LUF_min"]
+m_LUF_prev = m_LUF  # Initialisiert mit dem Startwert m_LUF_min
 m_ERH = m_KUL = 0
-# Totzeit und Totzone Parameter
-TOTZEIT_SCHRITTE = 0      # z.B. 5 Simulationsschritte Verzögerung
-TOTZONE = 0.05           # z.B. 5% Totzone (anpassen je nach Reglerausgabe)
+i = 0
 
-# Puffer für Totzeit (FIFO-Listen)
-m_ERH_puffer = [0.0] * TOTZEIT_SCHRITTE
-m_KUL_puffer = [0.0] * TOTZEIT_SCHRITTE
+# Berechnen der Wärmekapazität
+rho = 1.2  # kg/m³
+c_LUF = 1005  # Ws/(kg·K)
+C_Raum = rho * V_R * c_LUF  # Ws/K
+Q_IN = config["raum"]["Q_IN"]  # W
+
+# Totzeit und Totzone Parameter
+TOTZEIT_SCHRITTE = 0     # z.B. 5 Simulationsschritte Verzögerung
+TOTZONE = 0.05           # z.B. 5% Totzone (anpassen je nach Reglerausgabe)
+m_ERH_puffer = [0.0] * TOTZEIT_SCHRITTE # Puffer für Totzeit (FIFO-Listen)
+m_KUL_puffer = [0.0] * TOTZEIT_SCHRITTE # Puffer für Totzeit (FIFO-Listen)
+
+# Regler
+regler_T_ZUL = PIRegler(0.5, 0.3, dt)
+regler_ERH = PIRegler(0.001, 0.004, dt)
+regler_KUL = PIRegler(0.001, 0.004, dt)
 
 # WRG Logik
 def berechne_WRG(T_AUL, T_ABL, T_SOL_R):
     return ((T_ABL > T_AUL and T_AUL < T_SOL_R) or (T_AUL > T_SOL_R and T_AUL > T_ABL))
 
-# Berechnen der Wärmekapazität
-rho = 1.2  # kg/m³
-c_LUF = 1005  # Ws/(kg·K)
-V_R = config["raum"]["V_R"]
-C_Raum = rho * V_R * c_LUF  # Ws/K
-Q_IN = config["raum"]["Q_IN"]  # W
-
-# Regler
-regler_T_ZUL = PIRegler(0.5, 0.3, dt)
-regler_ERH = PIRegler(0.001, 0.004, dt, 0 )
-regler_KUL = PIRegler(0.001, 0.004, dt, 0 )
-
 vis = Visualisierung()
 
-for t in range(0, 1000):  # 1 Stunde simulieren
+for t in range(0, 25000):  # Simulationszeitraum
+
+    # Simulation Außentemperatur/Raumlast
+    if i == 60:
+        AE_AT = random.uniform(-0.5, 0.5)
+        T_AUL = T_AUL + AE_AT
+        # Begrenzung der Temperatur im definierten Rahmen
+        if T_AUL < 10:
+            T_AUL = 10
+        elif T_AUL > 30:
+            T_AUL = 30
+
+        AE_Q = random.uniform(50,50)
+        Q_IN = Q_IN + AE_Q
+        # Begrenzung der Temperatur im definierten Rahmen
+        if Q_IN < 0:
+            Q_IN = 0
+        elif Q_IN > 1000:
+            Q_IN = 1000
+        i = 0
+    else:
+        i = i + 1
+
+
     # WRG aktiv?
     wrg_on = berechne_WRG(T_AUL, T_ABL, T_SOL_R)
     if wrg_on:
@@ -60,7 +84,7 @@ for t in range(0, 1000):  # 1 Stunde simulieren
 
     # Regelung T_ZUL
     dT_RA_SOL = abs(T_SOL_R - T_R)
-    if dT_RA_SOL > 0.2:
+    if dT_RA_SOL > 0.02:
 
         T_SOL_ZUL =  regler_T_ZUL.update(T_SOL_R, T_R)
         dTZUL = T_SOL_ZUL - T_WRG
@@ -81,19 +105,6 @@ for t in range(0, 1000):  # 1 Stunde simulieren
                 T_SOL_ZUL = 15
             elif T_SOL_ZUL > 24:
                 T_SOL_ZUL = 24
-        # berechnung der potentiellen zuluft temperatur
-        if dTZUL > 0:
-            params = config["physik"]
-            T_ERH_pot = T_WRG + (m_ERH * params["c_WAS"] * config["erhitzer"]["T_DIF_ERH"]) / (params["c_LUF"] * m_LUF)
-            T_ZUL_pot = T_ERH_pot
-        elif dTZUL > 0:
-            params = config["physik"]
-            T_KUL_pot = T_WRG - (m_KUL * params["c_WAS"] * config["kuehler"]["T_DIF_KUL"]) / (params["c_LUF"] * m_LUF)
-            T_ZUL_pot = T_KUL_pot
-        else:
-            T_ZUL_pot = T_WRG
-
-        dTZUL_pot=T_SOL_ZUL-T_ZUL_pot
 
         # Heizen oder Kühlen mit Totzeit und Totzone
         if dTZUL > 0:
@@ -123,7 +134,7 @@ for t in range(0, 1000):  # 1 Stunde simulieren
             params = config["physik"]
             T_ERH = T_WRG + (m_ERH * params["c_WAS"] * config["erhitzer"]["T_DIF_ERH"]) / (params["c_LUF"] * m_LUF)
             T_ZUL = T_ERH
-            print(T_SOL_ZUL, T_ZUL,t, 'T_WRG:', T_WRG,'zähler:', m_ERH ,'nenner:', m_LUF)
+
         elif m_KUL > 0:
             params = config["physik"]
             T_KUL = T_WRG - (m_KUL * params["c_WAS"] * config["kuehler"]["T_DIF_KUL"]) / (params["c_LUF"] * m_LUF)
@@ -131,13 +142,33 @@ for t in range(0, 1000):  # 1 Stunde simulieren
         else:
             T_ZUL = T_WRG
 
+        #Kontrolle Volumenstrom Luft
+        if 15 <= T_ZUL <= 24:
+            T_ZUL = T_ZUL
+        else:
+            m_LUF = m_LUF_prev  # Nutzt den gespeicherten Wert des letzten Durchlaufs
 
+            if m_ERH > 0:
+                params = config["physik"]
+                T_ERH = T_WRG + (m_ERH * params["c_WAS"] * config["erhitzer"]["T_DIF_ERH"]) / (params["c_LUF"] * m_LUF)
+                T_ZUL = T_ERH
 
+            elif m_KUL > 0:
+                params = config["physik"]
+                T_KUL = T_WRG - (m_KUL * params["c_WAS"] * config["kuehler"]["T_DIF_KUL"]) / (params["c_LUF"] * m_LUF)
+                T_ZUL = T_KUL
+            else:
+                T_ZUL = T_WRG
 
-      # Raumtemperatur aktualisieren
-    T_R = (T_R * V_R + p_LUF * m_LUF * T_ZUL)/(V_R + p_LUF * m_LUF)
+    m_LUF_prev = m_LUF  # Speichert den aktuellen Wert für den nächsten Durchlauf
+
+    # Raumtemperatur aktualisieren
+    E_QIN = Q_IN * dt  # Energie in Joule, die im Zeitschritt zugeführt wird
+    delta_T_QIN = E_QIN / C_Raum  # Temperaturerhöhung in Kelvin (bzw. °C)
+    T_R = (T_R * V_R + p_LUF * m_LUF * T_ZUL) / (V_R + p_LUF * m_LUF) + delta_T_QIN
     T_ABL = T_R
 
+    print(t," T_SOL_ZUL: ", round(T_SOL_ZUL,3), " T_ZUL: ", round(T_ZUL,3), " T_R: ", round(T_R,3), " T_ABL: ", round(T_ABL,3))
     vis.add_data(t, T_SOL_R, T_R, T_ZUL, T_SOL_ZUL, T_WRG, m_ERH, m_KUL, m_LUF)
     time.sleep(dt)
 

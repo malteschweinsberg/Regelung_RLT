@@ -1,11 +1,10 @@
 class PIRegler:
-    def __init__(self, kp, ki, dt, integrator_min=None, integrator_max=None):
+    def __init__(self, kp, ki, dt):
         self.kp = kp
         self.ki = ki
         self.dt = dt
         self.integral = 0.0
-        self.integrator_min = integrator_min
-        self.integrator_max = integrator_max
+
 
     def reset(self):
         self.integral = 0.0
