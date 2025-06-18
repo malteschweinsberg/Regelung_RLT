@@ -4,8 +4,12 @@ import random
 import math
 from pi_regler import PIRegler
 from visualisation import Visualisierung
+from scipy.optimize import fsolve
+from psychrolib import GetSatHumRatio, SetUnitSystem, SI
 with open("config.json") as f:
     config = json.load(f)
+
+
 
 # Funktions definierung
 def berechne_WRG(T_AUL, T_ABL, T_SOL_R):
@@ -23,6 +27,55 @@ def relative_to_absolute_humidity(T, rel_humidity, pressure=1013.25):
     abs_humidity = (rel_humidity / 100) * abs_max      # absolute Feuchte (g/m³)
     return abs_humidity
 
+def abs_feuchte_bei_temp(T, soll_x):
+    # Sättigungsdampfdruck nach Magnus-Formel (hPa)
+    e_s = 6.112 * math.exp((17.62 * T) / (243.12 + T))
+    # absolute Feuchte (g/m³)
+    x = 216.7 * e_s / (T + 273.15)
+    return x - soll_x
+
+def berechne_abkuehl_temp(aktuelle_temp, ziel_x):
+    # Startwert: aktuelle Temperatur
+    T_guess = aktuelle_temp
+    # Finde die Temperatur, bei der die absolute Feuchte = ziel_x ist
+    T_ziel = fsolve(abs_feuchte_bei_temp, T_guess, args=(ziel_x,))
+    return T_ziel
+
+def berechne_kuehltemperatur(x_ziel_g_per_kg, start_temp=20):
+    """
+    Berechnet die Temperatur, auf die Luft gekühlt werden muss,
+    damit sie bei 100% relativer Feuchte die gegebene absolute Feuchte erreicht.
+
+    :param x_ziel_g_per_kg: Ziel-Feuchte in g/kg
+    :param start_temp: Startwert für die Näherung (default: 20 °C)
+    :return: Temperatur in °C
+    """
+    x_ziel = x_ziel_g_per_kg / 1000  # g/kg → kg/kg
+
+    def diff(t):
+        return GetSatHumRatio(t, P_ATM) - x_ziel
+
+    t_ziel = fsolve(diff, start_temp)[0]
+    return t_ziel
+def berechne_feuchte_nach_kuehler(T_kuehler, x_vor_g_per_kg):
+    """
+    Bestimmt die Feuchte nach einem Kühler (Entfeuchtung durch Kondensation).
+
+    :param T_kuehler: Temperatur des Kühlers [°C]
+    :param x_vor_g_per_kg: Absolute Feuchte vor dem Kühler [g/kg]
+    :return: Absolute Feuchte nach dem Kühler [g/kg]
+    """
+    try:
+        x_satt = GetSatHumRatio(T_kuehler, P_ATM) * 1000  # kg/kg → g/kg
+
+        if x_vor_g_per_kg > x_satt:
+            return x_satt  # Es kondensiert Wasser – Entfeuchtung
+        else:
+            return x_vor_g_per_kg  # Kein Taupunkt erreicht, keine Entfeuchtung
+
+    except ValueError as e:
+        print(f"❌ Fehler bei der Berechnung: {e}")
+        return None
 # Simulationseinstellungen
 t_sp = config["simulation"]["t_sp"]             # Geschwindigkeit der Simulation
 dt = 0.1 / t_sp                                 # Reale Zeit pro Simulationsschritt
@@ -36,7 +89,7 @@ V_R = config["raum"]["V_R"]                     # Raumvolumen
 T_R = config["raum"]["T_R_init"]                # Anfangs-Raumtemperatur
 X_R = relative_to_absolute_humidity(T_R, config["raum"]["X_R_init"] )               # Anfangs-Raumfeuchte
 p_LUF = config["physik"]["p_LUF"]
-T_ZUL = T_WRG = T_ERH = T_KUL = T_AUL
+T_ZUL = T_ZUL_prev = T_WRG = T_ERH = T_KUL = T_AUL
 X_ZUL = X_WRG = X_BFT = X_AUL
 T_ABL = T_R  # Abluft = Raumtemperatur
 m_LUF = config["ventilator"]["m_LUF_min"]
@@ -46,6 +99,8 @@ n_WRG = config["waermetauscher"]["n_WRG"]
 n_BFT = config["befeuchter"]["n_BFT"]
 i = 0
 print("X_AUL: ",X_AUL," X_R: ",X_R," X_SOL_R: ",X_SOL_R)
+SetUnitSystem(SI)
+P_ATM = 101325
 # Berechnen der Wärmekapazität
 rho = 1.2  # kg/m³
 c_LUF = 1005  # Ws/(kg·K)
@@ -67,7 +122,7 @@ regler_KUL = PIRegler(0.001, 0.004, dt)
 
 vis = Visualisierung()
 
-for t in range(0, 10000):  # Simulationszeitraum
+for t in range(0, 2000):  # Simulationszeitraum
 
     # Simulation Außentemperatur/Raumlast (feuchte Fehlt)
     if i == 60:
@@ -126,7 +181,7 @@ for t in range(0, 10000):  # Simulationszeitraum
 
         # Heizen oder Kühlen mit Totzeit und Totzone
         if dTZUL > 0:
-            m_ERH_roh = regler_ERH.update(T_SOL_ZUL, T_ZUL)     #Heizen
+            m_ERH_roh = regler_ERH.update(T_SOL_ZUL, T_ZUL_prev)     #Heizen
             # Totzone anwenden
             if abs(m_ERH_roh) < TOTZONE:
                 m_ERH_roh = 0.0
@@ -135,7 +190,7 @@ for t in range(0, 10000):  # Simulationszeitraum
             m_ERH = m_ERH_puffer.pop(0)
             m_KUL = 0
         elif dTZUL < 0:
-            m_KUL_roh = regler_KUL.update(T_ZUL, T_SOL_ZUL)     #Kühlen
+            m_KUL_roh = regler_KUL.update(T_ZUL_prev, T_SOL_ZUL)     #Kühlen
             # Totzone anwenden
             if abs(m_KUL_roh) < TOTZONE:
                 m_KUL_roh = 0.0
@@ -183,13 +238,43 @@ for t in range(0, 10000):  # Simulationszeitraum
     X_WRG = X_AUL
     if dX_R >0.1:
         X_SOL_ZUL =  regler_X_ZUL.update(X_SOL_R, X_R)
+        if X_SOL_ZUL > 12:
+            X_SOL_ZUL = 12
+        elif X_SOL_ZUL < 6:
+            X_SOL_ZUL = 6
         dX_ZUL = X_SOL_ZUL - X_ZUL
         if dX_ZUL > 0:
             m_BFT = regler_BFT.update(X_SOL_ZUL, X_AUL)
             X_ZUL = X_AUL + m_BFT * n_BFT
+        elif dX_ZUL <0:
+            T_SOL_ENF_KUL = berechne_kuehltemperatur(T_WRG, X_SOL_ZUL)
+            # Kühlen und somit entfeuchten
+            m_KUL = regler_ERH.update(T_SOL_ENF_KUL, T_ZUL_prev)
+            if abs(m_KUL_roh) < TOTZONE:
+                m_KUL_roh = 0.0
+            # Totzeit-Puffer aktualisieren
+            m_KUL_puffer.append(m_KUL_roh)
+            m_KUL = m_KUL_puffer.pop(0)
+            params = config["physik"]
+            T_KUL = T_WRG - (m_KUL * params["c_WAS"] * config["kuehler"]["T_DIF_KUL"]) / (params["c_LUF"] * m_LUF)
+            X_ZUL = berechne_feuchte_nach_kuehler(T_KUL, X_WRG)
+            print(t, 'T_K:',T_KUL,'T_wrg:',T_WRG,'Zähler:',m_KUL * params["c_WAS"] * config["kuehler"]["T_DIF_KUL"],'Nenner:', params["c_LUF"] * m_LUF)
+            T_ZUL = T_KUL
+            # Erhitzen nach dem Entfeuchen
+            m_ERH_roh = regler_ERH.update(T_SOL_ZUL, T_ZUL_prev)     #Heizen
+            # Totzone anwenden
+            if abs(m_ERH_roh) < TOTZONE:
+                m_ERH_roh = 0.0
+            # Totzeit-Puffer aktualisieren
+            m_ERH_puffer.append(m_ERH_roh)
+            m_ERH = m_ERH_puffer.pop(0)
+            T_ERH = T_WRG + (m_ERH * params["c_WAS"] * config["erhitzer"]["T_DIF_ERH"]) / (params["c_LUF"] * m_LUF)
+            T_ZUL = T_ERH
+
+
 
     m_LUF_prev = m_LUF  # Speichert den aktuellen Wert für den nächsten Durchlauf
-
+    T_ZUL_prev = T_ZUL
     # Raumtemperatur aktualisieren
     E_QIN = Q_IN * dt  # Energie in Joule, die im Zeitschritt zugeführt wird
     delta_T_QIN = E_QIN / C_Raum  # Temperaturerhöhung in Kelvin (bzw. °C)
