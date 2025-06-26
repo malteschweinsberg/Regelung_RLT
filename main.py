@@ -7,6 +7,23 @@ from visualisation import Visualisierung
 with open("config.json") as f:
     config = json.load(f)
 
+def enthalpie_luft_joule(temperatur, rel_feuchte = 35, druck=1013.25):
+    """
+    Berechnet die spezifische Enthalpie der feuchten Luft (in J/kg).
+    temperatur: Temperatur in °C
+    rel_feuchte: Relative Feuchte in %
+    druck: Luftdruck in hPa (Standard: 1013.25 hPa)
+    """
+    # Sättigungsdampfdruck nach Magnus-Formel
+    es = 6.1078 * 10 ** ((7.5 * temperatur) / (temperatur + 237.3))  # hPa
+    # Dampfdruck
+    e = es * rel_feuchte / 100.0
+    # Wasserdampfgehalt (Mischungsverhältnis, Näherung)
+    x = 0.622 * e / (druck - e)
+    # Spezifische Enthalpie (J/kg)
+    h = (1.006 * temperatur + x * (2501 + 1.86 * temperatur)) * 1000  # Umrechnung in J/kg
+    return h
+
 # Simulationseinstellungen
 t_sp = config["simulation"]["t_sp"]             # Geschwindigkeit der Simulation
 dt = 0.1 / t_sp                                 # Reale Zeit pro Simulationsschritt
@@ -25,9 +42,7 @@ m_ERH = m_KUL = 0
 i = 0
 
 # Berechnen der Wärmekapazität
-rho = 1.2  # kg/m³
-c_LUF = 1005  # Ws/(kg·K)
-C_Raum = rho * V_R * c_LUF  # Ws/K
+C_Raum = 15*3600*V_R  # J/K
 Q_IN = config["raum"]["Q_IN"]  # W
 
 # Totzeit und Totzone Parameter
@@ -37,9 +52,9 @@ m_ERH_puffer = [0.0] * TOTZEIT_SCHRITTE # Puffer für Totzeit (FIFO-Listen)
 m_KUL_puffer = [0.0] * TOTZEIT_SCHRITTE # Puffer für Totzeit (FIFO-Listen)
 
 # Regler
-regler_T_ZUL = PIRegler(0.5, 0.3, dt)
-regler_ERH = PIRegler(0.001, 0.004, dt)
-regler_KUL = PIRegler(0.001, 0.004, dt)
+regler_T_ZUL = PIRegler(0.4, 0.2, dt)
+regler_ERH = PIRegler(0.008, 0.003, dt)
+regler_KUL = PIRegler(0.008, 0.003, dt)
 
 # WRG Logik
 def berechne_WRG(T_AUL, T_ABL, T_SOL_R):
@@ -47,7 +62,7 @@ def berechne_WRG(T_AUL, T_ABL, T_SOL_R):
 
 vis = Visualisierung()
 
-for t in range(0, 25000):  # Simulationszeitraum
+for t in range(0, 15000):  # Simulationszeitraum
 
     # Simulation Außentemperatur/Raumlast
     if i == 60:
@@ -84,10 +99,10 @@ for t in range(0, 25000):  # Simulationszeitraum
 
     # Regelung T_ZUL
     dT_RA_SOL = abs(T_SOL_R - T_R)
-    if dT_RA_SOL > 0.02:
+    if dT_RA_SOL > 0.2:
 
         T_SOL_ZUL =  regler_T_ZUL.update(T_SOL_R, T_R)
-        dTZUL = T_SOL_ZUL - T_WRG
+        dTZUL = T_SOL_ZUL - T_ZUL
 
         # Steuerung Ventilator
         if 15 <= T_SOL_ZUL <= 24:
@@ -109,6 +124,7 @@ for t in range(0, 25000):  # Simulationszeitraum
         # Heizen oder Kühlen mit Totzeit und Totzone
         if dTZUL > 0:
             m_ERH_roh = regler_ERH.update(T_SOL_ZUL, T_ZUL)     #Heizen
+            regler_KUL.reset()
             # Totzone anwenden
             if abs(m_ERH_roh) < TOTZONE:
                 m_ERH_roh = 0.0
@@ -118,6 +134,7 @@ for t in range(0, 25000):  # Simulationszeitraum
             m_KUL = 0
         elif dTZUL < 0:
             m_KUL_roh = regler_KUL.update(T_ZUL, T_SOL_ZUL)     #Kühlen
+            regler_ERH.reset()
             # Totzone anwenden
             if abs(m_KUL_roh) < TOTZONE:
                 m_KUL_roh = 0.0
@@ -163,9 +180,10 @@ for t in range(0, 25000):  # Simulationszeitraum
     m_LUF_prev = m_LUF  # Speichert den aktuellen Wert für den nächsten Durchlauf
 
     # Raumtemperatur aktualisieren
-    E_QIN = Q_IN * dt  # Energie in Joule, die im Zeitschritt zugeführt wird
-    delta_T_QIN = E_QIN / C_Raum  # Temperaturerhöhung in Kelvin (bzw. °C)
-    T_R = (T_R * V_R + p_LUF * m_LUF * T_ZUL) / (V_R + p_LUF * m_LUF) + delta_T_QIN
+
+    h_ZUL = enthalpie_luft_joule(T_ZUL)
+    h_R = enthalpie_luft_joule(T_R)
+    T_R = T_R + dt/C_Raum * (Q_IN + m_LUF * h_ZUL - m_LUF * h_R)
     T_ABL = T_R
 
     print(t," T_SOL_ZUL: ", round(T_SOL_ZUL,3), " T_ZUL: ", round(T_ZUL,3), " T_R: ", round(T_R,3), " T_ABL: ", round(T_ABL,3))
