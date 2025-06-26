@@ -28,7 +28,7 @@ def enthalpie_luft_joule(temperatur, rel_feuchte = 35, druck=1013.25):
 def absolute_to_relative_humidity(T, abs_humidity, pressure=1013.25):
     es = 6.112 * math.exp((17.62 * T) / (243.12 + T)) # Sättigungsdampfdruck nach Sonntag-Formel (hPa)
     abs_max = 216.7 * (es / (T + 273.15)) # maximale absolute Feuchte (g/m³)
-    rel_humidity = (abs_humidity / abs_max) * 100 # relative Feuchte (%)
+    rel_humidity = (abs_humidity / abs_max)*10 # relative Feuchte (%)
     return rel_humidity
 
 def relative_to_absolute_humidity(T, rel_humidity, pressure=1013.25):
@@ -222,8 +222,9 @@ for t in range(0, 150):  # Simulationszeitraum
     X_ZUL_rel = absolute_to_relative_humidity(X_ZUL,T_ZUL)
     X_SOL_ZUL_rel = absolute_to_relative_humidity(X_SOL_ZUL,T_SOL_ZUL)
 
-    print(t," T_SOL_ZUL: ", round(T_SOL_ZUL,3), " T_ZUL: ", round(T_ZUL,3), " T_R: ", round(T_R,3), " T_ABL: ", round(T_ABL,3))
-    vis.add_data(t, T_SOL_R, T_R, T_ZUL, T_SOL_ZUL, T_WRG, m_ERH, m_KUL, m_LUF, X_R_rel,  config["raum"]["X_R_init"], X_SOL_ZUL_rel, X_ZUL_rel)
+    #print(t," T_SOL_ZUL: ", round(T_SOL_ZUL,3), " T_ZUL: ", round(T_ZUL,3), " T_R: ", round(T_R,3), " T_ABL: ", round(T_ABL,3))
+    print( X_R_rel,  config["simulation"]["X_SOL_R"], X_SOL_ZUL_rel, X_ZUL_rel)
+    vis.add_data(t, T_SOL_R, T_R, T_ZUL, T_SOL_ZUL, T_WRG, m_ERH, m_KUL, m_LUF, X_R_rel,  config["simulation"]["X_SOL_R"], X_SOL_ZUL_rel, X_ZUL_rel)
     time.sleep(dt)
 
 vis.plot()
