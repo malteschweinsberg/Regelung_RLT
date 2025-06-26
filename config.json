@@ -2,13 +2,18 @@
   "simulation": {
     "t_sp": 60,
     "T_AUL": 10,
-    "T_SOL_R": 21
+    "X_AUL": 30,
+    "T_SOL_R": 21,
+    "X_SOL_R": 50
   },
   "waermetauscher": {
     "n_WRG": 0.7
   },
   "erhitzer": {
     "T_DIF_ERH": 10
+  },
+  "befeuchter": {
+    "n_BFT": 0.8
   },
   "kuehler": {
     "T_DIF_KUL": 5
@@ -27,8 +32,8 @@
   "raum": {
     "V_R": 1000.0,
     "T_R_init": 15.0,
+    "X_R_init": 30.0,
     "Q_IN": 500
 
   }
 }
-
