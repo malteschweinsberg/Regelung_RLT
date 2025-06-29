@@ -39,7 +39,7 @@ def relative_to_absolute_humidity(T, rel_humidity, pressure=1013.25):
 
 # Simulationseinstellungen
 t_sp = config["simulation"]["t_sp"]             # Geschwindigkeit der Simulation
-dt = 1 / t_sp                                 # Reale Zeit pro Simulationsschritt
+dt = 0.1 / t_sp                                 # Reale Zeit pro Simulationsschritt
 
 # Initialwerte
 T_AUL = config["simulation"]["T_AUL"]           # Außenlufttemperatur
