@@ -61,7 +61,7 @@ m_ERH = m_KUL = 0
 i = 0
 print("X_AUL: ",X_AUL," X_R: ",X_R," X_SOL_R: ",X_SOL_R)
 # Berechnen der Wärmekapazität
-C_Raum = 15*3600*V_R  # J/K
+C_Raum = 15*V_R  # J/K
 Q_IN = config["raum"]["Q_IN"]  # W
 
 # Totzeit und Totzone Parameter
@@ -71,7 +71,7 @@ m_ERH_puffer = [0.0] * TOTZEIT_SCHRITTE # Puffer für Totzeit (FIFO-Listen)
 m_KUL_puffer = [0.0] * TOTZEIT_SCHRITTE # Puffer für Totzeit (FIFO-Listen)
 
 # Regler
-regler_X_ZUL = PIRegler(0.001, 0.004, dt)
+regler_X_ZUL = PIRegler(0.1, 0.2, dt)
 regler_BFT = PIRegler(0.001, 0.004, dt)
 regler_T_ZUL = PIRegler(0.4, 0.2, dt)
 regler_ERH = PIRegler(0.008, 0.003, dt)
@@ -83,7 +83,7 @@ def berechne_WRG(T_AUL, T_ABL, T_SOL_R):
 
 vis = Visualisierung()
 
-for t in range(0, 150):  # Simulationszeitraum
+for t in range(0, 5000):  # Simulationszeitraum
 
     # Simulation Außentemperatur/Raumlast
     if i == 60:
@@ -206,7 +206,7 @@ for t in range(0, 150):  # Simulationszeitraum
         X_SOL_ZUL =  regler_X_ZUL.update(X_SOL_R, X_R)
         dX_ZUL = X_SOL_ZUL - X_ZUL
         if dX_ZUL > 0:
-            m_BFT = regler_BFT.update(X_SOL_ZUL, X_AUL)
+            m_BFT = regler_BFT.update(X_SOL_ZUL, X_ZUL)
             X_ZUL = X_AUL + m_BFT * n_BFT
 
     m_LUF_prev = m_LUF  # Speichert den aktuellen Wert für den nächsten Durchlauf
