@@ -14,7 +14,7 @@ def berechne_WRG(T_AUL, T_ABL, T_SOL_R):
 def absolute_to_relative_humidity(T, abs_humidity, pressure=1013.25):
     es = 6.112 * math.exp((17.62 * T) / (243.12 + T)) # Sättigungsdampfdruck nach Sonntag-Formel (hPa)
     abs_max = 216.7 * (es / (T + 273.15)) # maximale absolute Feuchte (g/m³)
-    rel_humidity = (abs_humidity / abs_max) * 100 # relative Feuchte (%)
+    rel_humidity = (abs_humidity / abs_max) * 10 # relative Feuchte (%)
     return rel_humidity
 
 def relative_to_absolute_humidity(T, rel_humidity, pressure=1013.25):
@@ -67,7 +67,7 @@ regler_KUL = PIRegler(0.001, 0.004, dt)
 
 vis = Visualisierung()
 
-for t in range(0, 10000):  # Simulationszeitraum
+for t in range(0, 1000):  # Simulationszeitraum
 
     # Simulation Außentemperatur/Raumlast (feuchte Fehlt)
     if i == 60:
@@ -183,6 +183,7 @@ for t in range(0, 10000):  # Simulationszeitraum
     X_WRG = X_AUL
     if dX_R >0.1:
         X_SOL_ZUL =  regler_X_ZUL.update(X_SOL_R, X_R)
+        print(t, " X_SOL_R: ", round(X_SOL_R, 3), " X_R: ", round(X_R, 3), " X_SOl_ZUL: ", round(X_SOL_ZUL, 3))
         dX_ZUL = X_SOL_ZUL - X_ZUL
         if dX_ZUL > 0:
             m_BFT = regler_BFT.update(X_SOL_ZUL, X_AUL)
@@ -197,10 +198,12 @@ for t in range(0, 10000):  # Simulationszeitraum
     X_R = (V_R * X_R + p_LUF * m_LUF * X_ZUL) / (V_R + p_LUF * m_LUF)
     X_R_rel = absolute_to_relative_humidity(X_R,T_R)
     X_ZUL_rel = absolute_to_relative_humidity(X_ZUL,T_ZUL)
-    X_SOL_ZUL_rel = absolute_to_relative_humidity(X_SOL_ZUL,T_SOL_ZUL)
+    X_SOL_ZUL_rel = absolute_to_relative_humidity(X_SOL_ZUL,T_ZUL)
     T_ABL = T_R
 
-    #print(t," T_SOL_ZUL: ", round(T_SOL_ZUL,3), " T_ZUL: ", round(T_ZUL,3), " T_R: ", round(T_R,3), " T_ABL: ", round(T_ABL,3))
+    #print(t," T_SOL_ZUL: ", round(T_SOL_ZUL,3), " T_ZUL: ", round(T_ZUL,3), " T_R: ", round(T_R,3))
+    print(t, " X_SOL_ZUL: ", round(X_SOL_ZUL, 3), " X_ZUL: ", round(X_ZUL, 3), " X_R: ", round(X_R, 3))
+    #print(t, " X_SOL_ZUL_rel: ", round(X_SOL_ZUL_rel, 3), " X_ZUL_rel: ", round(X_ZUL_rel, 3), " X_R_rel: ", round(X_R_rel, 3))
     vis.add_data(t, T_SOL_R, T_R, T_ZUL, T_SOL_ZUL, T_WRG, m_ERH, m_KUL, m_LUF, X_R, X_SOL_R, X_SOL_ZUL, X_ZUL)
     time.sleep(dt)
 
