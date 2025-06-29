@@ -50,13 +50,13 @@ V_R = config["raum"]["V_R"]                     # Raumvolumen
 T_R = config["raum"]["T_R_init"]                # Anfangs-Raumtemperatur
 X_ABL = X_R = relative_to_absolute_humidity(T_R, config["raum"]["X_R_init"] )               # Anfangs-Raumfeuchte
 p_LUF = config["physik"]["p_LUF"]
-T_ZUL = T_WRG = T_ERH = T_KUL = T_AUL
+T_ZUL = T_WRG = T_TEP = T_AUL
 X_ZUL = X_WRG = X_BFT = X_AUL
 T_ABL = T_R  # Abluft = Raumtemperatur
 m_LUF = config["ventilator"]["m_LUF_min"]
 m_LUF_prev = m_LUF  # Initialisiert mit dem Startwert m_LUF_min
 n_BFT = config["befeuchter"]["n_BFT"]
-m_ERH = m_KUL = 0
+m_TEP = 0
 i = 0
 print("X_AUL: ",X_AUL," X_R: ",X_R," X_SOL_R: ",X_SOL_R)
 # Berechnen der Wärmekapazität
@@ -65,7 +65,7 @@ Q_IN = config["raum"]["Q_IN"]  # W
 
 # Totzeit und Totzone Parameter
 TOTZEIT_SCHRITTE = 0     # z.B. 5 Simulationsschritte Verzögerung
-TOTZONE = 0.0           # z.B. 5% Totzone (anpassen je nach Reglerausgabe)
+TOTZONE = 0.05           # z.B. 5% Totzone (anpassen je nach Reglerausgabe)
 m_TEP_puffer = [0.0] * TOTZEIT_SCHRITTE # Puffer für Totzeit (FIFO-Listen)
 
 
@@ -73,7 +73,7 @@ m_TEP_puffer = [0.0] * TOTZEIT_SCHRITTE # Puffer für Totzeit (FIFO-Listen)
 regler_X_ZUL = PIRegler(0.01, 0.04, dt)
 regler_BFT = PIRegler(0.001, 0.004, dt)
 regler_T_ZUL = PIRegler(0.4, 0.2, dt)
-regler_TEP = PIRegler(0.04, 0.00, dt)
+regler_TEP = PIRegler(0.008, 0.003, dt)
 
 
 # WRG Logik
@@ -82,7 +82,7 @@ def berechne_WRG(T_AUL, T_ABL, T_SOL_R):
 
 vis = Visualisierung()
 
-for t in range(0, 1000):  # Simulationszeitraum
+for t in range(0, 25000):  # Simulationszeitraum
 
     # Simulation Außentemperatur/Raumlast
     if i == 60:
@@ -103,7 +103,7 @@ for t in range(0, 1000):  # Simulationszeitraum
             Q_IN = 1000
         i = 0
     else:
-        i = i
+        i = i + 1
 
 
     # WRG aktiv?
@@ -123,8 +123,7 @@ for t in range(0, 1000):  # Simulationszeitraum
     # Regelung T_ZUL
 
 
-    #T_SOL_ZUL =  regler_T_ZUL.update(T_SOL_R, T_R)
-    T_SOL_ZUL=23
+    T_SOL_ZUL =  regler_T_ZUL.update(T_SOL_R, T_R)
     X_SOL_ZUL = regler_X_ZUL.update(X_SOL_R, X_R)
 
     # Steuerung Ventilator
@@ -157,7 +156,7 @@ for t in range(0, 1000):  # Simulationszeitraum
     dT_RA_SOL = abs(T_SOL_R - T_R)
 
 
-    if dT_RA_SOL > 0:
+    if dT_RA_SOL > 0.2:
         dTZUL = T_SOL_ZUL - T_ZUL
         # Heizen oder Kühlen mit Totzeit und Totzone
         m_TEP_roh = regler_TEP.update(T_SOL_ZUL, T_ZUL)

@@ -1,7 +1,7 @@
 {
   "simulation": {
     "t_sp": 60,
-    "T_AUL": 20,
+    "T_AUL": 30,
     "X_AUL": 30,
     "T_SOL_R": 21,
     "X_SOL_R": 50
@@ -11,7 +11,7 @@
     "nx_WRG": 0.2
   },
   "erhitzer": {
-    "T_DIF_ERH": 10
+    "T_DIF_ERH": 7
   },
   "befeuchter": {
     "n_BFT": 0.8
@@ -32,7 +32,7 @@
     },
   "raum": {
     "V_R": 1000.0,
-    "T_R_init": 15.0,
+    "T_R_init": 25.0,
     "X_R_init": 30.0,
     "Q_IN": 500
 
