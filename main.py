@@ -39,7 +39,7 @@ def relative_to_absolute_humidity(T, rel_humidity, pressure=1013.25):
 
 # Simulationseinstellungen
 t_sp = config["simulation"]["t_sp"]             # Geschwindigkeit der Simulation
-dt = 0.1 / t_sp                                 # Reale Zeit pro Simulationsschritt
+dt = 1 / t_sp                                 # Reale Zeit pro Simulationsschritt
 
 # Initialwerte
 T_AUL = config["simulation"]["T_AUL"]           # Außenlufttemperatur
@@ -73,7 +73,7 @@ m_TEP_puffer = [0.0] * TOTZEIT_SCHRITTE # Puffer für Totzeit (FIFO-Listen)
 regler_X_ZUL = PIRegler(0.01, 0.04, dt)
 regler_BFT = PIRegler(0.001, 0.004, dt)
 regler_T_ZUL = PIRegler(0.4, 0.2, dt)
-regler_TEP = PIRegler(0.008, 0.003, dt)
+regler_TEP = PIRegler(0.005, 0.02, dt)
 
 
 # WRG Logik
@@ -127,7 +127,7 @@ for t in range(0, 25000):  # Simulationszeitraum
     X_SOL_ZUL = regler_X_ZUL.update(X_SOL_R, X_R)
 
     # Steuerung Ventilator
-    if T_SOL_ZUL not in range(15,24) or X_SOL_ZUL not in range(6,12) :
+    if (X_SOL_ZUL not in range(6,12)) or (T_SOL_ZUL not in range(15,24) )  :
         if T_SOL_ZUL not in range(15,24):
             dT_RA = abs(T_SOL_R - T_R)
             dT_RA_w = dT_RA * config["ventilator"]["q_w_T"]
@@ -150,9 +150,9 @@ for t in range(0, 25000):  # Simulationszeitraum
         if d_max <= 0.1:
             m_LUF = config["ventilator"]["m_LUF_min"]
         elif d_max >= 2:
-            m_LUF = config["ventilator"]["m_LUF_min"]
+            m_LUF = config["ventilator"]["m_LUF_max"]
         elif 0.1 < d_max < 2:
-            m_LUF = config["ventilator"]["m_LUF_min"] + (dT_RA_w - 0.1) / (2-0.1) * (config["ventilator"]["m_LUF_min"] - config["ventilator"]["m_LUF_min"])
+            m_LUF = config["ventilator"]["m_LUF_min"] + (dT_RA_w - 0.1) / (2-0.1) * (config["ventilator"]["m_LUF_max"] - config["ventilator"]["m_LUF_min"])
     dT_RA_SOL = abs(T_SOL_R - T_R)
 
 
