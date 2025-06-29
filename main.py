@@ -66,15 +66,15 @@ Q_IN = config["raum"]["Q_IN"]  # W
 # Totzeit und Totzone Parameter
 TOTZEIT_SCHRITTE = 0     # z.B. 5 Simulationsschritte Verzögerung
 TOTZONE = 0.05           # z.B. 5% Totzone (anpassen je nach Reglerausgabe)
-m_ERH_puffer = [0.0] * TOTZEIT_SCHRITTE # Puffer für Totzeit (FIFO-Listen)
-m_KUL_puffer = [0.0] * TOTZEIT_SCHRITTE # Puffer für Totzeit (FIFO-Listen)
+m_TEP_puffer = [0.0] * TOTZEIT_SCHRITTE # Puffer für Totzeit (FIFO-Listen)
+
 
 # Regler
 regler_X_ZUL = PIRegler(0.01, 0.04, dt)
 regler_BFT = PIRegler(0.001, 0.004, dt)
 regler_T_ZUL = PIRegler(0.4, 0.2, dt)
-regler_ERH = PIRegler(0.008, 0.003, dt)
-regler_KUL = PIRegler(0.008, 0.003, dt)
+regler_TEP = PIRegler(0.006, 0.00, dt)
+
 
 # WRG Logik
 def berechne_WRG(T_AUL, T_ABL, T_SOL_R):
@@ -82,7 +82,7 @@ def berechne_WRG(T_AUL, T_ABL, T_SOL_R):
 
 vis = Visualisierung()
 
-for t in range(0, 5000):  # Simulationszeitraum
+for t in range(0, 1000):  # Simulationszeitraum
 
     # Simulation Außentemperatur/Raumlast
     if i == 60:
@@ -115,14 +115,16 @@ for t in range(0, 5000):  # Simulationszeitraum
             T_WRG = T_AUL + nt_WRG * (T_ABL - T_AUL)
             X_WRG = X_AUL + nx_WRG * (X_ABL - X_AUL)
         else:
-            T_WRG = T_AUL - n_WRG * (T_AUL - T_ABL)
+            T_WRG = T_AUL - nt_WRG * (T_AUL - T_ABL)
+            X_WRG = X_AUL + nx_WRG * (X_ABL - X_AUL)
     else:
         T_WRG = T_AUL
 
     # Regelung T_ZUL
 
 
-    T_SOL_ZUL =  regler_T_ZUL.update(T_SOL_R, T_R)
+    #T_SOL_ZUL =  regler_T_ZUL.update(T_SOL_R, T_R)
+    T_SOL_ZUL=23
     X_SOL_ZUL = regler_X_ZUL.update(X_SOL_R, X_R)
 
     # Steuerung Ventilator
@@ -149,75 +151,24 @@ for t in range(0, 5000):  # Simulationszeitraum
         if d_max <= 0.1:
             m_LUF = config["ventilator"]["m_LUF_min"]
         elif d_max >= 2:
-            m_LUF = config["ventilator"]["m_LUF_max"]
+            m_LUF = config["ventilator"]["m_LUF_min"]
         elif 0.1 < d_max < 2:
-            m_LUF = config["ventilator"]["m_LUF_min"] + (dT_RA_w - 0.1) / (2-0.1) * (config["ventilator"]["m_LUF_max"] - config["ventilator"]["m_LUF_min"])
-        if T_SOL_ZUL < 15:
-            T_SOL_ZUL = 15
-        elif T_SOL_ZUL > 24:
-            T_SOL_ZUL = 24
+            m_LUF = config["ventilator"]["m_LUF_min"] + (dT_RA_w - 0.1) / (2-0.1) * (config["ventilator"]["m_LUF_min"] - config["ventilator"]["m_LUF_min"])
     dT_RA_SOL = abs(T_SOL_R - T_R)
 
 
     if dT_RA_SOL > 0.2:
         dTZUL = T_SOL_ZUL - T_ZUL
         # Heizen oder Kühlen mit Totzeit und Totzone
-        if dTZUL > 0:
-            m_ERH_roh = regler_ERH.update(T_SOL_ZUL, T_ZUL)     #Heizen
-            m_KUL_roh = regler_KUL.update(T_ZUL, T_SOL_ZUL)
-            #regler_KUL.reset()
-            # Totzone anwenden
-            if abs(m_ERH_roh) < TOTZONE:
-                m_ERH_roh = 0.0
-            # Totzeit-Puffer aktualisieren
-            m_ERH_puffer.append(m_ERH_roh)
-            m_ERH = m_ERH_puffer.pop(0)
-            m_KUL = 0
-        elif dTZUL < 0:
-            m_KUL_roh = regler_KUL.update(T_ZUL, T_SOL_ZUL)     #Kühlen
-            m_ERH_roh = regler_ERH.update(T_SOL_ZUL, T_ZUL)
-            #regler_ERH.reset()
-            # Totzone anwenden
-            if abs(m_KUL_roh) < TOTZONE:
-                m_KUL_roh = 0.0
-            # Totzeit-Puffer aktualisieren
-            m_KUL_puffer.append(m_KUL_roh)
-            m_KUL = m_KUL_puffer.pop(0)
-            m_ERH = 0
-        else:
-            m_ERH = m_ERH
-            m_KUL = m_KUL
-
-        # Temperaturberechnung Erhitzer/Kühler
-        if m_ERH > 0:
-            params = config["physik"]
-            T_ERH = T_WRG + (m_ERH * params["c_WAS"] * config["erhitzer"]["T_DIF_ERH"]) / (params["c_LUF"] * m_LUF)
-            T_ZUL = T_ERH
-
-        elif m_KUL > 0:
-            params = config["physik"]
-            T_KUL = T_WRG - (m_KUL * params["c_WAS"] * config["kuehler"]["T_DIF_KUL"]) / (params["c_LUF"] * m_LUF)
-            T_ZUL = T_KUL
-        else:
-            T_ZUL = T_WRG
-
-        #Kontrolle Volumenstrom Luft
-        if 15 <= T_ZUL <= 24:
-            T_ZUL = T_ZUL
-        else:
-            m_LUF = m_LUF_prev  # Nutzt den gespeicherten Wert des letzten Durchlaufs
-
-            if m_ERH > 0:
-                params = config["physik"]
-                T_ERH = T_WRG + (m_ERH * params["c_WAS"] * config["erhitzer"]["T_DIF_ERH"]) / (params["c_LUF"] * m_LUF)
-                T_ZUL = T_ERH
-
-            elif m_KUL > 0:
-                params = config["physik"]
-                T_KUL = T_WRG - (m_KUL * params["c_WAS"] * config["kuehler"]["T_DIF_KUL"]) / (params["c_LUF"] * m_LUF)
-                T_ZUL = T_KUL
-            else:
-                T_ZUL = T_WRG
+        m_TEP_roh = regler_TEP.update(T_SOL_ZUL, T_ZUL)
+        # Totzone anwenden
+        if abs(m_TEP_roh) < TOTZONE:
+            m_TEP_roh = 0.0
+        # Totzeit-Puffer aktualisieren
+        m_TEP_puffer.append(m_TEP_roh)
+        m_TEP = m_TEP_puffer.pop(0)
+        params = config["physik"]
+        T_ZUL = T_WRG + (m_TEP * params["c_WAS"] * config["erhitzer"]["T_DIF_ERH"]) / (params["c_LUF"] * m_LUF)
 
     dX_R = abs(X_SOL_R - X_R)
 
@@ -242,7 +193,7 @@ for t in range(0, 5000):  # Simulationszeitraum
     print(t, 'X_R', round(X_R,3), 'm_Luf', round(m_LUF,3),'dt', round(dt,3) , 'x_r', round(X_R,3), 'v_r', V_R ,'x_r*v_R', round(X_R * V_R,3),'X_ZUL',round(X_ZUL,3), 'X_R',round(X_R,3))
     print(t, 'X_R', round(X_R, 3), 'm_Luf *dt ', round(m_LUF *dt, 3),'x_r*v_R', round(X_R * V_R, 3), 'X_ZUL-x_R', round(X_ZUL-X_R, 3))
     #print(t," T_SOL_ZUL: ", round(T_SOL_ZUL,3), " T_ZUL: ", round(T_ZUL,3), " T_R: ", round(T_R,3), " T_ABL: ", round(T_ABL,3))
-    vis.add_data(t, T_SOL_R, T_R, T_ZUL, T_SOL_ZUL, T_WRG, m_ERH, m_KUL, m_LUF, X_R,  X_SOL_R, X_SOL_ZUL, X_ZUL)
+    vis.add_data(t, T_SOL_R, T_R, T_ZUL, T_SOL_ZUL, T_WRG, m_TEP, m_LUF, X_R,  X_SOL_R, X_SOL_ZUL, X_ZUL)
     time.sleep(dt)
 
 vis.plot()

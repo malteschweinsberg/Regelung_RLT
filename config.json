@@ -1,7 +1,7 @@
 {
   "simulation": {
     "t_sp": 60,
-    "T_AUL": 10,
+    "T_AUL": 20,
     "X_AUL": 30,
     "T_SOL_R": 21,
     "X_SOL_R": 50
