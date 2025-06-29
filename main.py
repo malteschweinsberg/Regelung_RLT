@@ -28,7 +28,7 @@ def enthalpie_luft_joule(temperatur, rel_feuchte = 35, druck=1013.25):
 def absolute_to_relative_humidity(T, abs_humidity, pressure=1013.25):
     es = 6.112 * math.exp((17.62 * T) / (243.12 + T)) # Sättigungsdampfdruck nach Sonntag-Formel (hPa)
     abs_max = 216.7 * (es / (T + 273.15)) # maximale absolute Feuchte (g/m³)
-    rel_humidity = (abs_humidity / abs_max)*10 # relative Feuchte (%)
+    rel_humidity = (abs_humidity / abs_max) * 10 # relative Feuchte (%)
     return rel_humidity
 
 def relative_to_absolute_humidity(T, rel_humidity, pressure=1013.25):
@@ -48,14 +48,13 @@ T_SOL_R = config["simulation"]["T_SOL_R"]       # Ziel-Raumtemperatur
 X_SOL_R = relative_to_absolute_humidity(T_SOL_R, config["simulation"]["X_SOL_R"] )      # Ziel-Raumfeuchte
 V_R = config["raum"]["V_R"]                     # Raumvolumen
 T_R = config["raum"]["T_R_init"]                # Anfangs-Raumtemperatur
-X_R = relative_to_absolute_humidity(T_R, config["raum"]["X_R_init"] )               # Anfangs-Raumfeuchte
+X_ABL = X_R = relative_to_absolute_humidity(T_R, config["raum"]["X_R_init"] )               # Anfangs-Raumfeuchte
 p_LUF = config["physik"]["p_LUF"]
 T_ZUL = T_WRG = T_ERH = T_KUL = T_AUL
 X_ZUL = X_WRG = X_BFT = X_AUL
 T_ABL = T_R  # Abluft = Raumtemperatur
 m_LUF = config["ventilator"]["m_LUF_min"]
 m_LUF_prev = m_LUF  # Initialisiert mit dem Startwert m_LUF_min
-n_WRG = config["waermetauscher"]["n_WRG"]
 n_BFT = config["befeuchter"]["n_BFT"]
 m_ERH = m_KUL = 0
 i = 0
@@ -71,7 +70,7 @@ m_ERH_puffer = [0.0] * TOTZEIT_SCHRITTE # Puffer für Totzeit (FIFO-Listen)
 m_KUL_puffer = [0.0] * TOTZEIT_SCHRITTE # Puffer für Totzeit (FIFO-Listen)
 
 # Regler
-regler_X_ZUL = PIRegler(0.1, 0.2, dt)
+regler_X_ZUL = PIRegler(0.01, 0.04, dt)
 regler_BFT = PIRegler(0.001, 0.004, dt)
 regler_T_ZUL = PIRegler(0.4, 0.2, dt)
 regler_ERH = PIRegler(0.008, 0.003, dt)
@@ -110,42 +109,63 @@ for t in range(0, 5000):  # Simulationszeitraum
     # WRG aktiv?
     wrg_on = berechne_WRG(T_AUL, T_ABL, T_SOL_R)
     if wrg_on:
-        n_WRG = config["waermetauscher"]["n_WRG"]
+        nt_WRG = config["waermetauscher"]["nt_WRG"]
+        nx_WRG = config["waermetauscher"]["nx_WRG"]
         if T_AUL < T_ABL:
-            T_WRG = T_AUL + n_WRG * (T_ABL - T_AUL)
+            T_WRG = T_AUL + nt_WRG * (T_ABL - T_AUL)
+            X_WRG = X_AUL + nx_WRG * (X_ABL - X_AUL)
         else:
             T_WRG = T_AUL - n_WRG * (T_AUL - T_ABL)
     else:
         T_WRG = T_AUL
 
     # Regelung T_ZUL
-    dT_RA_SOL = abs(T_SOL_R - T_R)
-    if dT_RA_SOL > 0.2:
 
-        T_SOL_ZUL =  regler_T_ZUL.update(T_SOL_R, T_R)
-        dTZUL = T_SOL_ZUL - T_ZUL
 
-        # Steuerung Ventilator
-        if 15 <= T_SOL_ZUL <= 24:
-            T_SOL_ZUL = T_SOL_ZUL
-        else:
+    T_SOL_ZUL =  regler_T_ZUL.update(T_SOL_R, T_R)
+    X_SOL_ZUL = regler_X_ZUL.update(X_SOL_R, X_R)
+
+    # Steuerung Ventilator
+    if T_SOL_ZUL not in range(15,24) or X_SOL_ZUL not in range(6,12) :
+        if T_SOL_ZUL not in range(15,24):
             dT_RA = abs(T_SOL_R - T_R)
             dT_RA_w = dT_RA * config["ventilator"]["q_w_T"]
-            if dT_RA_w <= 0.1:
-                m_LUF = config["ventilator"]["m_LUF_min"]
-            elif dT_RA_w >= 2:
-                m_LUF = config["ventilator"]["m_LUF_max"]
-            elif 0.1 < dT_RA_w < 2:
-                m_LUF = config["ventilator"]["m_LUF_min"] + (dT_RA_w - 0.1) / (2-0.1) * (config["ventilator"]["m_LUF_max"] - config["ventilator"]["m_LUF_min"])
             if T_SOL_ZUL < 15:
                 T_SOL_ZUL = 15
             elif T_SOL_ZUL > 24:
                 T_SOL_ZUL = 24
+        else:
+            dT_RA_w = 0
+        if X_SOL_ZUL not in range(6, 12):
+            dX_RA = abs(X_SOL_R - X_R)
+            dX_RA_w = dX_RA * config["ventilator"]["q_w_X"]
+            if X_SOL_ZUL < 6:
+                X_SOL_ZUL = 6
+            elif X_SOL_ZUL > 12:
+                X_SOL_ZUL = 12
+        else:
+            dX_RA_w = 0
+        d_max = max(dT_RA_w, dX_RA_w)
+        if d_max <= 0.1:
+            m_LUF = config["ventilator"]["m_LUF_min"]
+        elif d_max >= 2:
+            m_LUF = config["ventilator"]["m_LUF_max"]
+        elif 0.1 < d_max < 2:
+            m_LUF = config["ventilator"]["m_LUF_min"] + (dT_RA_w - 0.1) / (2-0.1) * (config["ventilator"]["m_LUF_max"] - config["ventilator"]["m_LUF_min"])
+        if T_SOL_ZUL < 15:
+            T_SOL_ZUL = 15
+        elif T_SOL_ZUL > 24:
+            T_SOL_ZUL = 24
+    dT_RA_SOL = abs(T_SOL_R - T_R)
 
+
+    if dT_RA_SOL > 0.2:
+        dTZUL = T_SOL_ZUL - T_ZUL
         # Heizen oder Kühlen mit Totzeit und Totzone
         if dTZUL > 0:
             m_ERH_roh = regler_ERH.update(T_SOL_ZUL, T_ZUL)     #Heizen
-            regler_KUL.reset()
+            m_KUL_roh = regler_KUL.update(T_ZUL, T_SOL_ZUL)
+            #regler_KUL.reset()
             # Totzone anwenden
             if abs(m_ERH_roh) < TOTZONE:
                 m_ERH_roh = 0.0
@@ -155,7 +175,8 @@ for t in range(0, 5000):  # Simulationszeitraum
             m_KUL = 0
         elif dTZUL < 0:
             m_KUL_roh = regler_KUL.update(T_ZUL, T_SOL_ZUL)     #Kühlen
-            regler_ERH.reset()
+            m_ERH_roh = regler_ERH.update(T_SOL_ZUL, T_ZUL)
+            #regler_ERH.reset()
             # Totzone anwenden
             if abs(m_KUL_roh) < TOTZONE:
                 m_KUL_roh = 0.0
@@ -201,12 +222,12 @@ for t in range(0, 5000):  # Simulationszeitraum
     dX_R = abs(X_SOL_R - X_R)
 
     # Feuchte Regelung
-    X_WRG = X_AUL
     if dX_R >0.1:
-        X_SOL_ZUL =  regler_X_ZUL.update(X_SOL_R, X_R)
+
+        #print(t, " X_SOL_R: ", round(X_SOL_R, 3), " X_R: ", round(X_R, 3), " X_SOl_ZUL: ", round(X_SOL_ZUL, 3))
         dX_ZUL = X_SOL_ZUL - X_ZUL
         if dX_ZUL > 0:
-            m_BFT = regler_BFT.update(X_SOL_ZUL, X_ZUL)
+            m_BFT = regler_BFT.update(X_SOL_ZUL, X_AUL)
             X_ZUL = X_AUL + m_BFT * n_BFT
 
     m_LUF_prev = m_LUF  # Speichert den aktuellen Wert für den nächsten Durchlauf
@@ -217,14 +238,11 @@ for t in range(0, 5000):  # Simulationszeitraum
     h_R = enthalpie_luft_joule(T_R)
     T_R = T_R + dt/C_Raum * (Q_IN + m_LUF * h_ZUL - m_LUF * h_R)
     T_ABL = T_R
-    X_R = X_R + ((m_LUF * dt)/(X_R * V_R))*(X_ZUL - X_R)
-    X_R_rel = absolute_to_relative_humidity(X_R,T_R)
-    X_ZUL_rel = absolute_to_relative_humidity(X_ZUL,T_ZUL)
-    X_SOL_ZUL_rel = absolute_to_relative_humidity(X_SOL_ZUL,T_SOL_ZUL)
-
+    X_R = X_R + ((m_LUF * 1.2 * dt)/(V_R * 1.2))*(X_ZUL - X_R)
+    print(t, 'X_R', round(X_R,3), 'm_Luf', round(m_LUF,3),'dt', round(dt,3) , 'x_r', round(X_R,3), 'v_r', V_R ,'x_r*v_R', round(X_R * V_R,3),'X_ZUL',round(X_ZUL,3), 'X_R',round(X_R,3))
+    print(t, 'X_R', round(X_R, 3), 'm_Luf *dt ', round(m_LUF *dt, 3),'x_r*v_R', round(X_R * V_R, 3), 'X_ZUL-x_R', round(X_ZUL-X_R, 3))
     #print(t," T_SOL_ZUL: ", round(T_SOL_ZUL,3), " T_ZUL: ", round(T_ZUL,3), " T_R: ", round(T_R,3), " T_ABL: ", round(T_ABL,3))
-    print( X_R_rel,  config["simulation"]["X_SOL_R"], X_SOL_ZUL_rel, X_ZUL_rel)
-    vis.add_data(t, T_SOL_R, T_R, T_ZUL, T_SOL_ZUL, T_WRG, m_ERH, m_KUL, m_LUF, X_R_rel,  config["simulation"]["X_SOL_R"], X_SOL_ZUL_rel, X_ZUL_rel)
+    vis.add_data(t, T_SOL_R, T_R, T_ZUL, T_SOL_ZUL, T_WRG, m_ERH, m_KUL, m_LUF, X_R,  X_SOL_R, X_SOL_ZUL, X_ZUL)
     time.sleep(dt)
 
 vis.plot()
