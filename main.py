@@ -65,7 +65,7 @@ Q_IN = config["raum"]["Q_IN"]  # W
 
 # Totzeit und Totzone Parameter
 TOTZEIT_SCHRITTE = 0     # z.B. 5 Simulationsschritte Verzögerung
-TOTZONE = 0.05           # z.B. 5% Totzone (anpassen je nach Reglerausgabe)
+TOTZONE = 0.0           # z.B. 5% Totzone (anpassen je nach Reglerausgabe)
 m_TEP_puffer = [0.0] * TOTZEIT_SCHRITTE # Puffer für Totzeit (FIFO-Listen)
 
 
@@ -73,7 +73,7 @@ m_TEP_puffer = [0.0] * TOTZEIT_SCHRITTE # Puffer für Totzeit (FIFO-Listen)
 regler_X_ZUL = PIRegler(0.01, 0.04, dt)
 regler_BFT = PIRegler(0.001, 0.004, dt)
 regler_T_ZUL = PIRegler(0.4, 0.2, dt)
-regler_TEP = PIRegler(0.006, 0.00, dt)
+regler_TEP = PIRegler(0.04, 0.00, dt)
 
 
 # WRG Logik
@@ -103,7 +103,7 @@ for t in range(0, 1000):  # Simulationszeitraum
             Q_IN = 1000
         i = 0
     else:
-        i = i + 1
+        i = i
 
 
     # WRG aktiv?
@@ -157,7 +157,7 @@ for t in range(0, 1000):  # Simulationszeitraum
     dT_RA_SOL = abs(T_SOL_R - T_R)
 
 
-    if dT_RA_SOL > 0.2:
+    if dT_RA_SOL > 0:
         dTZUL = T_SOL_ZUL - T_ZUL
         # Heizen oder Kühlen mit Totzeit und Totzone
         m_TEP_roh = regler_TEP.update(T_SOL_ZUL, T_ZUL)
