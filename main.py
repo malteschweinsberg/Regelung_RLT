@@ -103,6 +103,13 @@ for t in range(0, config["simulation"]["schritte"]):
                 config["simulation"]["stoerung_T_AUL_max"]
             ), config["simulation"]["T_AUL_max"])
         )
+        X_AUL_AUL = max(
+            relative_to_absolute_humidity(T_AUL,config["simulation"]["X_AUL_min"]),
+            min(X_AUL + random.uniform(
+                relative_to_absolute_humidity(T_AUL,config["simulation"]["stoerung_X_AUL_min"]),
+                relative_to_absolute_humidity(T_AUL,config["simulation"]["stoerung_X_AUL_max"])
+            ), relative_to_absolute_humidity(T_AUL,config["simulation"]["X_AUL_max"]))
+        )
         Q_IN = max(
             config["simulation"]["Q_IN_min"],
             min(Q_IN + random.uniform(
@@ -196,6 +203,9 @@ for t in range(0, config["simulation"]["schritte"]):
     T_ABL = T_R
     rho_luft = config["physik"]["rho_luft"]
     X_R += (m_LUF * dt) / (V_R * rho_luft) * (X_ZUL - X_R)
+
+# Update Soll_Feuchte
+    X_SOL_R = relative_to_absolute_humidity(T_R, config["simulation"]["X_SOL_R"])
 
     if t % 10 == 0:  # Nur jede 10. Iteration, damit die Ausgabe übersichtlich bleibt
         print(

@@ -50,19 +50,19 @@ class Visualisierung:
         axs[1].grid(True, which='both', linestyle='--', alpha=0.5)
 
         # Luftfeuchte
-        axs[2].step(self.time, self.X_R, label="Relative Raumluftfeuchte", linewidth=1.2, where='post')
-        axs[2].step(self.time, self.X_Sol_R, label="Relative Soll Raumluftfeuchte", linewidth=1.2, where='post',
+        axs[2].step(self.time, self.X_R, label="Absolute Raumluftfeuchte", linewidth=1.2, where='post')
+        axs[2].step(self.time, self.X_Sol_R, label="Absolute Soll Raumluftfeuchte", linewidth=1.2, where='post',
                     linestyle='--')
-        axs[2].step(self.time, self.X_ZUL, label="Relative Zuluft Luftfeuchte", linewidth=1.2, where='post')
-        axs[2].step(self.time, self.X_ZUL_Soll, label="Relative soll Zuluft Luftfeuchte", linewidth=1.2, where='post',
+        axs[2].step(self.time, self.X_ZUL, label="Absolute Zuluftfeuchte", linewidth=1.2, where='post')
+        axs[2].step(self.time, self.X_ZUL_Soll, label="Absolute Soll Zuluftfeuchte", linewidth=1.2, where='post',
                     linestyle='--')
-        axs[2].set_ylabel("Luftfeuchte [%]", fontsize=12)
+        axs[2].set_ylabel("Luftfeuchte [g/kg]", fontsize=12)
         axs[2].legend(loc='upper right', fontsize=9)
         axs[2].grid(True, which='both', linestyle='--', alpha=0.5)
 
         # NEU: Luftvolumenstrom m_LUF
         axs[3].plot(self.time, self.m_LUF, label="Luftvolumenstrom", linewidth=1.2, color='tab:blue')
-        axs[3].set_ylabel("Volumenstrom [m³/h]", fontsize=12)
+        axs[3].set_ylabel("Volumenstrom [m³/s]", fontsize=12)
         axs[3].set_xlabel("Zeit [s]", fontsize=12)
         axs[3].legend(loc='upper right', fontsize=9)
         axs[3].grid(True, which='both', linestyle='--', alpha=0.5)

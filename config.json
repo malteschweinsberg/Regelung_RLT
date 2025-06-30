@@ -5,16 +5,20 @@
     "X_AUL": 60,
     "T_SOL_R": 21,
     "X_SOL_R": 50,
-    "schritte": 10000,
+    "schritte": 50000,
     "stoerung_intervall": 60,
     "stoerung_T_AUL_min": -0.5,
     "stoerung_T_AUL_max": 0.5,
+    "stoerung_X_AUL_min": -0.5,
+    "stoerung_X_AUL_max": 0.5,
     "stoerung_Q_IN_min": 50,
     "stoerung_Q_IN_max": 50,
     "Q_IN_min": 0,
     "Q_IN_max": 1000,
     "T_AUL_min": 10,
-    "T_AUL_max": 30
+    "T_AUL_max": 30,
+    "X_AUL_min": 30,
+    "X_AUL_max": 80
   },
   "waermetauscher": {
     "nt_WRG": 0.7,
