@@ -137,7 +137,7 @@ for t in range(0, config["simulation"]["schritte"]):
         X_WRG = X_AUL
 
 # Ventilatorsteuerung
-    T_SOL_ZUL = regler_T_ZUL.update(T_SOL_R, T_R)
+    T_SOL_ZUL = _T_ZUL.update(T_SOL_R, T_R)
     X_SOL_ZUL = regler_X_ZUL.update(X_SOL_R, X_R)
     T_min = config["schwellenwerte"]["T_ZUL_min"]
     T_max = config["schwellenwerte"]["T_ZUL_max"]
