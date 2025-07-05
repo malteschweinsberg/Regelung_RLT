@@ -119,7 +119,7 @@ for t in range(0, config["simulation"]["schritte"]):
         )
         i = 0
     else:
-        i += 1
+        i = 1
 
 # Wärmerückgewinnung
     wrg_on = berechne_WRG(T_AUL, T_ABL, T_SOL_R)
@@ -137,7 +137,7 @@ for t in range(0, config["simulation"]["schritte"]):
         X_WRG = X_AUL
 
 # Ventilatorsteuerung
-    T_SOL_ZUL = _T_ZUL.update(T_SOL_R, T_R)
+    T_SOL_ZUL = regler_T_ZUL.update(T_SOL_R, T_R)
     X_SOL_ZUL = regler_X_ZUL.update(X_SOL_R, X_R)
     T_min = config["schwellenwerte"]["T_ZUL_min"]
     T_max = config["schwellenwerte"]["T_ZUL_max"]
@@ -147,7 +147,7 @@ for t in range(0, config["simulation"]["schritte"]):
     dX_RA_SOL = abs(X_SOL_R - X_R)
 
     dT_RA_w = dX_RA_w = 0
-
+'''
     if dT_RA_SOL > config["schwellenwerte"]["dT_RA_SOL"] or dX_RA_SOL > config["schwellenwerte"]["dX_RA_SOL"]:
 
         if T_SOL_ZUL < T_min or T_SOL_ZUL > T_max:
@@ -174,8 +174,8 @@ for t in range(0, config["simulation"]["schritte"]):
                     config["ventilator"]["m_LUF_max"] - config["ventilator"]["m_LUF_min"]
             )
     else:
-        m_LUF = config["ventilator"].get("m_LUF_default", config["ventilator"]["m_LUF_min"])
-
+        m_LUF = config["ventilator"].get("m_LUF_default", config["ventilator"]["m_LUF_min"])'''
+    m_LUF = 3
 # Heizregistersteuerung
     if dT_RA_SOL > config["schwellenwerte"]["dT_RA_SOL"]:
         m_TEP_roh = regler_TEP.update(T_SOL_ZUL, T_ZUL)

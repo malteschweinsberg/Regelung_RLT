@@ -45,10 +45,10 @@
   },
   "raum": {
     "V_R": 1000.0,
-    "T_R_init": 25.0,
+    "T_R_init": 22.5,
     "X_R_init": 60.0,
     "Q_IN": 500,
-    "faktor_waermekapazitaet": 15
+    "faktor_waermekapazitaet": 50
   },
   "totzeit": {
     "totzeit_schritte": 2,
