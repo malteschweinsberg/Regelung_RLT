@@ -5,7 +5,7 @@
     "X_AUL": 60,
     "T_SOL_R": 21,
     "X_SOL_R": 50,
-    "schritte": 50000,
+    "schritte": 20000,
     "stoerung_intervall": 60,
     "stoerung_T_AUL_min": -0.5,
     "stoerung_T_AUL_max": 0.5,
@@ -46,19 +46,19 @@
   "raum": {
     "V_R": 1000.0,
     "T_R_init": 22.5,
-    "X_R_init": 60.0,
+    "X_R_init": 55.0,
     "Q_IN": 500,
     "faktor_waermekapazitaet": 50
   },
   "totzeit": {
-    "totzeit_schritte": 2,
-    "totzone": 0.01
+    "totzeit_schritte": 5,
+    "totzone": 0.02
   },
   "regler": {
     "X_ZUL": { "kp": 0.03, "ki": 0.08 },
     "BFT":   { "kp": 0.003, "ki": 0.01 },
     "T_ZUL": { "kp": 0.2,   "ki": 0.1 },
-    "TEP":   { "kp": 0.002, "ki": 0.01 }
+    "TEP":   { "kp": 0.03, "ki": 0.012}
   },
   "schwellenwerte": {
     "T_ZUL_min": 15,
