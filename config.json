@@ -1,11 +1,11 @@
 {
   "simulation": {
     "t_sp": 60,
-    "T_AUL": 30,
-    "X_AUL": 60,
+    "T_AUL": 10,
+    "X_AUL": 20,
     "T_SOL_R": 21,
     "X_SOL_R": 50,
-    "schritte": 20000,
+    "schritte": 10000,
     "stoerung_intervall": 60,
     "stoerung_T_AUL_min": -0.5,
     "stoerung_T_AUL_max": 0.5,
@@ -52,12 +52,12 @@
   },
   "totzeit": {
     "totzeit_schritte": 5,
-    "totzone": 0.02
+    "totzone": 0.05
   },
   "regler": {
-    "X_ZUL": { "kp": 0.03, "ki": 0.08 },
+    "X_ZUL": {"kp": 3,   "ti": 900, "dt": 300  },
     "BFT":   { "kp": 0.003, "ki": 0.01 },
-    "T_ZUL": { "kp": 0.2,   "ki": 0.1 },
+    "T_ZUL": { "kp": 3,   "ti": 900, "dt": 300 },
     "TEP":   { "kp": 0.03, "ki": 0.012}
   },
   "schwellenwerte": {
@@ -67,7 +67,7 @@
     "X_ZUL_max": 15,
     "d_max_min": 0.1,
     "d_max_max": 2.0,
-    "dT_RA_SOL": 0.2,
+    "dT_RA_SOL": 0.1,
     "dX_RA_SOL": 0.1
   }
 }

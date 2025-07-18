@@ -3,6 +3,7 @@ import time
 import random
 import math
 from pi_regler import PIRegler
+from pi_regler_diskret import DiskreterPIRegler
 from visualisation import Visualisierung
 
 with open("config.json") as f:
@@ -62,19 +63,16 @@ m_TEP_puffer = [0.0] * TOTZEIT_SCHRITTE
 m_HUM_puffer = [0.0] * TOTZEIT_SCHRITTE
 
 # Reglerinitialisierung
-regler_X_ZUL = PIRegler(
-    config["regler"]["X_ZUL"]["kp"],
-    config["regler"]["X_ZUL"]["ki"],
-    dt
+arbeitspunkt = X_ZUL
+regler_X_ZUL = DiskreterPIRegler(
+    arbeitspunkt,
+    config["regler"]["T_ZUL"]["kp"],
+    config["regler"]["T_ZUL"]["ti"],
+    config["regler"]["T_ZUL"]["dt"]
 )
 regler_HUM = PIRegler(
     config["regler"]["BFT"]["kp"],
     config["regler"]["BFT"]["ki"],
-    dt
-)
-regler_T_ZUL = PIRegler(
-    config["regler"]["T_ZUL"]["kp"],
-    config["regler"]["T_ZUL"]["ki"],
     dt
 )
 regler_TEP = PIRegler(
@@ -82,6 +80,14 @@ regler_TEP = PIRegler(
     config["regler"]["TEP"]["ki"],
     dt
 )
+arbeitspunkt = T_ZUL
+regler_T_ZUL = DiskreterPIRegler(
+    arbeitspunkt,
+    config["regler"]["T_ZUL"]["kp"],
+    config["regler"]["T_ZUL"]["ti"],
+    config["regler"]["T_ZUL"]["dt"]
+)
+
 
 
 # WRG-Logik
@@ -119,7 +125,7 @@ for t in range(0, config["simulation"]["schritte"]):
         )
         i = 0
     else:
-        i += 1
+        i = i+1
 
 # Wärmerückgewinnung
     wrg_on = berechne_WRG(T_AUL, T_ABL, T_SOL_R)
@@ -137,6 +143,8 @@ for t in range(0, config["simulation"]["schritte"]):
         X_WRG = X_AUL
 
 # Ventilatorsteuerung
+    regler_T_ZUL.arbeitspunkt = T_R
+    regler_X_ZUL.arbeitspunkt = T_R
     T_SOL_ZUL = regler_T_ZUL.update(T_SOL_R, T_R)
     X_SOL_ZUL = regler_X_ZUL.update(X_SOL_R, X_R)
     T_min = config["schwellenwerte"]["T_ZUL_min"]
@@ -190,6 +198,7 @@ for t in range(0, config["simulation"]["schritte"]):
             m_ERH = 0
         else:
             m_KUL = 0
+            m_ERH = m_TEP
 
 # Befeuchtersteuerung
     dX_RA_SOL = abs(X_SOL_R - X_R)
@@ -204,6 +213,7 @@ for t in range(0, config["simulation"]["schritte"]):
             m_BFT = 0
         else:
             m_ENF = 0
+            m_BFT = m_HUM
 
 
         X_ZUL = X_AUL + (m_HUM * n_BFT) / m_LUF
