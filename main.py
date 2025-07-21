@@ -45,7 +45,7 @@ T_R = config["raum"]["T_R_init"]
 X_R = relative_to_absolute_humidity(T_R, config["raum"]["X_R_init"])
 X_ABL = X_R
 T_SOL_ZUL = T_ZUL = T_WRG = T_AUL
-X_ZUL = X_WRG = X_AUL
+X_SOL_ZUL = X_ZUL = X_WRG = X_AUL
 T_ABL = T_R
 m_LUF = config["ventilator"]["m_LUF_min"]
 n_BFT = config["befeuchter"]["n_BFT"]
@@ -63,30 +63,29 @@ m_TEP_puffer = [0.0] * TOTZEIT_SCHRITTE
 m_HUM_puffer = [0.0] * TOTZEIT_SCHRITTE
 
 # Reglerinitialisierung
-arbeitspunkt = X_ZUL
+arbeitspunkt_X = X_SOL_ZUL
 regler_X_ZUL = DiskreterPIRegler(
-    arbeitspunkt,
-    config["regler"]["T_ZUL"]["kp"],
-    config["regler"]["T_ZUL"]["ti"],
-    config["regler"]["T_ZUL"]["dt"]
-)
+    config["regler"]["X_ZUL"]["kp"],
+    config["regler"]["X_ZUL"]["ti"],
+    config["regler"]["X_ZUL"]["dt"]
+                                    )
 regler_HUM = PIRegler(
     config["regler"]["BFT"]["kp"],
     config["regler"]["BFT"]["ki"],
     dt
-)
+                                    )
 regler_TEP = PIRegler(
     config["regler"]["TEP"]["kp"],
     config["regler"]["TEP"]["ki"],
     dt
-)
-arbeitspunkt = T_ZUL
+                                    )
+arbeitspunkt_T = T_SOL_ZUL
 regler_T_ZUL = DiskreterPIRegler(
-    arbeitspunkt,
+    #arbeitspunkt_T,
     config["regler"]["T_ZUL"]["kp"],
     config["regler"]["T_ZUL"]["ti"],
     config["regler"]["T_ZUL"]["dt"]
-)
+                                    )
 
 
 
@@ -125,7 +124,7 @@ for t in range(0, config["simulation"]["schritte"]):
         )
         i = 0
     else:
-        i = i+1
+        i = 1
 
 # Wärmerückgewinnung
     wrg_on = berechne_WRG(T_AUL, T_ABL, T_SOL_R)
@@ -143,10 +142,8 @@ for t in range(0, config["simulation"]["schritte"]):
         X_WRG = X_AUL
 
 # Ventilatorsteuerung
-    regler_T_ZUL.arbeitspunkt = T_R
-    regler_X_ZUL.arbeitspunkt = T_R
-    T_SOL_ZUL = regler_T_ZUL.update(T_SOL_R, T_R)
-    X_SOL_ZUL = regler_X_ZUL.update(X_SOL_R, X_R)
+    T_SOL_ZUL = regler_T_ZUL.update(T_SOL_ZUL, T_SOL_R, T_R)
+    X_SOL_ZUL = regler_X_ZUL.update(X_SOL_ZUL, X_SOL_R, X_R)
     T_min = config["schwellenwerte"]["T_ZUL_min"]
     T_max = config["schwellenwerte"]["T_ZUL_max"]
     X_min = config["schwellenwerte"]["X_ZUL_min"]
