@@ -1,11 +1,11 @@
 {
   "simulation": {
     "t_sp": 60,
-    "T_AUL": 30,
+    "T_AUL": 10,
     "X_AUL": 60,
     "T_SOL_R": 21,
     "X_SOL_R": 50,
-    "schritte": 20000,
+    "schritte": 15000,
     "stoerung_intervall": 60,
     "stoerung_T_AUL_min": -0.5,
     "stoerung_T_AUL_max": 0.5,
@@ -45,14 +45,14 @@
   },
   "raum": {
     "V_R": 1000.0,
-    "T_R_init": 22.5,
+    "T_R_init": 19.0,
     "X_R_init": 55.0,
     "Q_IN": 500,
     "faktor_waermekapazitaet": 50
   },
   "totzeit": {
-    "totzeit_schritte": 5,
-    "totzone": 0.02
+    "totzeit_schritte": 0,
+    "totzone": 0.00
   },
   "regler": {
     "X_ZUL": { "kp": 0.03, "ki": 0.08 },
@@ -67,7 +67,7 @@
     "X_ZUL_max": 15,
     "d_max_min": 0.1,
     "d_max_max": 2.0,
-    "dT_RA_SOL": 0.2,
-    "dX_RA_SOL": 0.1
+    "dT_RA_SOL": 0.0,
+    "dX_RA_SOL": 0.0
   }
 }

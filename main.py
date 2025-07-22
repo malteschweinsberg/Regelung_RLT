@@ -119,7 +119,7 @@ for t in range(0, config["simulation"]["schritte"]):
         )
         i = 0
     else:
-        i += 1
+        i = 1
 
 # Wärmerückgewinnung
     wrg_on = berechne_WRG(T_AUL, T_ABL, T_SOL_R)
@@ -189,6 +189,7 @@ for t in range(0, config["simulation"]["schritte"]):
             m_KUL = -m_TEP
             m_ERH = 0
         else:
+            m_ERH = m_TEP
             m_KUL = 0
 
 # Befeuchtersteuerung
@@ -203,6 +204,7 @@ for t in range(0, config["simulation"]["schritte"]):
             m_ENF = -m_HUM
             m_BFT = 0
         else:
+            m_BFT = m_HUM
             m_ENF = 0
 
 
