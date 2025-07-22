@@ -45,20 +45,20 @@
   },
   "raum": {
     "V_R": 1000.0,
-    "T_R_init": 22.5,
+    "T_R_init": 19,
     "X_R_init": 55.0,
     "Q_IN": 500,
     "faktor_waermekapazitaet": 50
   },
   "totzeit": {
     "totzeit_schritte": 0,
-    "totzone": 0.05
+    "totzone": 0.0
   },
   "regler": {
     "X_ZUL": {"kp": 4,   "ti": 900, "dt": 300  },
     "BFT":   { "kp": 0.003, "ki": 0.01 },
     "T_ZUL": { "kp": 3,   "ti": 900, "dt": 300 },
-    "TEP":   { "kp": 0.03, "ki": 0.005}
+    "TEP":   { "kp": 0.03, "ti": 900, "dt": 300 }
   },
   "schwellenwerte": {
     "T_ZUL_min": 15,

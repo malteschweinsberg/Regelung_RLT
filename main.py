@@ -49,7 +49,7 @@ X_SOL_ZUL = X_ZUL = X_WRG = X_AUL
 T_ABL = T_R
 m_LUF = config["ventilator"]["m_LUF_min"]
 n_BFT = config["befeuchter"]["n_BFT"]
-m_TEP = 0
+m_TEP_roh = m_TEP = 0
 dT_RA_w = 0  # Vor den if-Bedingungen hinzufügen
 dX_RA_w = 0
 i = 0
@@ -74,10 +74,10 @@ regler_HUM = PIRegler(
     config["regler"]["BFT"]["ki"],
     dt
                                     )
-regler_TEP = PIRegler(
+regler_TEP = DiskreterPIRegler(
     config["regler"]["TEP"]["kp"],
-    config["regler"]["TEP"]["ki"],
-    dt
+    config["regler"]["TEP"]["ti"],
+    config["regler"]["TEP"]["dt"]
                                     )
 arbeitspunkt_T = T_SOL_ZUL
 regler_T_ZUL = DiskreterPIRegler(
@@ -183,11 +183,13 @@ for t in range(0, config["simulation"]["schritte"]):
 
 # Heizregistersteuerung
     if dT_RA_SOL > config["schwellenwerte"]["dT_RA_SOL"]:
-        m_TEP_roh = regler_TEP.update(T_SOL_ZUL, T_ZUL)
+        m_TEP_roh = regler_TEP.update(m_TEP_roh, T_SOL_ZUL, T_ZUL)
+        print(m_TEP_roh)
         if abs(m_TEP_roh) < TOTZONE:
             m_TEP_roh = 0.0
         m_TEP_puffer.append(m_TEP_roh)
         m_TEP = m_TEP_puffer.pop(0)
+        print(m_TEP)
         T_ZUL = T_WRG +  (m_TEP * config["physik"]["c_WAS"] * config["TEP"]["T_DIF_TEP"]) / (
                 config["physik"]["c_LUF"] * m_LUF)
         if m_TEP <= 0:
