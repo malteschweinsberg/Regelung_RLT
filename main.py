@@ -138,7 +138,6 @@ for t in range(0, config["simulation"]["schritte"]):
             T_WRG = T_AUL - nt_WRG * (T_AUL - T_ABL)
             X_WRG = X_AUL + nx_WRG * (X_ABL - X_AUL)
     else:
-        print ('off')
         T_WRG = T_AUL
         X_WRG = X_AUL
 

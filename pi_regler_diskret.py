@@ -8,7 +8,6 @@ class DiskreterPIRegler:
 
     def update(self, arbeitspunkt, soll, ist):
         e = soll - ist
-        faktor = 1 + (self.dt / self.ti)
         u = arbeitspunkt + self.kp * (e - self.e_prev+(self.dt/self.ti)*e)
         self.e_prev = e
         return u

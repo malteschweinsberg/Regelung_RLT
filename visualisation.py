@@ -44,7 +44,7 @@ class Visualisierung:
     def plot_and_save(self, filename, file_format="png"):
         fig, axs = plt.subplots(
             6, 1,
-            figsize=(16, 14),
+            figsize=(16, 9),
             sharex=True,
             gridspec_kw={'height_ratios': [2, 2, 2, 1, 1, 0.8]}
         )
