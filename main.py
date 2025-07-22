@@ -243,4 +243,4 @@ for t in range(0, config["simulation"]["schritte"]):
     vis.add_data(t, T_SOL_R, T_R, T_ZUL, T_SOL_ZUL, T_WRG, m_ERH, m_KUL, m_LUF, X_R, X_SOL_R, X_SOL_ZUL, X_ZUL, m_BFT, m_ENF, wrg_on)
     time.sleep(dt)
 
-vis.plot()
+vis.plot_and_save('visualisierung_sachsen', file_format='png')
