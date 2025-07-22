@@ -124,7 +124,7 @@ for t in range(0, config["simulation"]["schritte"]):
         )
         i = 0
     else:
-        i = 1
+        i =i+ 1
 
 # Wärmerückgewinnung
     wrg_on = berechne_WRG(T_AUL, T_ABL, T_SOL_R)
@@ -138,6 +138,7 @@ for t in range(0, config["simulation"]["schritte"]):
             T_WRG = T_AUL - nt_WRG * (T_AUL - T_ABL)
             X_WRG = X_AUL + nx_WRG * (X_ABL - X_AUL)
     else:
+        print ('off')
         T_WRG = T_AUL
         X_WRG = X_AUL
 
@@ -227,7 +228,7 @@ for t in range(0, config["simulation"]["schritte"]):
     X_SOL_R = relative_to_absolute_humidity(T_R, config["simulation"]["X_SOL_R"])
 
     if t % 10 == 0:  # Nur jede 10. Iteration, damit die Ausgabe übersichtlich bleibt
-        print(
+        """print(
             f"t={t:04d} | "
             f"T_R={T_R:.2f} (Soll {T_SOL_R:.2f}) | "
             f"T_ZUL={T_ZUL:.2f} (Soll {T_SOL_ZUL:.2f}) | "
@@ -237,10 +238,10 @@ for t in range(0, config["simulation"]["schritte"]):
             f"m_BFT={m_HUM:.3f} | "
             f"m_LUF={m_LUF:.2f}"
     )
-
+"""
 
 # Visualisierung
     vis.add_data(t, T_SOL_R, T_R, T_ZUL, T_SOL_ZUL, T_WRG, m_ERH, m_KUL, m_LUF, X_R, X_SOL_R, X_SOL_ZUL, X_ZUL, m_BFT, m_ENF, wrg_on)
     time.sleep(dt)
 
-vis.plot()
+vis.plot_and_save('Übertragungsfunktion für beide Regler', file_format='png')
