@@ -119,7 +119,7 @@ for t in range(0, config["simulation"]["schritte"]):
         )
         i = 0
     else:
-        i = 1
+        i = i+1
 
 # Wärmerückgewinnung
     wrg_on = berechne_WRG(T_AUL, T_ABL, T_SOL_R)
@@ -238,4 +238,4 @@ for t in range(0, config["simulation"]["schritte"]):
     vis.add_data(t, T_SOL_R, T_R, T_ZUL, T_SOL_ZUL, T_WRG, m_ERH, m_KUL, m_LUF, X_R, X_SOL_R, X_SOL_ZUL, X_ZUL, m_BFT, m_ENF, wrg_on)
     time.sleep(dt)
 
-vis.plot()
+vis.plot_and_save('PI-Regler', file_format='png')

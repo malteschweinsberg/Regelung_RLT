@@ -5,7 +5,7 @@
     "X_AUL": 60,
     "T_SOL_R": 21,
     "X_SOL_R": 50,
-    "schritte": 15000,
+    "schritte": 43200,
     "stoerung_intervall": 60,
     "stoerung_T_AUL_min": -0.5,
     "stoerung_T_AUL_max": 0.5,
