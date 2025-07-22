@@ -184,12 +184,10 @@ for t in range(0, config["simulation"]["schritte"]):
 # Heizregistersteuerung
     if dT_RA_SOL > config["schwellenwerte"]["dT_RA_SOL"]:
         m_TEP_roh = regler_TEP.update(m_TEP_roh, T_SOL_ZUL, T_ZUL)
-        print(m_TEP_roh)
         if abs(m_TEP_roh) < TOTZONE:
             m_TEP_roh = 0.0
         m_TEP_puffer.append(m_TEP_roh)
         m_TEP = m_TEP_puffer.pop(0)
-        print(m_TEP)
         T_ZUL = T_WRG +  (m_TEP * config["physik"]["c_WAS"] * config["TEP"]["T_DIF_TEP"]) / (
                 config["physik"]["c_LUF"] * m_LUF)
         if m_TEP <= 0:

@@ -5,7 +5,7 @@
     "X_AUL": 20,
     "T_SOL_R": 21,
     "X_SOL_R": 50,
-    "schritte": 5000,
+    "schritte": 15000,
     "stoerung_intervall": 60,
     "stoerung_T_AUL_min": -0.5,
     "stoerung_T_AUL_max": 0.5,
@@ -67,7 +67,7 @@
     "X_ZUL_max": 15,
     "d_max_min": 0.1,
     "d_max_max": 2.0,
-    "dT_RA_SOL": 0.1,
-    "dX_RA_SOL": 0.1
+    "dT_RA_SOL": 0.0,
+    "dX_RA_SOL": 0.0
   }
 }
