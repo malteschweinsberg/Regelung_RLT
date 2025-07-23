@@ -52,7 +52,7 @@
   },
   "totzeit": {
     "totzeit_schritte": 0,
-    "totzone": 0.0
+    "totzone": 0.05
   },
   "regler": {
     "X_ZUL": {"kp": 3,   "ti": 1500, "dt": 100  },
