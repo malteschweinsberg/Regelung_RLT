@@ -77,29 +77,26 @@ m_TEP_puffer = [0.0] * TOTZEIT_SCHRITTE
 m_HUM_puffer = [0.0] * TOTZEIT_SCHRITTE
 
 # Reglerinitialisierung
-arbeitspunkt_X = X_SOL_ZUL
-regler_X_ZUL = DiskreterPIRegler(
+regler_X_ZUL = PIRegler(
     config["regler"]["X_ZUL"]["kp"],
-    config["regler"]["X_ZUL"]["ti"],
-    config["regler"]["X_ZUL"]["dt"]
-                                    )
+    config["regler"]["X_ZUL"]["ki"],
+    dt
+)
 regler_HUM = PIRegler(
     config["regler"]["BFT"]["kp"],
     config["regler"]["BFT"]["ki"],
     dt
-                                    )
-regler_TEP = DiskreterPIRegler(
-    config["regler"]["TEP"]["kp"],
-    config["regler"]["TEP"]["ti"],
-    config["regler"]["TEP"]["dt"]
-                                    )
-arbeitspunkt_T = T_SOL_ZUL
-regler_T_ZUL = DiskreterPIRegler(
-    #arbeitspunkt_T,
+)
+regler_T_ZUL = PIRegler(
     config["regler"]["T_ZUL"]["kp"],
-    config["regler"]["T_ZUL"]["ti"],
-    config["regler"]["T_ZUL"]["dt"]
-                                    )
+    config["regler"]["T_ZUL"]["ki"],
+    dt
+)
+regler_TEP = PIRegler(
+    config["regler"]["TEP"]["kp"],
+    config["regler"]["TEP"]["ki"],
+    dt
+)
 
 
 
@@ -163,8 +160,8 @@ for t in range(0, config["simulation"]["schritte"]):
         X_WRG = X_AUL
 
 # Ventilatorsteuerung
-    T_SOL_ZUL = regler_T_ZUL.update(T_SOL_ZUL, T_SOL_R, T_R)
-    X_SOL_ZUL = regler_X_ZUL.update(X_SOL_ZUL, X_SOL_R, X_R)
+    T_SOL_ZUL = regler_T_ZUL.update(T_SOL_R, T_R)
+    X_SOL_ZUL = regler_X_ZUL.update(X_SOL_R, X_R)
     T_min = config["schwellenwerte"]["T_ZUL_min"]
     T_max = config["schwellenwerte"]["T_ZUL_max"]
     X_min = config["schwellenwerte"]["X_ZUL_min"]
@@ -204,7 +201,7 @@ for t in range(0, config["simulation"]["schritte"]):
 
 # Heizregistersteuerung
     if dT_RA_SOL > config["schwellenwerte"]["dT_RA_SOL"]:
-        m_TEP_roh = regler_TEP.update(m_TEP_roh, T_SOL_ZUL, T_ZUL)
+        m_TEP_roh = regler_TEP.update(T_SOL_ZUL, T_ZUL)
         if abs(m_TEP_roh) < TOTZONE:
             m_TEP_roh = 0.0
         m_TEP_puffer.append(m_TEP_roh)

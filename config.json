@@ -58,10 +58,10 @@
     "totzone": 0.0
   },
   "regler": {
-    "X_ZUL": {"kp": 3,   "ti": 1500, "dt": 100  },
+    "X_ZUL": { "kp": 0.03, "ki": 0.08 },
     "BFT":   { "kp": 0.003, "ki": 0.01 },
-    "T_ZUL": { "kp": 3,   "ti": 1500, "dt": 100 },
-    "TEP":   { "kp": 0.03, "ti": 900, "dt": 300 }
+    "T_ZUL": { "kp": 0.2,   "ki": 0.1 },
+    "TEP":   { "kp": 0.03, "ki": 0.012}
   },
   "schwellenwerte": {
     "T_ZUL_min": 15,
