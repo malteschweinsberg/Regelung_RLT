@@ -9,13 +9,26 @@ from visualisation import Visualisierung
 with open("config.json") as f:
     config = json.load(f)
 
+def enthalpie_luft_joule_volum_feuchte(temperatur_C, abs_feuchte_kgm3, druck_hPa=config["physik"]["luftdruck_hPa"]):
+    """
+    Berechnet die Enthalpie der Luft in J/kg mit Eingabe der absoluten Feuchte in kg/m³.
 
-def enthalpie_luft_joule(temperatur, rel_feuchte=config["physik"]["rel_feuchte_default"],
-                         druck=config["physik"]["luftdruck_hPa"]):
-    es = 6.1078 * 10 ** ((7.5 * temperatur) / (temperatur + 237.3))
-    e = es * rel_feuchte / 100.0
-    x = 0.622 * e / (druck - e)
-    h = (1.006 * temperatur + x * (2501 + 1.86 * temperatur)) * 1000
+    :param temperatur_C: Temperatur in °C
+    :param abs_feuchte_kgm3: Absolute Feuchte in kg/m³ (Wasserdampf pro Luftvolumen)
+    :param druck_hPa: Luftdruck in hPa (Standard: 1013.25 hPa)
+    :return: Enthalpie in J/kg (bezogen auf trockene Luft)
+    """
+    # Schritt 1: Dichte trockener Luft berechnen
+    R_d = 287.058  # spezifische Gaskonstante trockene Luft in J/(kg·K)
+    T_K = temperatur_C + 273.15
+    p_Pa = druck_hPa * 100  # hPa → Pa
+    rho_dry_air = p_Pa / (R_d * T_K)  # in kg/m³
+
+    # Schritt 2: Umrechnung in spezifische Feuchte (kg/kg)
+    x = abs_feuchte_kgm3 / rho_dry_air
+
+    # Schritt 3: Enthalpie berechnen (J/kg trockene Luft)
+    h = (1.006 * temperatur_C + x * (2501 + 1.86 * temperatur_C)) * 1000
     return h
 
 
@@ -29,8 +42,9 @@ def absolute_to_relative_humidity(T, abs_humidity, pressure=config["physik"]["lu
 def relative_to_absolute_humidity(T, rel_humidity, pressure=config["physik"]["luftdruck_hPa"]):
     es = 6.112 * math.exp((17.62 * T) / (243.12 + T))
     abs_max = 216.7 * (es / (T + 273.15))
-    abs_humidity = (rel_humidity / 100) * abs_max
+    abs_humidity = ((rel_humidity / 100) * abs_max)/1000
     return abs_humidity
+
 
 
 # Initialisierung
@@ -90,9 +104,11 @@ regler_T_ZUL = DiskreterPIRegler(
 
 
 # WRG-Logik
-def berechne_WRG(T_AUL, T_ABL, T_SOL_R):
-    return ((T_ABL > T_AUL and T_AUL < T_SOL_R) or
-            (T_AUL > T_SOL_R and T_AUL > T_ABL))
+def berechne_WRG(dh1, dh2):
+    if dh1 > dh2:
+        return True
+    else:
+        return False
 
 
 vis = Visualisierung()
@@ -108,7 +124,7 @@ for t in range(0, config["simulation"]["schritte"]):
                 config["simulation"]["stoerung_T_AUL_max"]
             ), config["simulation"]["T_AUL_max"])
         )
-        X_AUL_AUL = max(
+        X_AUL = max(
             relative_to_absolute_humidity(T_AUL,config["simulation"]["X_AUL_min"]),
             min(X_AUL + random.uniform(
                 relative_to_absolute_humidity(T_AUL,config["simulation"]["stoerung_X_AUL_min"]),
@@ -127,7 +143,12 @@ for t in range(0, config["simulation"]["schritte"]):
         i =i+ 1
 
 # Wärmerückgewinnung
-    wrg_on = berechne_WRG(T_AUL, T_ABL, T_SOL_R)
+    h_SOl_ZUL = enthalpie_luft_joule_volum_feuchte(T_SOL_ZUL, X_SOL_ZUL)
+    h_AUL = enthalpie_luft_joule_volum_feuchte(T_AUL,X_AUL)
+    h_ABL = enthalpie_luft_joule_volum_feuchte(T_ABL,X_ABL)
+    dh1 = h_SOl_ZUL-h_AUL
+    dh2 = h_SOl_ZUL-h_ABL
+    wrg_on = berechne_WRG(dh1, dh2)
     if wrg_on:
         nt_WRG = config["waermetauscher"]["nt_WRG"]
         nx_WRG = config["waermetauscher"]["nx_WRG"]
@@ -188,12 +209,12 @@ for t in range(0, config["simulation"]["schritte"]):
             m_TEP_roh = 0.0
         m_TEP_puffer.append(m_TEP_roh)
         m_TEP = m_TEP_puffer.pop(0)
-        T_ZUL = T_WRG +  (m_TEP * config["physik"]["c_WAS"] * config["TEP"]["T_DIF_TEP"]) / (
-                config["physik"]["c_LUF"] * m_LUF)
         if m_TEP <= 0:
+            T_ZUL = T_WRG + (m_TEP * config["physik"]["c_WAS"] * config["Kuehler"]["T_DIF_KUH"]) / (config["physik"]["c_LUF"] * m_LUF)
             m_KUL = -m_TEP
             m_ERH = 0
         else:
+            T_ZUL = T_WRG + (m_TEP * config["physik"]["c_WAS"] * config["Erhitzer"]["T_DIF_ERH"]) / (config["physik"]["c_LUF"] * m_LUF)
             m_KUL = 0
             m_ERH = m_TEP
 
@@ -216,8 +237,9 @@ for t in range(0, config["simulation"]["schritte"]):
         X_ZUL = X_WRG + (m_HUM * n_BFT) / m_LUF
 
 # Raumdynamik
-    h_ZUL = enthalpie_luft_joule(T_ZUL)
-    h_R = enthalpie_luft_joule(T_R)
+
+    h_ZUL = enthalpie_luft_joule_volum_feuchte(T_ZUL, X_ZUL)
+    h_R = enthalpie_luft_joule_volum_feuchte(T_R, X_ZUL)
     T_R += dt / C_Raum * (Q_IN + m_LUF * h_ZUL - m_LUF * h_R)
     T_ABL = T_R
     rho_luft = config["physik"]["rho_luft"]
@@ -226,8 +248,8 @@ for t in range(0, config["simulation"]["schritte"]):
 # Update Soll_Feuchte
     X_SOL_R = relative_to_absolute_humidity(T_R, config["simulation"]["X_SOL_R"])
 
-    if t % 10 == 0:  # Nur jede 10. Iteration, damit die Ausgabe übersichtlich bleibt
-        """print(
+    if t % 1 == 0:  # Nur jede 10. Iteration, damit die Ausgabe übersichtlich bleibt
+        print(
             f"t={t:04d} | "
             f"T_R={T_R:.2f} (Soll {T_SOL_R:.2f}) | "
             f"T_ZUL={T_ZUL:.2f} (Soll {T_SOL_ZUL:.2f}) | "
@@ -237,7 +259,7 @@ for t in range(0, config["simulation"]["schritte"]):
             f"m_BFT={m_HUM:.3f} | "
             f"m_LUF={m_LUF:.2f}"
     )
-"""
+
 
 # Visualisierung
     vis.add_data(t, T_SOL_R, T_R, T_ZUL, T_SOL_ZUL, T_WRG, m_ERH, m_KUL, m_LUF, X_R, X_SOL_R, X_SOL_ZUL, X_ZUL, m_BFT, m_ENF, wrg_on)

@@ -44,7 +44,7 @@ class Visualisierung:
     def plot_and_save(self, filename, file_format="png"):
         fig, axs = plt.subplots(
             6, 1,
-            figsize=(16, 9),
+            figsize=(16, 12),
             sharex=True,
             gridspec_kw={'height_ratios': [2, 2, 2, 1, 1, 0.8]}
         )
@@ -70,7 +70,7 @@ class Visualisierung:
         axs[2].step(self.time, self.X_Sol_R, label="Soll Raumluftfeuchte", where='post', linewidth=1.2, linestyle='--')
         axs[2].step(self.time, self.X_ZUL, label="Zuluftfeuchte", where='post', linewidth=1.2)
         axs[2].step(self.time, self.X_ZUL_Soll, label="Soll Zuluftfeuchte", where='post', linewidth=1.2, linestyle='--')
-        axs[2].set_ylabel("Feuchte\n[g/kg]", fontsize=12, rotation=90)
+        axs[2].set_ylabel("Feuchte\n[kg/m³]", fontsize=12, rotation=90)
         axs[2].yaxis.set_label_coords(-0.05, 0.5)
         axs[2].legend(loc='upper right', fontsize=9)
         axs[2].grid(True, which='both', linestyle='--', alpha=0.5)

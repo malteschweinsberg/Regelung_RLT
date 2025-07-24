@@ -2,10 +2,10 @@
   "simulation": {
     "t_sp": 60,
     "T_AUL": 10,
-    "X_AUL": 20,
+    "X_AUL": 30,
     "T_SOL_R": 21,
     "X_SOL_R": 50,
-    "schritte": 43200,
+    "schritte": 8000,
     "stoerung_intervall": 60,
     "stoerung_T_AUL_min": -0.5,
     "stoerung_T_AUL_max": 0.5,
@@ -24,8 +24,11 @@
     "nt_WRG": 0.7,
     "nx_WRG": 0.2
   },
-  "TEP": {
-    "T_DIF_TEP": 7
+  "Kuehler": {
+    "T_DIF_KUH": 5
+  },
+  "Erhitzer": {
+    "T_DIF_ERH": 10
   },
   "befeuchter": {
     "n_BFT": 1
@@ -46,7 +49,7 @@
   "raum": {
     "V_R": 1000.0,
     "T_R_init": 19,
-    "X_R_init": 55.0,
+    "X_R_init": 20.0,
     "Q_IN": 500,
     "faktor_waermekapazitaet": 50
   },
@@ -63,8 +66,8 @@
   "schwellenwerte": {
     "T_ZUL_min": 15,
     "T_ZUL_max": 24,
-    "X_ZUL_min": 4,
-    "X_ZUL_max": 15,
+    "X_ZUL_min": 0.004,
+    "X_ZUL_max": 0.015,
     "d_max_min": 0.1,
     "d_max_max": 2.0,
     "dT_RA_SOL": 0.0,
