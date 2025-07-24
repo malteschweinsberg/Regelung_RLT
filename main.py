@@ -239,8 +239,9 @@ for t in range(0, config["simulation"]["schritte"]):
 # Raumdynamik
 
     h_ZUL = enthalpie_luft_joule_volum_feuchte(T_ZUL, X_ZUL)
-    h_R = enthalpie_luft_joule_volum_feuchte(T_R, X_ZUL)
-    T_R += dt / C_Raum * (Q_IN + m_LUF * h_ZUL - m_LUF * h_R)
+    h_R = enthalpie_luft_joule_volum_feuchte(T_R, X_R)
+    T_R += (dt / C_Raum) * (Q_IN + m_LUF * h_ZUL - m_LUF * h_R)
+    print('T_R',T_R,'dt / C_Raum ',dt / C_Raum ,'*(Q_IN',Q_IN,'+m_LUF * h_ZUL',m_LUF * h_ZUL,'-m_LUF * h_R)',m_LUF * h_R,'h_R',h_R,)
     T_ABL = T_R
     rho_luft = config["physik"]["rho_luft"]
     X_R += (m_LUF * dt) / (V_R * rho_luft) * (X_ZUL - X_R)
