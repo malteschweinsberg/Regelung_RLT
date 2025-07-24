@@ -213,7 +213,7 @@ for t in range(0, config["simulation"]["schritte"]):
             m_BFT = m_HUM
 
 
-        X_ZUL = X_AUL + (m_HUM * n_BFT) / m_LUF
+        X_ZUL = X_WRG + (m_HUM * n_BFT) / m_LUF
 
 # Raumdynamik
     h_ZUL = enthalpie_luft_joule(T_ZUL)
