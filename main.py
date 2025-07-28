@@ -64,7 +64,7 @@ T_ABL = T_R
 m_LUF = config["ventilator"]["m_LUF_min"]
 n_BFT = config["befeuchter"]["n_BFT"]
 m_TEP_roh = m_TEP = 0
-m_TEP_prev = 0.00001
+m_HUM_prev = m_TEP_prev = 0.00001
 dT_RA_w = 0  # Vor den if-Bedingungen hinzufügen
 dX_RA_w = 0
 i = 0
@@ -224,8 +224,9 @@ for t in range(0, config["simulation"]["schritte"]):
     dX_RA_SOL = abs(X_SOL_R - X_R)
     if dX_RA_SOL > config["schwellenwerte"]["dX_RA_SOL"]:
         m_HUM_roh = regler_HUM.update(X_SOL_ZUL, X_ZUL)
-        if abs(m_HUM_roh) < TOTZONE:
-            m_HUM_roh = 0.0
+        if abs(m_HUM_roh - m_HUM_prev) / abs(m_HUM_prev) < TOTZONE:
+            m_HUM_roh = m_HUM_prev
+        m_HUM_prev = m_HUM_roh
         m_HUM_puffer.append(m_HUM_roh)
         m_HUM = m_HUM_puffer.pop(0)
         if m_HUM <= 0:
