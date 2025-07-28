@@ -9,7 +9,7 @@ from visualisation import Visualisierung
 with open("config.json") as f:
     config = json.load(f)
 
-def enthalpie_luft_joule_volum_feuchte(temperatur_C, abs_feuchte_kgm3, druck_hPa=config["physik"]["luftdruck_hPa"]):
+def enthalpie_luft_joule_volum_feuchte(temperatur_C, abs_feuchte_kgm3, druck_Pa=config["physik"]["luftdruck_Pa"]):
     """
     Berechnet die Enthalpie der Luft in J/kg mit Eingabe der absoluten Feuchte in kg/m³.
 
@@ -19,30 +19,41 @@ def enthalpie_luft_joule_volum_feuchte(temperatur_C, abs_feuchte_kgm3, druck_hPa
     :return: Enthalpie in J/kg (bezogen auf trockene Luft)
     """
     # Schritt 1: Dichte trockener Luft berechnen
-    R_d = 287.058  # spezifische Gaskonstante trockene Luft in J/(kg·K)
-    T_K = temperatur_C + 273.15
-    p_Pa = druck_hPa * 100  # hPa → Pa
-    rho_dry_air = p_Pa / (R_d * T_K)  # in kg/m³
+    R_d = config["physik"]["R_d"]  # spezifische Gaskonstante trockene Luft in J/(kg·K)
+    T_K = temperatur_C + config["physik"]["C_to_K"]
+    rho_dry_air = druck_Pa / (R_d * T_K)  # in kg/m³
 
     # Schritt 2: Umrechnung in spezifische Feuchte (kg/kg)
     x = abs_feuchte_kgm3 / rho_dry_air
 
     # Schritt 3: Enthalpie berechnen (J/kg trockene Luft)
-    h = (1.006 * temperatur_C + x * (2501 + 1.86 * temperatur_C)) * 1000
+    h = (config["physik"]["c_LUF"]  * temperatur_C + x * (config["physik"]["h_V_DAMPF_0C"] + config["physik"]["c_WASSERDAMPF"] * temperatur_C))
     return h
 
 
-def absolute_to_relative_humidity(T, abs_humidity, pressure=config["physik"]["luftdruck_hPa"]):
-    es = 6.112 * math.exp((17.62 * T) / (243.12 + T))
-    abs_max = 216.7 * (es / (T + 273.15))
+def absolute_to_relative_humidity(T, abs_humidity):
+    # Sättigungsdampfdruck in Pa (nicht hPa!)
+    es = config["physik"]["P_WS_0C_PA"] * math.exp((config["physik"]["MAGNUS_A"] * T) / (config["physik"]["MAGNUS_B_C"] + T))  # T in °C
+
+    # Max. absolute Feuchte in kg/m³ (Konstante angepasst auf Pa)
+    abs_max =config["physik"]["FEUCHTEFAKTOR_KG_PA"]  * (es / (T + config["physik"]["C_to_K"]))  # SI: T in K
+
+    # relative Feuchte in Prozent
     rel_humidity = (abs_humidity / abs_max) * 100
     return rel_humidity
 
 
-def relative_to_absolute_humidity(T, rel_humidity, pressure=config["physik"]["luftdruck_hPa"]):
-    es = 6.112 * math.exp((17.62 * T) / (243.12 + T))
-    abs_max = 216.7 * (es / (T + 273.15))
-    abs_humidity = ((rel_humidity / 100) * abs_max)/1000
+def relative_to_absolute_humidity(T, rel_humidity):
+
+    # Sättigungsdampfdruck in Pa
+    es = config["physik"]["P_WS_0C_PA"] * math.exp((config["physik"]["MAGNUS_A"] * T) / (config["physik"]["MAGNUS_B_C"] + T))
+
+    # Maximale absolute Feuchte in kg/m³ (Konstante für Pa)
+    abs_max = config["physik"]["FEUCHTEFAKTOR_KG_PA"] * (es / (T + config["physik"]["C_to_K"]))  # T in K
+
+    # Umrechnung: relative in absolute Feuchte (kg/m³)
+    abs_humidity = (rel_humidity / 100) * abs_max
+
     return abs_humidity
 
 
@@ -64,6 +75,7 @@ T_ABL = T_R
 m_LUF = config["ventilator"]["m_LUF_min"]
 n_BFT = config["befeuchter"]["n_BFT"]
 m_TEP_roh = m_TEP = 0
+m_HUM_prev = m_TEP_prev = 0.00001
 dT_RA_w = 0  # Vor den if-Bedingungen hinzufügen
 dX_RA_w = 0
 i = 0
@@ -202,8 +214,9 @@ for t in range(0, config["simulation"]["schritte"]):
 # Heizregistersteuerung
     if dT_RA_SOL > config["schwellenwerte"]["dT_RA_SOL"]:
         m_TEP_roh = regler_TEP.update(T_SOL_ZUL, T_ZUL)
-        if abs(m_TEP_roh) < TOTZONE:
-            m_TEP_roh = 0.0
+        if abs(m_TEP_roh - m_TEP_prev) / abs(m_TEP_prev) < TOTZONE:
+            m_TEP_roh = m_TEP_prev
+        m_TEP_prev = m_TEP_roh
         m_TEP_puffer.append(m_TEP_roh)
         m_TEP = m_TEP_puffer.pop(0)
         if m_TEP <= 0:
@@ -219,8 +232,9 @@ for t in range(0, config["simulation"]["schritte"]):
     dX_RA_SOL = abs(X_SOL_R - X_R)
     if dX_RA_SOL > config["schwellenwerte"]["dX_RA_SOL"]:
         m_HUM_roh = regler_HUM.update(X_SOL_ZUL, X_ZUL)
-        if abs(m_HUM_roh) < TOTZONE:
-            m_HUM_roh = 0.0
+        if abs(m_HUM_roh - m_HUM_prev) / abs(m_HUM_prev) < TOTZONE:
+            m_HUM_roh = m_HUM_prev
+        m_HUM_prev = m_HUM_roh
         m_HUM_puffer.append(m_HUM_roh)
         m_HUM = m_HUM_puffer.pop(0)
         if m_HUM <= 0:
@@ -237,7 +251,7 @@ for t in range(0, config["simulation"]["schritte"]):
 
     h_ZUL = enthalpie_luft_joule_volum_feuchte(T_ZUL, X_ZUL)
     h_R = enthalpie_luft_joule_volum_feuchte(T_R, X_ZUL)
-    T_R += dt / C_Raum * (Q_IN + m_LUF * h_ZUL - m_LUF * h_R)
+    T_R += (dt / C_Raum) * (Q_IN + (m_LUF * config["physik"]["c_LUF"] * (T_ZUL - T_R)) + (m_LUF * config["physik"]["r_WAS"] * (T_ZUL - T_R)))
     T_ABL = T_R
     rho_luft = config["physik"]["rho_luft"]
     X_R += (m_LUF * dt) / (V_R * rho_luft) * (X_ZUL - X_R)

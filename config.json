@@ -36,9 +36,19 @@
   "physik": {
     "c_LUF": 1005,
     "c_WAS": 4180,
-    "luftdruck_hPa": 1013.25,
+    "luftdruck_Pa": 101325,
     "rel_feuchte_default": 35,
-    "rho_luft": 1.2
+    "rho_luft": 1.2,
+    "r_WAS": 2257,
+    "R_d": 287.058,
+    "C_to_K": 273.15,
+    "h_V_DAMPF_0C": 2501000,
+    "c_WASSERDAMPF": 1860,
+    "P_WS_0C_PA": 611.2,
+    "MAGNUS_A": 17.62,
+    "MAGNUS_B_C": 243.12,
+    "FEUCHTEFAKTOR_KG_PA": 2.167
+
   },
   "ventilator": {
     "m_LUF_min": 1.3,
@@ -55,13 +65,13 @@
   },
   "totzeit": {
     "totzeit_schritte": 0,
-    "totzone": 0.0
+    "totzone": 0.00
   },
   "regler": {
     "X_ZUL": { "kp": 0.03, "ki": 0.08 },
     "BFT":   { "kp": 0.003, "ki": 0.01 },
     "T_ZUL": { "kp": 0.2,   "ki": 0.1 },
-    "TEP":   { "kp": 0.03, "ki": 0.012}
+    "TEP":   { "kp": 0.03, "ki": 0.002}
   },
   "schwellenwerte": {
     "T_ZUL_min": 15,
