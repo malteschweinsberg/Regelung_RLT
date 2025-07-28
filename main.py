@@ -64,6 +64,7 @@ T_ABL = T_R
 m_LUF = config["ventilator"]["m_LUF_min"]
 n_BFT = config["befeuchter"]["n_BFT"]
 m_TEP_roh = m_TEP = 0
+m_TEP_prev = 0.00001
 dT_RA_w = 0  # Vor den if-Bedingungen hinzufügen
 dX_RA_w = 0
 i = 0
@@ -205,8 +206,9 @@ for t in range(0, config["simulation"]["schritte"]):
 # Heizregistersteuerung
     if dT_RA_SOL > config["schwellenwerte"]["dT_RA_SOL"]:
         m_TEP_roh = regler_TEP.update(m_TEP_roh, T_SOL_ZUL, T_ZUL)
-        if abs(m_TEP_roh) < TOTZONE:
-            m_TEP_roh = 0.0
+        if abs(m_TEP_roh - m_TEP_prev) / abs(m_TEP_prev) < TOTZONE:
+            m_TEP_roh = m_TEP_prev
+        m_TEP_prev = m_TEP_roh
         m_TEP_puffer.append(m_TEP_roh)
         m_TEP = m_TEP_puffer.pop(0)
         if m_TEP <= 0:
@@ -240,8 +242,10 @@ for t in range(0, config["simulation"]["schritte"]):
 
     h_ZUL = enthalpie_luft_joule_volum_feuchte(T_ZUL, X_ZUL)
     h_R = enthalpie_luft_joule_volum_feuchte(T_R, X_R)
-    T_R += (dt / C_Raum) * (Q_IN + m_LUF * h_ZUL - m_LUF * h_R)
-    print('T_R',T_R,'dt / C_Raum ',dt / C_Raum ,'*(Q_IN',Q_IN,'+m_LUF * h_ZUL',m_LUF * h_ZUL,'-m_LUF * h_R)',m_LUF * h_R,'h_R',h_R,)
+    print('T_ZUL', T_ZUL, 'X_ZUL', X_ZUL, 'h_zul', h_ZUL,'T_R', T_R, 'X_R', X_R, 'h_R', h_R)
+    #T_R += (dt / C_Raum) * (Q_IN + (m_LUF * h_ZUL - m_LUF * h_R))
+    T_R += (dt / C_Raum) * (Q_IN + (m_LUF * config["physik"]["c_LUF"] * (T_ZUL-T_R)) +(m_LUF * config["physik"]["r_WAS"] * (T_ZUL-T_R)))
+    #print('T_R',T_R,'dt / C_Raum ',dt / C_Raum ,'*(Q_IN',Q_IN,'+m_LUF * h_ZUL',m_LUF * h_ZUL,'-m_LUF * h_R)',m_LUF * h_R,'h_R',h_R,)
     T_ABL = T_R
     rho_luft = config["physik"]["rho_luft"]
     X_R += (m_LUF * dt) / (V_R * rho_luft) * (X_ZUL - X_R)
@@ -256,7 +260,7 @@ for t in range(0, config["simulation"]["schritte"]):
             f"T_ZUL={T_ZUL:.2f} (Soll {T_SOL_ZUL:.2f}) | "
             f"m_TEP={m_TEP:.3f} | "
             f"X_R={X_R:.2f} (Soll {X_SOL_R:.2f}) | "
-            f"X_ZUL={X_ZUL:.2f} (Soll {X_SOL_ZUL:.2f}) | "
+            f"X_ZUL={X_ZUL:.4f} (Soll {X_SOL_ZUL:.4f}) | "
             f"m_BFT={m_HUM:.3f} | "
             f"m_LUF={m_LUF:.2f}"
     )
