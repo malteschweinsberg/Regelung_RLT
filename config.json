@@ -63,7 +63,7 @@
     "faktor_waermekapazitaet": 50
   },
   "totzeit": {
-    "totzeit_schritte": 0,
+    "totzeit_schritte": 5,
     "totzone": 0.05
   },
   "regler": {
@@ -79,7 +79,7 @@
     "X_ZUL_max": 0.015,
     "d_max_min": 0.1,
     "d_max_max": 2.0,
-    "dT_RA_SOL": 0.1,
+    "dT_RA_SOL": 0.0,
     "dX_RA_SOL": 0.0
   }
 }
