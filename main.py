@@ -18,7 +18,6 @@ import math         # Mathematische Funktionen (Logarithmen, Exponentialfunktion
 
 # Eigenentwickelte Module
 from pi_regler import PIRegler                            # Standard-PI-Regler
-from pi_regler_diskret import DiskreterPIRegler           # Alternative PI-Regelstruktur (diskret)
 from visualisation import Visualisierung                  # Modul zur Visualisierung der Zeitverläufe
 
 # ----------- KONFIGURATIONSEINLESUNG -----------
@@ -454,5 +453,5 @@ for t in range(0, config["simulation"]["schritte"]):  # Haupt-Simulationsschleif
     )
     time.sleep(dt)                                                                    # Warten um die Simulation zeitlich zu strecken
 
-vis.plot_and_save('PI-Regler', file_format='png')                             # Abschließendes Speichern und Plotten der Ergebnisse
+vis.plot_and_save('Ergebnis', file_format='png')                             # Abschließendes Speichern und Plotten der Ergebnisse
 
