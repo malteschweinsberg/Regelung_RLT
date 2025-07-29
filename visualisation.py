@@ -55,7 +55,7 @@ class Visualisierung:
         axs[0].plot(self.time, self.T_ZUL, label="Zulufttemperatur", linewidth=1.2)
         axs[0].plot(self.time, self.T_Sol_ZUL, label="Soll Zulufttemperatur", linewidth=1.2, linestyle='--')
         axs[0].set_ylabel("Temperatur\n[°C]", fontsize=12, rotation=90)
-        axs[0].yaxis.set_label_coords(-0.025, 0.5)
+        axs[0].yaxis.set_label_coords(-0.03, 0.5)
         axs[0].legend(loc='upper right', fontsize=9)
         axs[0].grid(True, which='both', linestyle='--', alpha=0.5)
 
@@ -104,7 +104,7 @@ class Visualisierung:
             ax.set_xticklabels(xtick_labels, rotation=45)
             ax.set_xlim(0, max(self.time))
 
-        fig.suptitle('PI-Regler', fontsize=20, y=1.02)
+        fig.suptitle('PI-Regler', fontsize=20, y=0.98)
         plt.tight_layout()
         plt.savefig(f"{filename}.{file_format}", dpi=300, bbox_inches='tight')
         plt.close(fig)
