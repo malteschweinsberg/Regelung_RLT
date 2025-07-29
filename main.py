@@ -125,110 +125,53 @@ def berechne_WRG(dh1, dh2):
     """
     return dh1 > dh2  # WRG nur aktivieren, wenn dadurch mehr Energie eingespart werden kann
 
-# --- Initialisierung der Simulationsparameter ---
+# =============================
+#       Initialisierung
+# =============================
 
-# Anzahl der Simulationsschritte pro Zeiteinheit (z.B. 10 Schritte pro Sekunde)
-t_sp = config["simulation"]["t_sp"]
+# --- GRUNDLEGENDES SETUP ---
+t_sp = config["simulation"]["t_sp"]                       # Anzahl Zeitschritte pro Zeiteinheit (z.B. 60 Schritte pro Stunde)
+dt = 0.1 / t_sp                                           # Zeitschrittweite (s) für die Simulation, abhängig von t_sp
 
-# Zeitschrittgröße dt in Sekunden; ergibt sich aus 0.1 / t_sp
-# → je höher t_sp, desto kleiner der Zeitschritt (feinere Auflösung)
-dt = 0.1 / t_sp
+# --- AUSSENLUFT UND SOLLWERTE ---
+T_AUL = config["simulation"]["T_AUL"]                     # Außenlufttemperatur in °C
+X_AUL = relative_to_absolute_humidity(                    # Umrechnung der relativen Außenluftfeuchte in absolute (kg/m³)
+    T_AUL, config["simulation"]["X_AUL"]
+)
+T_SOL_R = config["simulation"]["T_SOL_R"]                 # Solltemperatur im Raum (z.B. 21°C)
+X_SOL_R = relative_to_absolute_humidity(                  # Umrechnung der relativen Sollfeuchte in absolute (kg/m³)
+    T_SOL_R, config["simulation"]["X_SOL_R"]
+)
 
+# --- RAUMZUSTÄNDE INITIIEREN ---
+V_R = config["raum"]["V_R"]                               # Raumvolumen in m³
+T_R = config["raum"]["T_R_init"]                          # Initiale Raumtemperatur in °C
+X_R = relative_to_absolute_humidity(                      # Initiale Raumfeuchte als absolute Feuchte in kg/m³
+    T_R, config["raum"]["X_R_init"]
+)
+X_ABL = X_R                                               # Anfangs: Abluftfeuchte entspricht Raumluftfeuchte
 
-# --- Umrechnung der relativen Start-Feuchten in absolute Feuchtewerte (kg/m³) ---
+# --- ZULUFT & WRG STARTWERTE ---
+T_SOL_ZUL = T_ZUL = T_WRG = T_AUL                         # Zuluft-, WRG-Temperatur starten mit Außenlufttemperatur
+X_SOL_ZUL = X_ZUL = X_WRG = X_AUL                         # Zuluft-, WRG-Feuchte starten mit Außenluftfeuchte
+T_ABL = T_R                                               # Ablufttemperatur entspricht zunächst der Raumtemperatur
 
-# Außenluft-Temperatur aus Konfiguration (°C)
-T_AUL = config["simulation"]["T_AUL"]
+# --- ANFANGSWERTE SYSTEM ---
+m_LUF = config["ventilator"]["m_LUF_min"]                # Mindest-Luftmassenstrom durch Ventilator (kg/s)
+n_BFT = config["Feuchte Behandlung"]["n_HUM"]             # Befeuchterkonstante: kg Wasser pro kg Luft
+m_TEP_roh = m_TEP = 0                                     # Rohwert und gefilterter Wert des Heiz-/Kühlstroms (kg/s)
+m_HUM_prev = m_TEP_prev = 0.00001                         # Initiale "Vorwerte" für Totzonen-Logik (kleiner Startwert)
+dT_RA_w = 0                                               # Gewichtete Temperaturabweichung zw. Raum und Sollwert
+dX_RA_w = 0                                               # Gewichtete Feuchteabweichung zw. Raum und Sollwert
+i = 0                                                     # Zählvariable für Störungstiming
 
-# Umrechnung der Außenluft-Feuchte von rel. (%) in absolute (kg/m³)
-X_AUL = relative_to_absolute_humidity(T_AUL, config["simulation"]["X_AUL"])
-
-# Soll-Raumtemperatur (°C) → dient als Zielwert für Temperaturregelung
-T_SOL_R = config["simulation"]["T_SOL_R"]
-
-# Soll-Raumfeuchte (relativ %) → Umrechnung in absolute Feuchte (kg/m³)
-X_SOL_R = relative_to_absolute_humidity(T_SOL_R, config["simulation"]["X_SOL_R"])
-
-
-# --- Initiale Raumzustände ---
-
-# Raumvolumen (m³) aus Konfigurationsdatei
-V_R = config["raum"]["V_R"]
-
-# Startwert der Raumtemperatur (°C)
-T_R = config["raum"]["T_R_init"]
-
-# Startwert der Raumfeuchte (relativ %) → Umrechnung in absolute Feuchte
-X_R = relative_to_absolute_humidity(T_R, config["raum"]["X_R_init"])
-
-# Anfangswert der Abluftfeuchte = Raumfeuchte (da Abluft direkt aus Raum stammt)
-X_ABL = X_R
-
-
-# --- Initiale Werte für Zuluft- und WRG-Zustände ---
-
-# Anfangszustand der Zulufttemperatur (Soll, Ist, WRG) wird auf Außenluft gesetzt
-T_SOL_ZUL = T_ZUL = T_WRG = T_AUL
-
-# Gleiches gilt für die absolute Feuchte der Zuluft (Soll, Ist, WRG)
-X_SOL_ZUL = X_ZUL = X_WRG = X_AUL
-
-
-# --- Ablufttemperatur wird initial mit Raumtemperatur gesetzt ---
-T_ABL = T_R
-
-
-# --- Anfangswerte für Ströme und Stellgrößen ---
-
-# Startwert für Luftmassenstrom in kg/s (kleinster Wert, z.B. Grundlüftung)
-m_LUF = config["ventilator"]["m_LUF_min"]
-
-# Wirkungsgrad oder Verstärkung des Befeuchters (z.B. kg Wasser/kg Luft)
-n_BFT = config["Feuchte Behandlung"]["n_HUM"]
-
-# Massenstrom durch das Heiz/Kühlregister – Startwert = 0
-m_TEP_roh = m_TEP = 0
-
-# Initialisierung der vorherigen Reglerausgänge (kleiner Startwert zur Vermeidung von Division durch Null)
-m_HUM_prev = m_TEP_prev = 0.00001
-
-
-# --- Differenzgrößen für Regelung ---
-
-# Startwerte der gewichteten Temperatur- und Feuchteabweichungen im Raum
-# Diese Größen werden für die Volumenstromregelung verwendet
-dT_RA_w = 0
-dX_RA_w = 0
-
-# Zähler für Störsimulation (z.B. alle x Schritte wird Außenluft geändert)
-i = 0
-
-
-# --- Wärmespeicher des Raums ---
-
-# Wärmekapazität des Raums C = Raumvolumen * materialabhängiger Faktor (z.B. Luft, Möbel)
-# Einheit: J/K – wie viel Energie benötigt wird, um Raum um 1 K zu erwärmen
-C_Raum = config["raum"]["faktor_waermekapazitaet"] * V_R
-
-# Interne Wärmelast des Raums (z.B. durch Personen, Geräte), Einheit: Watt (J/s)
-Q_IN = config["raum"]["Q_IN"]
-
-
-# --- Totzeit und Totzone ---
-
-# Totzeit in Anzahl Simulationsschritte (z.B. 10 Schritte = 1 Sekunde Verzögerung)
-TOTZEIT_SCHRITTE = config["totzeit"]["totzeit_schritte"]
-
-# Totzone (Hysterese-Bereich), innerhalb dessen der Regler nicht reagiert
-# Verhindert häufiges Schalten bei kleinen Schwankungen
-TOTZONE = config["totzeit"]["totzone"]
-
-# Puffer für Temperaturregelung → Reglerausgänge werden hier gespeichert,
-# um sie um "TOTZEIT_SCHRITTE" verzögert anzuwenden
-m_TEP_puffer = [0.0] * TOTZEIT_SCHRITTE
-
-# Dasselbe für die Feuchteregelung (Befeuchtung/Entfeuchtung)
-m_HUM_puffer = [0.0] * TOTZEIT_SCHRITTE
+# --- THERMISCHE SYSTEMPARAMETER ---
+C_Raum = config["raum"]["faktor_waermekapazitaet"] * V_R  # Wärmekapazität des Raums [J/K]
+Q_IN = config["raum"]["Q_IN"]                             # Interne Wärmelast im Raum [W]
+TOTZEIT_SCHRITTE = config["totzeit"]["totzeit_schritte"]  # Anzahl der Totzeitschritte (Verzögerung)
+TOTZONE = config["totzeit"]["totzone"]                    # Toleranzzone, in der keine Änderung erfolgt
+m_TEP_puffer = [0.0] * TOTZEIT_SCHRITTE                   # Puffer für Heiz-/Kühlstromregelung zur Totzeitabbildung
+m_HUM_puffer = [0.0] * TOTZEIT_SCHRITTE                   # Puffer für Befeuchterregelung zur Totzeitabbildung
 
 
 # --- Initialisierung der PI-Regler ---
@@ -259,41 +202,55 @@ regler_HUM = PIRegler(
     config["regler"]["BFT"]["ki"],
     dt
 )
-
+# --- VISUALISIERUNG INITIALISIEREN ---
 vis = Visualisierung()  # Initialisiert das Visualisierungsobjekt für die spätere Ausgabe
+
 
 for t in range(0, config["simulation"]["schritte"]):  # Haupt-Simulationsschleife über definierte Anzahl an Schritten
 
-    # --- Störgrößensimulation ---
-    if i == config["simulation"]["stoerung_intervall"]:  # Prüft, ob es Zeit für eine neue Störung ist
-
-        T_AUL = max(  # Neue Außenlufttemperatur berechnen (innerhalb definierter Grenzen)
-            config["simulation"]["T_AUL_min"],
-            min(T_AUL + random.uniform(
-                config["simulation"]["stoerung_T_AUL_min"],
-                config["simulation"]["stoerung_T_AUL_max"]
-            ), config["simulation"]["T_AUL_max"])
+    # =============================
+    #     Störgrößensimulation
+    # =============================
+    if i == config["simulation"][
+        "stoerung_intervall"]:  # Wenn der Störintervall erreicht ist, dann wird eine neue Störung eingeleitet
+        T_AUL = max(  # Neue Außenlufttemperatur bestimmen (mit Störung)
+            config["simulation"]["T_AUL_min"],  # Untere Begrenzung
+            min(  # Obere Begrenzung:
+                T_AUL + random.uniform(  # Aktuelle Temperatur plus zufällige Störung innerhalb definierter Grenzen
+                    config["simulation"]["stoerung_T_AUL_min"],
+                    config["simulation"]["stoerung_T_AUL_max"]
+                ),
+                config["simulation"]["T_AUL_max"]
+            )
         )
 
-        X_AUL = max(  # Neue absolute Außenluftfeuchte berechnen (basierend auf relativen Störgrößen)
-            relative_to_absolute_humidity(T_AUL, config["simulation"]["X_AUL_min"]),
-            min(X_AUL + random.uniform(
-                relative_to_absolute_humidity(T_AUL, config["simulation"]["stoerung_X_AUL_min"]),
-                relative_to_absolute_humidity(T_AUL, config["simulation"]["stoerung_X_AUL_max"])
-            ), relative_to_absolute_humidity(T_AUL, config["simulation"]["X_AUL_max"]))
+        X_AUL = max(  # Neue absolute Außenluftfeuchte bestimmen (mit Störung)
+            relative_to_absolute_humidity(  # Untere Begrenzung in absoluter Feuchte
+                T_AUL, config["simulation"]["X_AUL_min"]
+            ),
+            min(  # Obere Begrenzung:
+                X_AUL + random.uniform(  # Aktuelle Feuchte plus zufällige Störung (in relativer Feuchte umgerechnet)
+                    relative_to_absolute_humidity(T_AUL, config["simulation"]["stoerung_X_AUL_min"]),
+                    relative_to_absolute_humidity(T_AUL, config["simulation"]["stoerung_X_AUL_max"])
+                ),
+                relative_to_absolute_humidity(T_AUL, config["simulation"]["X_AUL_max"])
+            )
         )
 
-        Q_IN = max(  # Interne Wärmelast verändern (simuliert z.B. Personen, Geräte im Raum)
-            config["simulation"]["Q_IN_min"],
-            min(Q_IN + random.uniform(
-                config["simulation"]["stoerung_Q_IN_min"],
-                config["simulation"]["stoerung_Q_IN_max"]
-            ), config["simulation"]["Q_IN_max"])
+        Q_IN = max(  # Neue interne Wärmelast Q_IN (z.B. durch Personen, Geräte)
+            config["simulation"]["Q_IN_min"],  # Untere Begrenzung
+            min(  # Obere Begrenzung:
+                Q_IN + random.uniform(  # Aktueller Wert plus zufällige Störung
+                    config["simulation"]["stoerung_Q_IN_min"],
+                    config["simulation"]["stoerung_Q_IN_max"]
+                ),
+                config["simulation"]["Q_IN_max"]
+            )
         )
 
-        i = 0  # Zähler zurücksetzen (nächste Störung erst nach erneutem Intervall)
+        i = 0  # Zähler zurücksetzen nach Auslösen der Störung
     else:
-        i = i + 1  # Zähler erhöhen, bis Intervall erreicht ist
+        i = i + 1  # Zähler für nächsten Störungszeitpunkt hochzählen
 
 
 # Wärmerückgewinnung (WRG)
