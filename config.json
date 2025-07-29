@@ -5,7 +5,7 @@
     "X_AUL": 30,
     "T_SOL_R": 21,
     "X_SOL_R": 50,
-    "schritte": 8000,
+    "schritte": 43200,
     "stoerung_intervall": 60,
     "stoerung_T_AUL_min": -0.5,
     "stoerung_T_AUL_max": 0.5,
@@ -58,7 +58,7 @@
   "raum": {
     "V_R": 1000.0,
     "T_R_init": 19,
-    "X_R_init": 60.0,
+    "X_R_init": 20.0,
     "Q_IN": 500,
     "faktor_waermekapazitaet": 50
   },
@@ -69,7 +69,7 @@
   "regler": {
     "X_ZUL": {"kp": 3,   "ti": 1500, "dt": 100  },
     "BFT":   { "kp": 0.003, "ki": 0.01 },
-    "T_ZUL": { "kp": 3,   "ti": 1500, "dt": 100 },
+    "T_ZUL": {"kp": 3,   "ti": 1500, "dt": 100  },
     "TEP":   { "kp": 0.02, "ti": 900, "dt": 300 }
   },
   "schwellenwerte": {
@@ -79,7 +79,7 @@
     "X_ZUL_max": 0.015,
     "d_max_min": 0.1,
     "d_max_max": 2.0,
-    "dT_RA_SOL": 0.0,
+    "dT_RA_SOL": 0.1,
     "dX_RA_SOL": 0.0
   }
 }
