@@ -104,7 +104,7 @@ class Visualisierung:
             ax.set_xticklabels(xtick_labels, rotation=45)
             ax.set_xlim(0, max(self.time))
 
-        fig.suptitle('Übertragungsfunktion für beide Regler', fontsize=20, y=1.02)
+        fig.suptitle('PI-Regler', fontsize=20, y=1.02)
         plt.tight_layout()
         plt.savefig(f"{filename}.{file_format}", dpi=300, bbox_inches='tight')
         plt.close(fig)
