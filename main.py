@@ -433,8 +433,6 @@ for t in range(0, config["simulation"]["schritte"]):  # Haupt-Simulationsschleif
 
     X_R += (m_LUF * dt) / (V_R * rho_luft) * (X_ZUL - X_R)                       # Änderung der absoluten Raumfeuchte
 
-
-# Update Soll_Feuchte
     X_SOL_R = relative_to_absolute_humidity(T_R, config["simulation"]["X_SOL_R"])   # Aktualisiere Soll-Feuchte basierend auf aktueller Raumtemperatur
 
     if t % 1 == 0:                                                                   # Ausgabe in jeder Iteration (kann z.B. auch % 10 sein)

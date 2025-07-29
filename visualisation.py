@@ -78,7 +78,7 @@ class Visualisierung:
         axs[3].plot(self.time, self.m_LUF, label="Luftvolumenstrom", linewidth=1.2)
         axs[3].set_ylabel("Volumenstrom\n[m³/s]", fontsize=12, rotation=90)
         axs[3].yaxis.set_label_coords(-0.025, 0.5)
-        axs[3].set_ylim(1, 3)
+        axs[3].set_ylim(0, 11)
         axs[3].legend(loc='upper right', fontsize=9)
         axs[3].grid(True, which='both', linestyle='--', alpha=0.5)
 
