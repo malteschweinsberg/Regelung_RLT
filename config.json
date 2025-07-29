@@ -5,7 +5,7 @@
     "X_AUL": 30,
     "T_SOL_R": 21,
     "X_SOL_R": 50,
-    "schritte": 43200,
+    "schritte": 4320,
     "stoerung_intervall": 120,
     "stoerung_T_AUL_min": -0.2,
     "stoerung_T_AUL_max": 0.2,
@@ -30,8 +30,8 @@
   "Erhitzer": {
     "T_DIF_ERH": 10
   },
-  "befeuchter": {
-    "n_BFT": 1
+  "Feuchte Behandlung": {
+    "n_HUM": 1
   },
   "physik": {
     "c_LUF": 1005,
@@ -47,7 +47,7 @@
     "P_WS_0C_PA": 611.2,
     "MAGNUS_A": 17.62,
     "MAGNUS_B_C": 243.12,
-    "FEUCHTEFAKTOR_KG_PA": 2.167
+    "FEUCHTEFAKTOR_KG_PA": 0.002167
 
   },
   "ventilator": {

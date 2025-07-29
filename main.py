@@ -185,7 +185,7 @@ T_ABL = T_R
 m_LUF = config["ventilator"]["m_LUF_min"]
 
 # Wirkungsgrad oder Verstärkung des Befeuchters (z.B. kg Wasser/kg Luft)
-n_BFT = config["befeuchter"]["n_BFT"]
+n_BFT = config["Feuchte Behandlung"]["n_HUM"]
 
 # Massenstrom durch das Heiz/Kühlregister – Startwert = 0
 m_TEP_roh = m_TEP = 0
